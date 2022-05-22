@@ -1,0 +1,14 @@
+.login-container {
+    display: flex;
+    max-width: 1000px;
+    background-color: var(--dark-secondary);
+    border: 2px;
+    border-color: var(--shadow-color);
+}
+
+.login-page {
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}

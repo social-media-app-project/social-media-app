@@ -1,0 +1,8 @@
+.login-image-container {
+    flex: 1;
+}
+
+.login-image {
+    max-width: 100%;
+    display: block; /* Hack to remove 3px whitespace under image in bordered div */
+}
