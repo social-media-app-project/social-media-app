@@ -2,8 +2,7 @@
     display: flex;
     max-width: 1000px;
     background-color: var(--dark-secondary);
-    border: 2px;
-    border-color: var(--shadow-color);
+    border-radius: 15px 15px;
 }
 
 .login-page {

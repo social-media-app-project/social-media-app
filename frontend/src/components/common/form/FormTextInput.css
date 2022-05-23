@@ -1,0 +1,10 @@
+.text-input-label {
+    display: block;
+    text-align: left;
+}
+
+.text-input {
+    display: block;
+    width: 250px;
+    height: 25px;
+}

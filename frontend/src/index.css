@@ -8,6 +8,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--dark-primary);
+  color: var(--light-grey);
+}
+
+input:focus {
+  outline: none;
 }
 
 code {
@@ -18,5 +23,7 @@ code {
 :root {
   --dark-primary: #1f1f1f;
   --dark-secondary: rgb(8, 8, 8);
-  --shadow-color: aqua;
+  --blue: #41B6E6;
+  --pink: #DB3EB1;
+  --light-grey: #BEBEBE;
 }
