@@ -1,0 +1,48 @@
+.login-panel {
+    padding: 20px;
+    flex: 1.1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-heading-container {
+    text-align: center;
+    flex: 0.8;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+.login-heading {
+    font-size: 3rem;
+    bottom: 0;
+    align-self: flex-end;
+}
+
+.password-button-container {
+    height: 40px;
+}
+
+.create-button-container {
+    height: 40px;
+}
+
+.forgot-password-button {
+    background: none;
+    color: var(--pink);
+    font-size: 1rem;
+}
+
+.forgot-password-button:hover {
+    text-decoration: underline;
+    background: none;
+}
+
+.create-account-button {
+    background-color: var(--blue);
+}
+
+.create-account-button:hover {
+    background-color: aqua;
+}

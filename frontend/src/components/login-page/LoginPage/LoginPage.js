@@ -1,5 +1,5 @@
-import LoginPanel from "./LoginPanel";
-import LoginImage from "./LoginImage";
+import LoginPanel from "../login-panel/LoginPanel/LoginPanel";
+import LoginImage from "../LoginImage/LoginImage";
 import "./LoginPage.css";
 
 function LoginPage() {

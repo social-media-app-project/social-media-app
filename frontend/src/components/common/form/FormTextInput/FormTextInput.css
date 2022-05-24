@@ -1,0 +1,21 @@
+.text-input-label {
+    text-align: left;
+    display: block;
+    padding-bottom: 5px;
+}
+
+.text-input-group {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.text-input {
+    display: block;
+    outline: none;
+    width: 250px;
+    padding: 5px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 2px;
+}
+

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./LoginForm.css";
-import FormTextInput from "../common/form/FormTextInput";
+import FormTextInput from "../../../common/form/FormTextInput/FormTextInput";
+import TextButton from "../../../common/form/TextButton/TextButton";
 
 function LoginForm() {
     const [usernameText, setUsernameText] = useState("");
@@ -31,7 +32,7 @@ function LoginForm() {
                 setStateToNewText={setPasswordText}
                 handleTextChange={handleTextChange}
             />
-            <button type="submit">Log in</button>
+            <TextButton text="Log in" type="submit" />
         </form>;
 }
 
