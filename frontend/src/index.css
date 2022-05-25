@@ -65,7 +65,7 @@ code {
 :root {
   --dark-primary: #1f1f1f;
   --dark-secondary: rgb(8, 8, 8);
-  --blue: #ADFFF3;
-  --pink: #DB3EB1;
+  --primary-accent: #ADFFF3;
+  --secondary-accent: #DB3EB1;
   --light-grey: #BEBEBE;
 }

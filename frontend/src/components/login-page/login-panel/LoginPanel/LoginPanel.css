@@ -30,7 +30,7 @@
 
 .forgot-password-button {
     background: none;
-    color: var(--pink);
+    color: var(--secondary-accent);
     font-size: 1rem;
 }
 
@@ -40,7 +40,7 @@
 }
 
 .create-account-button {
-    background-color: var(--blue);
+    background-color: var(--primary-accent);
 }
 
 .create-account-button:hover {
