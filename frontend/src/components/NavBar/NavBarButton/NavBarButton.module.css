@@ -1,3 +1,5 @@
 .nav-bar-button {
-    color: var(--text-color);
+    color: var(--primary-accent);
+    font-size: 1.3rem;
+    padding: 5px;
 }

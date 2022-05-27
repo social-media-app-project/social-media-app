@@ -7,7 +7,7 @@ import { FaCog } from 'react-icons/fa';
 const NavBarButton = () => (
   <NavLink to="/home">
     <div className={styles['nav-bar-button']}>
-      <FaCog/>
+      <FaCog className={styles['icon']}/>
       <span>Settings</span>
     </div>
   </NavLink>
