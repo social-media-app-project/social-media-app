@@ -1,8 +1,10 @@
 .login-container {
     display: flex;
-    max-width: 1000px;
-    background-color: var(--dark-secondary);
-    box-shadow: 0 0 40px 10px var(--secondary-accent);
+    max-width: 500px;
+    background-color: var(--secondary-background);
+    box-shadow: 0 0 30px 5px var(--primary-accent);
+    border-radius: 15px;
+    flex: 1;
 }
 
 .login-page {

@@ -32,7 +32,7 @@ function LoginForm() {
                 setStateToNewText={setPasswordText}
                 handleTextChange={handleTextChange}
             />
-            <TextButton text="Log in" type="submit" />
+            <TextButton text="Log in" type="submit" classNames={["login-button"]} />
         </form>;
 }
 

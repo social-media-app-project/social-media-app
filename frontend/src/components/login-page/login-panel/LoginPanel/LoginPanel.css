@@ -8,29 +8,29 @@
 
 .login-heading-container {
     text-align: center;
-    flex: 0.8;
+    flex: 1;
     display: flex;
     justify-content: center;
+    align-items: center;
     padding-bottom: 10px;
 }
 
 .login-heading {
     font-size: 3rem;
-    bottom: 0;
-    align-self: flex-end;
 }
 
-.password-button-container {
-    height: 40px;
-}
-
-.create-button-container {
-    height: 40px;
+.inputs-container {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .forgot-password-button {
     background: none;
-    color: var(--secondary-accent);
+    color: var(--primary-accent);
     font-size: 1rem;
 }
 
@@ -40,9 +40,12 @@
 }
 
 .create-account-button {
-    background-color: var(--primary-accent);
+    background-color: #009425;
+    color: #fff;
+    font-weight: 600;
 }
 
 .create-account-button:hover {
-    background-color: aqua;
+    background-color: #fff;
+    color: #009425;
 }

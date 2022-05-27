@@ -7,12 +7,14 @@ function LoginPanel() {
         <div className="login-heading-container">
             <h1 className="login-heading">Welcome</h1>
         </div>
-        <LoginForm/>
-        <div className="password-button-container">
-            <TextButton text="Forgot Password?" classNames={["forgot-password-button"]} type="button" />
-        </div>
-        <div className="create-button-container">
-            <TextButton text="Create a new account" classNames={["create-account-button"]} type="button" />
+        <div className="inputs-container">
+            <LoginForm/>
+            <div className="password-button-container">
+                <TextButton text="Forgot Password?" classNames={["forgot-password-button"]} type="button" />
+            </div>
+            <div className="create-button-container">
+                <TextButton text="Create a new account" classNames={["create-account-button"]} type="button" />
+            </div>
         </div>
     </div>;
 }

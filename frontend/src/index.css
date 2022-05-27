@@ -53,8 +53,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--dark-primary);
-  color: var(--light-grey);
+  background-color: var(--primary-background);
+  color: var(--text-color);
 }
 
 code {
@@ -63,9 +63,9 @@ code {
 }
 
 :root {
-  --dark-primary: #1f1f1f;
-  --dark-secondary: rgb(8, 8, 8);
+  --primary-background: #1f1f1f;
+  --secondary-background: rgb(8, 8, 8);
   --primary-accent: #ADFFF3;
   --secondary-accent: #DB3EB1;
-  --light-grey: #BEBEBE;
+  --text-color: #f3f3f3;
 }

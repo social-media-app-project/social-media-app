@@ -6,10 +6,9 @@
     padding-left: 15px;
     padding-right: 15px;
     border-radius: 5px;
-    margin: 5px;
 }
 
 .text-button:hover {
     cursor: pointer;
-    background-color: var(--light-grey);
+    background-color: grey;
 }
