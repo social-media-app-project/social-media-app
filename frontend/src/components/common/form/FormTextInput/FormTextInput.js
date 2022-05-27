@@ -1,10 +1,10 @@
-import "./FormTextInput.css";
+import styles from "./FormTextInput.module.css";
 
 function FormTextInput(props) {
-    return <div className="text-input-group">
-        <label htmlFor={props.inputName} className="text-input-label">{props.label}</label>
+    return <div className={styles["text-input-group"]}>
+        <label htmlFor={props.inputName} className={styles["text-input-label"]}>{props.label}</label>
         <input type="text"
-            className="text-input"
+            className={styles["text-input"]}
             id={props.inputName}
             name={props.inputName}
             value={props.value}

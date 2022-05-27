@@ -1,19 +1,19 @@
 import TextButton from "../../../common/form/TextButton/TextButton";
 import LoginForm from "../LoginForm/LoginForm";
-import "./LoginPanel.css";
+import styles from "./LoginPanel.module.css";
 
 function LoginPanel() {
-    return <div className="login-panel">
-        <div className="login-heading-container">
-            <h1 className="login-heading">Welcome</h1>
+    return <div className={styles["login-panel"]}>
+        <div className={styles["login-heading-container"]}>
+            <h1 className={styles["login-heading"]}>Welcome</h1>
         </div>
-        <div className="inputs-container">
+        <div className={styles["inputs-container"]}>
             <LoginForm/>
-            <div className="password-button-container">
-                <TextButton text="Forgot Password?" classNames={["forgot-password-button"]} type="button" />
+            <div className={styles["password-button-container"]}>
+                <TextButton text="Forgot Password?" classNames={[styles["forgot-password-button"]]} type="button" />
             </div>
-            <div className="create-button-container">
-                <TextButton text="Create a new account" classNames={["create-account-button"]} type="button" />
+            <div className={styles["create-button-container"]}>
+                <TextButton text="Create a new account" classNames={[styles["create-account-button"]]} type="button" />
             </div>
         </div>
     </div>;

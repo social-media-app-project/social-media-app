@@ -1,9 +1,13 @@
 import React from 'react';
-import "./TextButton.css";
+import styles from "./TextButton.module.css";
 
 
 const TextButton = props => (
-  <button style={props.style} className={props.classNames ? ["text-button", ...props.classNames].join(" ") : "text-button"} type={props.type}>{props.text}</button>
+  <button style={props.style} 
+    className={props.classNames ? [styles["text-button"], ...props.classNames].join(" ") : styles["text-button"]} 
+    type={props.type}>
+    {props.text}
+  </button>
 );
 
 export default TextButton;

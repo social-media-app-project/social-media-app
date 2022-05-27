@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./LoginForm.css";
+import  styles from "./LoginForm.module.css";
 import FormTextInput from "../../../common/form/FormTextInput/FormTextInput";
 import TextButton from "../../../common/form/TextButton/TextButton";
 
@@ -17,7 +17,7 @@ function LoginForm() {
         setStateToNewText(newText);
     }
 
-    return <form onSubmit={handleSubmit} className="login-form">
+    return <form onSubmit={handleSubmit} className={styles["login-form"]}>
             <FormTextInput
                 label="Username"
                 inputName="username"
@@ -32,7 +32,7 @@ function LoginForm() {
                 setStateToNewText={setPasswordText}
                 handleTextChange={handleTextChange}
             />
-            <TextButton text="Log in" type="submit" classNames={["login-button"]} />
+            <TextButton text="Log in" type="submit" classNames={[styles["login-button"]]} />
         </form>;
 }
 
