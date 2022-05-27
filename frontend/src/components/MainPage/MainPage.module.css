@@ -1,1 +1,19 @@
-.main-page {}
+.main-page {
+    display: flex;
+    background-color: var(--secondary-background);
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.controls-container {
+    flex: 1;
+    max-width: 250px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid grey;
+}
+
+.content-container {
+    flex: 2;
+    max-width: 1000px;
+}
