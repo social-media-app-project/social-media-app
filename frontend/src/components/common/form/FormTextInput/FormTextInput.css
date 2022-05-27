@@ -2,6 +2,7 @@
     text-align: left;
     display: block;
     padding-bottom: 5px;
+    cursor: text;
 }
 
 .text-input {
