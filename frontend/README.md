@@ -71,4 +71,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ### More notes for development
 
-Recommend using generate-react-cli to generate components with the --path option.
+Recommend using generate-react-cli to generate components.
+
+Ex. `npx generate-react-cli component MyComponent` with an optional `--path=src/components/MyComponentDirectory`
+
+Recommend installing ESLint and Prettier ESLint to your text editor (config files are in package.json), and setting active language to React JSX for auto-indentation, etc.
