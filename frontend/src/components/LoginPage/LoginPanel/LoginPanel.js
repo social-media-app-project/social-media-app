@@ -1,4 +1,4 @@
-import TextButton from "../../../common/form/TextButton/TextButton";
+import TextButton from "../../common/form/TextButton/TextButton";
 import LoginForm from "../LoginForm/LoginForm";
 import styles from "./LoginPanel.module.css";
 

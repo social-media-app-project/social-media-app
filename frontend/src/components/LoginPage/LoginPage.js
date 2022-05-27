@@ -1,4 +1,4 @@
-import LoginPanel from "../login-panel/LoginPanel/LoginPanel";
+import LoginPanel from "./LoginPanel/LoginPanel";
 import styles from "./LoginPage.module.css";
 
 function LoginPage() {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import  styles from "./LoginForm.module.css";
-import FormTextInput from "../../../common/form/FormTextInput/FormTextInput";
-import TextButton from "../../../common/form/TextButton/TextButton";
+import FormTextInput from "../../common/form/FormTextInput/FormTextInput";
+import TextButton from "../../common/form/TextButton/TextButton";
 
 function LoginForm() {
     const [usernameText, setUsernameText] = useState("");
