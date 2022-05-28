@@ -5,7 +5,9 @@ import { FaImages } from 'react-icons/fa';
 const AttachmentsBar = () => {
     return (
     <div className={styles['attachments-bar']}>
-        <FaImages/>
+        <button>
+            <FaImages/>
+        </button>
     </div>
     )
 };
