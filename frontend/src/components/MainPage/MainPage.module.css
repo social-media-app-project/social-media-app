@@ -14,6 +14,7 @@
 }
 
 .content-container {
-    flex: 2;
-    max-width: 1000px;
+    flex-basis: 1000px;
+    flex-shrink: 1;
+    border: 3px solid red;
 }
