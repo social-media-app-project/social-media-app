@@ -1,0 +1,15 @@
+.create-post-container {
+    padding: 10px;
+    border-bottom: 1px solid grey;
+    display: flex;
+}
+
+.profile-pic-container {
+    flex-basis: 100px;
+    border: 2px solid red;
+}
+
+.create-content-container {
+    flex: 1;
+    border: 2px solid blue;
+}

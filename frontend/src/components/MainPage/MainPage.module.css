@@ -10,11 +10,11 @@
     max-width: 200px;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid grey;
 }
 
 .content-container {
-    flex-basis: 1000px;
+    flex-basis: 800px;
     flex-shrink: 1;
-    border: 3px solid red;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
 }
