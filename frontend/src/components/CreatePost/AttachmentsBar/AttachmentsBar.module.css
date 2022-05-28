@@ -1,0 +1,8 @@
+.attachments-bar {
+    color: var(--primary-accent);
+    font-size: 1.4em;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: center;
+}

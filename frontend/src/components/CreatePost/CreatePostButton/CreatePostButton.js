@@ -1,9 +1,14 @@
 import React from 'react';
 import styles from './CreatePostButton.module.css';
+import TextButton from '../../common/form/TextButton/TextButton';
 
 const CreatePostButton = () => {
     return (
-    <div></div>
+    <TextButton 
+        text='Post'
+        classNames={[styles['post-button']]}
+        type='submit'
+    />
     )
 };
 

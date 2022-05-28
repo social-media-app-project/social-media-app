@@ -2,6 +2,7 @@
     padding: 10px;
     border-bottom: 1px solid grey;
     display: flex;
+    height: 25vh;
 }
 
 .profile-pic-container {
@@ -12,4 +13,17 @@
 .create-content-container {
     flex: 1;
     border: 2px solid blue;
+}
+
+form.create-post {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.3em;
+    gap: 2em;
 }

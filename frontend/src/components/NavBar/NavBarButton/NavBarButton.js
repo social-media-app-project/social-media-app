@@ -10,7 +10,7 @@ const NavBarButton = props => {
       className={styles['nav-bar-button']} 
       activeClassName={styles['nav-bar-button-active']}>
         {props.children}
-        <span className={styles['nav-button-label']}>{props.label}</span>
+        {props.label ? <span className={styles['nav-button-label']}>{props.label}</span> : null}
     </NavLink>
   );
 };

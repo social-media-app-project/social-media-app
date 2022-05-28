@@ -65,7 +65,20 @@ code {
 :root {
   --primary-background: #1f1f1f;
   --secondary-background: rgb(8, 8, 8);
-  --primary-accent: #ADFFF3;
-  --secondary-accent: #DB3EB1;
+  --primary-accent: #7FFF00;
+  --dark-accent: #448900;
   --text-color: #f3f3f3;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: grey;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: var(--primary-accent);
+}
+
+button { font-weight: 600 }
