@@ -1,16 +1,18 @@
 import React from 'react';
 import styles from './NavBarButton.module.css';
 import { NavLink } from 'react-router-dom';
-import { FaCog } from 'react-icons/fa';
 
 // Temporary settings stub
-const NavBarButton = () => (
-  <NavLink to="/home">
-    <div className={styles['nav-bar-button']}>
-      <FaCog className={styles['icon']}/>
-      <span>Settings</span>
-    </div>
-  </NavLink>
-);
+const NavBarButton = props => {
+  return (
+    <NavLink 
+      to={props.to} 
+      className={styles['nav-bar-button']} 
+      activeClassName={styles['nav-bar-button-active']}>
+        {props.children}
+        <span className={styles['nav-button-label']}>{props.label}</span>
+    </NavLink>
+  );
+};
 
 export default NavBarButton;

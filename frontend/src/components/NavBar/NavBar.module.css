@@ -1,3 +1,7 @@
 .nav-bar {
     align-self: flex-start;
 }
+
+.nav-bar svg {
+    color: var(--primary-accent);
+}

@@ -6,8 +6,8 @@
 }
 
 .controls-container {
-    flex: 1;
-    max-width: 250px;
+    padding: 15px;
+    max-width: 200px;
     display: flex;
     flex-direction: column;
     border-right: 1px solid grey;

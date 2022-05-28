@@ -1,5 +1,22 @@
 .nav-bar-button {
-    color: var(--primary-accent);
+    color: var(--text-color);
     font-size: 1.3rem;
-    padding: 5px;
+    padding: 8px;
+    display: flex;
+    border-radius: 15px;
+    align-items: center;
+    max-width: fit-content;
+    text-decoration: none;
+}
+
+.nav-bar-button:hover {
+    background-color: var(--primary-background);
+}
+
+.nav-bar-button-active { /* TODO: fix broken class */
+    background-color: var(--primary-background); 
+}
+
+.nav-button-label {
+    padding-left: 10px;
 }
