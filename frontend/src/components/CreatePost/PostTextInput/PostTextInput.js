@@ -9,7 +9,6 @@ const PostTextInput = () => {
             name='post text'
             placeholder='What would you like to share?'
             autoComplete='off'
-            required
             spellCheck={false}
             ></textarea>
     </div>

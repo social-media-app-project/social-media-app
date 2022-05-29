@@ -1,12 +1,12 @@
 import React from 'react';
+import ImageUploadButton from '../ImageUploadButton/ImageUploadButton';
 import styles from './AttachmentsBar.module.css';
-import { FaImages } from 'react-icons/fa';
 
 const AttachmentsBar = () => {
     return (
     <div className={styles['attachments-bar']}>
         <button>
-            <FaImages/>
+            <ImageUploadButton />
         </button>
     </div>
     )

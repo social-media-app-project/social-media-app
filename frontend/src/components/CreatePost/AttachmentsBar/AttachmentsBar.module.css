@@ -1,6 +1,6 @@
-.attachments-bar > button {
+.attachments-bar button {
     color: var(--primary-accent);
-    font-size: 1.4em;
+    font-size: 1.2em;
     background: none;
     border: none;
     cursor: pointer;
