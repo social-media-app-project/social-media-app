@@ -1,18 +1,15 @@
 .login-panel {
-    padding: 20px;
-    flex: 1.1;
-    text-align: center;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
 }
 
 .login-heading-container {
     text-align: center;
-    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 10px;
+    padding-bottom: 2rem;
 }
 
 .login-heading {
@@ -25,7 +22,7 @@
     flex-direction: column;
     text-align: center;
     justify-content: center;
-    gap: 10px;
+    gap: 1rem;
 }
 
 .forgot-password-button {

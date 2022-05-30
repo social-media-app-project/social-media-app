@@ -1,10 +1,12 @@
 .login-container {
     display: flex;
-    max-width: 500px;
+    flex-basis: 500px;
     background-color: var(--secondary-background);
     box-shadow: 0 0 30px 5px var(--primary-accent);
     border-radius: 15px;
-    flex: 1;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    justify-content: center;
 }
 
 .login-page {
