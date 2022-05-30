@@ -11,11 +11,12 @@ function App() {
   <Router>
     <Routes>
       <Route path="/login" element={<LoginPage/>} />
-      <Route path="/" element={<MainPage/>} >
-        <Route path="" element={<HomeFeed/>} />
-        <Route path="*" element={<HomeFeed/>} />
-        <Route path="user/:userId" element={<Profile/>} />
-        <Route path="user/:userId/friends" element={<Friends/>} />
+      <Route element={<MainPage/>} >
+        <Route path="/" element={<HomeFeed/>} />
+        <Route path=":userId" element={<Profile/>} />
+        <Route path="profile" element={<Profile/>} />
+        <Route path=":userId/friends" element={<Friends/>} />
+        <Route path="friends" element={<Friends/>} />
       </Route>
     </Routes>
   </Router>);

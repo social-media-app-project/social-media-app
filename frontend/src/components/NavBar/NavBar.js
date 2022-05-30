@@ -6,8 +6,8 @@ import { FaHome, FaUserAlt, FaUserFriends } from 'react-icons/fa';
 const NavBar = () => {
   const buttons = [
     { to: "/", label: "Home", icon: <FaHome/> },
-    { to: "/user/myusername", label: "Profile", icon: <FaUserAlt/> },
-    { to: "/user/myusername/friends", label: "Friends", icon: <FaUserFriends/>}
+    { to: "/profile", label: "Profile", icon: <FaUserAlt/> },
+    { to: "/friends", label: "Friends", icon: <FaUserFriends/>}
   ];
 
   return (
