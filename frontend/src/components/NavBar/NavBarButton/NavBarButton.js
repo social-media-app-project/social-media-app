@@ -8,7 +8,11 @@ const NavBarButton = props => {
     <NavLink 
       to={props.to} 
       className={styles['nav-bar-button']} 
-      activeClassName={styles['nav-bar-button-active']}>
+      style={({ isActive }) => {
+        return {
+          backgroundColor: isActive ? 'var(--primary-background)' : undefined
+        }
+      }}>
         {props.children}
         {props.label ? <span className={styles['nav-button-label']}>{props.label}</span> : null}
     </NavLink>

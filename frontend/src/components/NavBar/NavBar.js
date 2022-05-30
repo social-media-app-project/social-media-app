@@ -1,14 +1,13 @@
 import React from 'react';
 import styles from './NavBar.module.css';
 import NavBarButton from './NavBarButton/NavBarButton';
-import { FaCog, FaHome, FaUserAlt, FaUserFriends } from 'react-icons/fa';
+import { FaHome, FaUserAlt, FaUserFriends } from 'react-icons/fa';
 
 const NavBar = () => {
   const buttons = [
-    { to: "/home", label: "Home", icon: <FaHome/> },
-    { to: "/home", label: "Profile", icon: <FaUserAlt/> }, // TODO: change route
-    { to: "/home", label: "Friends", icon: <FaUserFriends/>},
-    { to: "/home", label: "Settings", icon: <FaCog/> } // TODO: change route
+    { to: "/", label: "Home", icon: <FaHome/> },
+    { to: "/user/myusername", label: "Profile", icon: <FaUserAlt/> },
+    { to: "/user/myusername/friends", label: "Friends", icon: <FaUserFriends/>}
   ];
 
   return (
