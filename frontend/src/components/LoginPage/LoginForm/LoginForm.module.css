@@ -7,11 +7,11 @@
 }
 
 .login-button {
-    background-color: #0000ff;
-    color: #fff;
+    background-color: var(--primary-button-color);
+    color: var(--primary-button-color-inv);
 }
 
 .login-button:hover {
-    background-color: #fff;
-    color: #0000ff;
+    background-color: var(--primary-button-color-inv);
+    color: var(--primary-button-color);
 }

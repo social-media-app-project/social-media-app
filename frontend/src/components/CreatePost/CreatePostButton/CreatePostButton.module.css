@@ -1,8 +1,9 @@
 .post-button {
-    background-color: var(--primary-accent);
-    color: var(--primary-background);
+    background-color: var(--primary-button-color);
+    color: var(--primary-button-color-inv);
 }
 
 .post-button:hover {
-    background-color: var(--dark-accent);
+    background-color: var(--primary-button-color-inv);
+    color: var(--primary-button-color);
 }

@@ -13,10 +13,6 @@
     background-color: var(--primary-background);
 }
 
-.nav-bar-button-active { /* TODO: fix broken class */
-    background-color: var(--primary-background); 
-}
-
 .nav-button-label {
     padding-left: 10px;
 }

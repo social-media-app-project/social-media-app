@@ -68,6 +68,8 @@ code {
   --primary-accent: #7FFF00;
   --dark-accent: #448900;
   --text-color: #f3f3f3;
+  --primary-button-color: #0000ff;
+  --primary-button-color-inv: #fff;
 }
 
 ::-webkit-scrollbar {
