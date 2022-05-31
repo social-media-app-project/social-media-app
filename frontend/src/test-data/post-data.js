@@ -3,7 +3,7 @@ const posts = [
         description: "Hi, this is my first post",
         profilePicUrl: "https://pbs.twimg.com/profile_images/1343497830099402752/kBLCEgPl_normal.jpg",
         user: "meee meee",
-        timestamp: 1654024871,
+        timestamp: 1654024871000,
         numLikes: 17,
         numComments: 4
     },
@@ -11,7 +11,7 @@ const posts = [
         description: "Hi, this is my first post",
         profilePicUrl: "https://pbs.twimg.com/profile_images/1343497830099402752/kBLCEgPl_normal.jpg",
         user: "meee meee",
-        timestamp: 1654024871,
+        timestamp: 1654024893111,
         numLikes: 17,
         numComments: 4
     }

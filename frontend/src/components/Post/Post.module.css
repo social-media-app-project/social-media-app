@@ -1,17 +1,8 @@
 .post-container {
-    padding: 1rem;
     border-bottom: 1px solid grey;
-    display: flex;
-    gap: 1rem;
 }
 
-.content-container {
-    flex: 1;
-}
-
-.buttons-container {
-    display: flex;
-    justify-content: flex-end;
-    padding: 0.3em;
-    gap: 1.5em;
+.post-text {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
 }

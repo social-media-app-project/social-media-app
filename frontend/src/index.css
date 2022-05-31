@@ -69,6 +69,7 @@ code {
   --dark-accent: #448900;
   --text-color: #f3f3f3;
   --placeholder-text-color: #f3f3f37e;
+  --darkened-text-color: #f3f3f3a6;
   --primary-button-color: #0000ff;
   --primary-button-color-inv: #fff;
 }

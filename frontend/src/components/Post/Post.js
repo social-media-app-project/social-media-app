@@ -1,20 +1,19 @@
 import React from 'react';
-import ProfileNameButton from '../ProfileNameButton/ProfileNameButton';
-import ProfilePictureButton from '../ProfilePictureButton/ProfilePictureButton';
+import GeneralPostContainer from '../GeneralPostContainer/GeneralPostContainer';
 import styles from './Post.module.css';
 
 const Post = props => {
-    const { post, isOwner } = props;
+    const isOwner = true;
+    const { post } = props;
     const { description, profilePicUrl, user, timestamp, numLikes, numComments } = props.post;
 
     return (
     <div className={styles['post-container']}>
-        <div className={styles['profile-pic-container']}>
-            <ProfilePictureButton></ProfilePictureButton>
-        </div>
-        <div className={styles['content-container']}>
-            <ProfileNameButton name="temp name"></ProfileNameButton>
-        </div>
+        <GeneralPostContainer isOwner={isOwner} timestamp={timestamp}>
+            <div className={styles['post-text']}>
+                <span>{description}</span>
+            </div>
+        </GeneralPostContainer>
     </div>
     )
 };

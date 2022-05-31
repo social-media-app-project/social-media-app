@@ -1,7 +1,3 @@
-.name-button-container {
-    padding: 0.5em;
-}
-
 .name-button {
     color: var(--text-color);
     text-decoration: none;
