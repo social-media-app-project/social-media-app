@@ -1,9 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './ProfilePictureButton.module.css';
+import profilePicTest from './profilePicTest.jpg';
 
-const ProfilePictureButton = () => {
+const ProfilePictureButton = props => {
+
     return (
-    <div></div>
+    <Link to='/'>
+        <img src={profilePicTest} alt='person' className={styles['profile-pic-link']} />
+    </Link>
     )
 };
 

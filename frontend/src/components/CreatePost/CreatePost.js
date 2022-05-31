@@ -6,11 +6,12 @@ import styles from './CreatePost.module.css';
 import CreatePostButton from './CreatePostButton/CreatePostButton';
 import PostTextInput from './PostTextInput/PostTextInput';
 
-const CreatePost = () => {
+const CreatePost = props => {
+    console.log(props);
     return (
     <div className={styles['create-post-container']}>
         <div className={styles['profile-pic-container']}>
-            <ProfilePictureButton></ProfilePictureButton>
+            <ProfilePictureButton user={props.user}></ProfilePictureButton>
         </div>
         <div className={styles['create-content-container']}>
             <ProfileNameButton name="temp name"></ProfileNameButton>

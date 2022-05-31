@@ -1,24 +1,12 @@
 .post-container {
-    padding: 10px;
+    padding: 1rem;
     border-bottom: 1px solid grey;
     display: flex;
-}
-
-.profile-pic-container {
-    flex-basis: 100px;
-    border: 2px solid red;
+    gap: 1rem;
 }
 
 .content-container {
     flex: 1;
-    border: 2px solid blue;
-    height: 200px;
-}
-
-form.create-post {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
 }
 
 .buttons-container {

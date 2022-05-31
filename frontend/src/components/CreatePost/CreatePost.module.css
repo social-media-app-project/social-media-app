@@ -2,16 +2,11 @@
     padding: 1rem;
     border-bottom: 1px solid grey;
     display: flex;
-}
-
-.profile-pic-container {
-    flex-basis: 100px;
-    border: 2px solid red;
+    gap: 1rem;
 }
 
 .create-content-container {
     flex: 1;
-    border: 2px solid blue;
 }
 
 .buttons-container {

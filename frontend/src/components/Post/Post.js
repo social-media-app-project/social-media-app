@@ -12,7 +12,7 @@ const Post = props => {
         <div className={styles['profile-pic-container']}>
             <ProfilePictureButton></ProfilePictureButton>
         </div>
-        <div className={styles['create-content-container']}>
+        <div className={styles['content-container']}>
             <ProfileNameButton name="temp name"></ProfileNameButton>
         </div>
     </div>
