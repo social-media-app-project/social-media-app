@@ -1,0 +1,29 @@
+.post-container {
+    padding: 10px;
+    border-bottom: 1px solid grey;
+    display: flex;
+}
+
+.profile-pic-container {
+    flex-basis: 100px;
+    border: 2px solid red;
+}
+
+.content-container {
+    flex: 1;
+    border: 2px solid blue;
+    height: 200px;
+}
+
+form.create-post {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.3em;
+    gap: 1.5em;
+}

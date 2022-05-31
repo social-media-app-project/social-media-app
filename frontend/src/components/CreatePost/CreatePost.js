@@ -13,8 +13,8 @@ const CreatePost = () => {
             <ProfilePictureButton></ProfilePictureButton>
         </div>
         <div className={styles['create-content-container']}>
+            <ProfileNameButton name="temp name"></ProfileNameButton>
             <form className={styles['create-post']}>
-                <ProfileNameButton name="temp name"></ProfileNameButton>
                 <PostTextInput></PostTextInput>
                 <div className={styles['buttons-container']}>
                     <AttachmentsBar></AttachmentsBar>
