@@ -7,4 +7,5 @@
 .text-input {
     border: none;
     outline: none;
+    cursor: text;
 }
