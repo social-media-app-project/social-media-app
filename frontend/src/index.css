@@ -75,7 +75,7 @@ code {
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 10px;
   background-color: grey;
   border-radius: 10px;
 }
