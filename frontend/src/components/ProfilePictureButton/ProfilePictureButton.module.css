@@ -1,5 +1,5 @@
 .profile-pic-link {
     border-radius: 50%;
     padding: 3px;
-    border: 1px solid var(--primary-accent);
+    border: 1px solid var(--text-color);
 }

@@ -17,7 +17,9 @@ const GeneralPostContainer = props => {
             <div className={styles['post-header-info']}>
                 <ProfileNameButton name="temp name"></ProfileNameButton>
                 { timestamp ? 
-                    <PostDateLabel timestamp={timestamp} /> : 
+                    <div>
+                        <PostDateLabel timestamp={timestamp} />
+                    </div> : 
                     null }
                 { isOwner ?
                     <div className={styles['delete-container']}>

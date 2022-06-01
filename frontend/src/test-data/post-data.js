@@ -8,7 +8,7 @@ const posts = [
         numComments: 4
     },
     {
-        description: "Hi, this is my first post",
+        description: "Hi, this is my first post, this one is longer this one is longerthis one is longerthis one is longerthis one is longerthis one is longerthis one is longerthis one is longer",
         profilePicUrl: "https://pbs.twimg.com/profile_images/1343497830099402752/kBLCEgPl_normal.jpg",
         user: "meee meee",
         timestamp: 1654024893111,

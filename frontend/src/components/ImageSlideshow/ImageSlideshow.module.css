@@ -1,0 +1,16 @@
+.arrow {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+}
+
+.arrow:hover {
+    background-color: var(--primary-background);
+    cursor: pointer;
+}
+
+.slideshow {
+    display: flex;
+    justify-content: center;
+}

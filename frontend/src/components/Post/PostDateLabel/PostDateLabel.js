@@ -4,7 +4,7 @@ import moment from 'moment';
 
 const PostDateLabel = props => {
     const date = new Date(props.timestamp);
-    const formattedString = moment(date).format("dddd, MMMM Do YYYY, h:mm a");
+    const formattedString = moment(date).format("MMMM Do YYYY, h:mm a");
 
     return (
     <span className={styles['date-label']}>{formattedString}</span>
