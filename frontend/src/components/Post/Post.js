@@ -30,9 +30,8 @@ const Post = props => {
         <div className={styles['additional-info-container']}>
             <div className={styles['post-info-container']}>
                 <button className={styles['post-info-button']}>{numLikes} likes</button>
-                <button className={styles['post-info-button']} onClick={toggleComments}>{numComments} comments</button>
                 <button className={styles['post-info-button']}><HiOutlineThumbUp className={styles['post-info-icon']} /> Like</button>
-                <button className={styles['post-info-button']}><FaRegComment className={styles['post-info-icon']} /> Comment</button>
+                <button className={styles['post-info-button']} onClick={toggleComments}>{numComments} comments</button>
             </div>
             { commentsExpanded ? <CommentsSection /> : null }
         </div>
