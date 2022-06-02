@@ -1,6 +1,5 @@
 .create-comment-container {
     display: flex;
-    border: 1px solid grey;
 }
 
 .create-comment-container > .profile-pic-container {
