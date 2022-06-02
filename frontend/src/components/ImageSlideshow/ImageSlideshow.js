@@ -23,7 +23,7 @@ const ImageSlideshow = () => {
 
     return (
     <>
-        <span>{imageIndex + 1} of {images.length}</span>
+        {images.length > 1 ? <span>{imageIndex + 1} of {images.length}</span> : null}
         <div className={styles['slideshow']}>
             { (images.length > 1) ?
                 <button className={styles['arrow']} onClick={handleBackClick}>
