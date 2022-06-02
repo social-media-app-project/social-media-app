@@ -1,0 +1,35 @@
+.create-comment-container {
+    display: flex;
+    border: 1px solid grey;
+}
+
+.create-comment-container > .profile-pic-container {
+    padding: 0.5rem;
+}
+
+.create-comment-container .input-container {
+    padding-top: 0.5em;
+    padding-right: 0.5em;
+}
+
+.create-comment-container .input-container > .input {
+    border: none;
+    outline: none;
+    cursor: text;
+    max-width: 100%;
+}
+
+.create-comment-container > button {
+    font-size: 1.2rem;
+    color: grey;
+}
+
+.create-comment-container > button:hover {
+    color: var(--primary-accent);
+}
+
+.create-comment-container .right-section {
+    flex: 1;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}

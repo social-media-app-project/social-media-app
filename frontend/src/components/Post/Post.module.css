@@ -11,3 +11,34 @@
 .slideshow-container {
     padding: 0.8em;
 }
+
+.post-info-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.post-info-button {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    font-weight: 300;
+    padding: 0.6rem;
+    text-align: center;
+}
+
+.post-info-button:hover {
+    background-color: var(--primary-background);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.post-info-icon {
+    vertical-align: top;
+}
+
+.additional-info-container {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
