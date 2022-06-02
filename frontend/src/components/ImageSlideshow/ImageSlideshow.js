@@ -22,25 +22,28 @@ const ImageSlideshow = () => {
     }
 
     return (
-    <div className={styles['slideshow']}>
-        { (images.length > 1) ? 
-            <button className={styles['arrow']} onClick={handleBackClick}>
-                <IoIosArrowBack />
-            </button> 
-            : null 
-        }
-        {
-            images.map((imageSrc, index) => {
-                return (<Image  key={index} index={index} imageSrc={imageSrc} currIndex={imageIndex} />)
-            }) 
-        }
-        { (images.length > 1) ? 
-            <button className={styles['arrow']} onClick={handleForwardClick}>
-                <IoIosArrowForward />
-            </button>
-            : null 
-        }
-    </div>
+    <>
+        <span>{imageIndex + 1} of {images.length}</span>
+        <div className={styles['slideshow']}>
+            { (images.length > 1) ?
+                <button className={styles['arrow']} onClick={handleBackClick}>
+                    <IoIosArrowBack />
+                </button>
+                : null
+            }
+            {
+                images.map((imageSrc, index) => {
+                    return (<Image  key={index} index={index} imageSrc={imageSrc} currIndex={imageIndex} />)
+                })
+            }
+            { (images.length > 1) ?
+                <button className={styles['arrow']} onClick={handleForwardClick}>
+                    <IoIosArrowForward />
+                </button>
+                : null
+            }
+        </div>
+    </>
     )
 };
 

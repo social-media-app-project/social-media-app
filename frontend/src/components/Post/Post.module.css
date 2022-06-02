@@ -10,6 +10,8 @@
 
 .slideshow-container {
     padding: 0.8em;
+    padding-top: 0;
+    text-align: center;
 }
 
 .post-info-container {

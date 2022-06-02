@@ -16,6 +16,7 @@
     border: none;
     outline: none;
     cursor: text;
+    overflow-wrap: anywhere;
 }
 
 .create-comment-container > button {
