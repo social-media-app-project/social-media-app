@@ -1,20 +1,20 @@
 import React from 'react';
 import ProfileNameButton from '../../../ProfileNameButton/ProfileNameButton';
 import ProfilePictureButton from '../../../ProfilePictureButton/ProfilePictureButton';
-import './CreateComment.css';
+import styles from './CreateComment.module.css';
 import { FaComment } from 'react-icons/fa';
 
 const CreateComment = () => {
     return (
-    <div className='create-comment-container'>
-        <div className='profile-pic-container'>
+    <div className={styles['create-comment-container']}>
+        <div className={styles['profile-pic-container']}>
             <ProfilePictureButton />
         </div>
-        <div className='right-section'>
+        <div className={styles['right-section']}>
             <ProfileNameButton name='my name' />
-            <div className='input-container'>
+            <div className={styles['input-container']}>
                 <div
-                    className='input'
+                    className={styles['input']}
                     contentEditable
                     role="textbox"
                     spellCheck={false}

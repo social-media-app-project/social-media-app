@@ -1,5 +1,5 @@
 import React from 'react';
-import './TemplateName.css';
+import styles from './TemplateName.module.css';
 
 const TemplateName = () => {
     return (

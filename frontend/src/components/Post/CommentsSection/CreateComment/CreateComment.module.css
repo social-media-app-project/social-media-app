@@ -16,7 +16,6 @@
     border: none;
     outline: none;
     cursor: text;
-    max-width: 100%;
 }
 
 .create-comment-container > button {

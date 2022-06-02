@@ -7,7 +7,7 @@
     "default": {
       "customTemplates": {
         "component": "generate-templates/TemplateName.js",
-        "style": "generate-templates/TemplateName.css"
+        "style": "generate-templates/TemplateName.module.css"
       },
       "path": "src/components",
       "withStyle": true,
