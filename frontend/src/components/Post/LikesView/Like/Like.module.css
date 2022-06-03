@@ -1,0 +1,14 @@
+
+.like-holder{
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .9rem;
+  margin: 0px 10px;
+}
+
+.like-img{
+  border-radius: 50%;
+  width: 30px;
+
+}
