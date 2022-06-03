@@ -65,22 +65,27 @@ code {
 :root {
   --primary-background: #1f1f1f;
   --secondary-background: rgb(8, 8, 8);
-  --primary-accent: #7FFF00;
+  --primary-accent: #a8ff50;
   --dark-accent: #448900;
   --text-color: #f3f3f3;
+  --placeholder-text-color: #f3f3f37e;
+  --darkened-text-color: #f3f3f3a6;
   --primary-button-color: #0000ff;
   --primary-button-color-inv: #fff;
 }
 
-::-webkit-scrollbar {
-  width: 5px;
-  background-color: grey;
-  border-radius: 10px;
+button { 
+  font-weight: 600;
+  border: none;
+  background: none;
+  color: var(--text-color);
 }
 
-::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background-color: var(--primary-accent);
+button:hover {
+  cursor: pointer;
 }
 
-button { font-weight: 600 }
+div[placeholder]:empty:before {
+  content: attr(placeholder);
+  color: var(--placeholder-text-color);
+}

@@ -2,15 +2,16 @@ import React from 'react';
 import styles from './PostTextInput.module.css';
 
 const PostTextInput = () => {
+
     return (
     <div className={styles['text-input-container']}>
-        <textarea 
+        <div
             className={styles['text-input']}
-            name='post text'
-            placeholder='What would you like to share?'
-            autoComplete='off'
+            contentEditable
+            role="textbox"
             spellCheck={false}
-            ></textarea>
+            placeholder="What would you like to say?"
+        />
     </div>
     )
 };

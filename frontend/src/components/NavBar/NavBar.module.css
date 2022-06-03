@@ -1,5 +1,7 @@
 .nav-bar {
     align-self: flex-start;
+    position: sticky;
+    top:0px;
 }
 
 .nav-bar svg {

@@ -1,27 +1,14 @@
 import React from 'react';
-import ProfileNameButton from '../ProfileNameButton/ProfileNameButton';
-import ProfilePictureButton from '../ProfilePictureButton/ProfilePictureButton';
-import AttachmentsBar from './AttachmentsBar/AttachmentsBar';
+import GeneralPostContainer from '../GeneralPostContainer/GeneralPostContainer';
 import styles from './CreatePost.module.css';
-import CreatePostButton from './CreatePostButton/CreatePostButton';
-import PostTextInput from './PostTextInput/PostTextInput';
+import CreatePostForm from './CreatePostForm/CreatePostForm';
 
-const CreatePost = () => {
+const CreatePost = props => {
     return (
     <div className={styles['create-post-container']}>
-        <div className={styles['profile-pic-container']}>
-            <ProfilePictureButton></ProfilePictureButton>
-        </div>
-        <div className={styles['create-content-container']}>
-            <form className={styles['create-post']}>
-                <ProfileNameButton name="temp name"></ProfileNameButton>
-                <PostTextInput></PostTextInput>
-                <div className={styles['buttons-container']}>
-                    <AttachmentsBar></AttachmentsBar>
-                    <CreatePostButton></CreatePostButton>
-                </div>
-            </form>
-        </div>
+        <GeneralPostContainer props={props} >
+            <CreatePostForm />
+        </GeneralPostContainer>
     </div>
     )
 };

@@ -1,0 +1,19 @@
+.post-container {
+    padding: 0.8rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.content-container {
+    flex: 1;
+}
+
+.post-header-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.delete-container {
+    margin-left: auto;
+}

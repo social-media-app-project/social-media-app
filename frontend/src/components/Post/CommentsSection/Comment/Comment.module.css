@@ -1,0 +1,27 @@
+.comment-container {
+    font-size: 0.9rem;
+    display: flex;
+}
+
+.comment-container > .profile-pic-container {
+    padding: 0.5rem;
+}
+
+.comment-container .comment {
+    padding: 0.5rem;
+    background-color: var(--primary-background);
+    border-radius: 15px;
+}
+
+.comment-container .right-section {
+    flex: 1;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.comment-container .right-section .comment-header-info {
+    padding-left: 0.5rem;
+    display: flex;
+    gap: 1rem;
+    padding-bottom: 0.2rem;
+}
