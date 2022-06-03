@@ -5,9 +5,11 @@ import styles from './Post.module.css';
 import { FaRegComment } from 'react-icons/fa';
 import { HiOutlineThumbUp, HiThumbUp } from 'react-icons/hi';
 import CommentsSection from './CommentsSection/CommentsSection';
+import LikesView from './LikesView/LikesView';
 
 const Post = props => {
     const [ commentsExpanded, setCommentsExpanded ] = useState(false);
+    const [likesExpanded, setLikesExpanded ] = useState(false);
 
     const isOwner = true;
     const { post } = props;
@@ -15,7 +17,18 @@ const Post = props => {
 
     const toggleComments = () => {
         setCommentsExpanded(!commentsExpanded);
+        if(likesExpanded){
+            setLikesExpanded(false)
+        }
     }
+
+    const toggleLikes = () =>{
+        setLikesExpanded(!likesExpanded);
+        if(commentsExpanded){
+            setCommentsExpanded(false)
+        }
+    }
+
 
     return (
     <div className={styles['post-container']}>
@@ -29,11 +42,12 @@ const Post = props => {
         </div>
         <div className={styles['additional-info-container']}>
             <div className={styles['post-info-container']}>
-                <button className={styles['post-info-button']}>{numLikes} likes</button>
+                <button className={styles['post-info-button']} name='like' onClick={toggleLikes}>{numLikes} likes</button>
                 <button className={styles['post-info-button']}><HiOutlineThumbUp className={styles['post-info-icon']} /> Like</button>
-                <button className={styles['post-info-button']} onClick={toggleComments}>{numComments} comments</button>
+                <button className={styles['post-info-button']} name='comment' onClick={toggleComments}>{numComments} comments</button>
             </div>
             { commentsExpanded ? <CommentsSection /> : null }
+            {likesExpanded ? <LikesView /> : null}
         </div>
     </div>
     )

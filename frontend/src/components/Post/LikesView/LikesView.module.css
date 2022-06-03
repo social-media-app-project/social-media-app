@@ -1,0 +1,12 @@
+.likes-view{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  gap: 7px;
+  max-height: 15vh;
+  overflow: auto;
+  overflow-y: auto;
+  justify-content: center;
+}
