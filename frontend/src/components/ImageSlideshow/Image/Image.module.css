@@ -1,21 +1,16 @@
 .picture-container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    max-width: 426px;
-    max-height: 240px;
-    border: 1.5px var(--primary-accent) solid;
-    border-radius: 1.25rem;
-    overflow: hidden;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  max-width: 426px;
+  max-height: 240px;
+  border: 2px rgb(68, 68, 68) solid;
+  border-radius: 1.25rem;
+  overflow: hidden;
 }
 
 img.picture {
-    /**
-     *---------------------------------------------------
-     * change object-fit to conver to see another option
-     *----------------------------------------------------
-     */
-    object-fit:contain;
-    height: 100%;
-    width: 100%;
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
 }
