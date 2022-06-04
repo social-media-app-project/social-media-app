@@ -2,7 +2,7 @@
 
 `npm run serverstart`
 
-**If there is an error with Port already being in used**
+**If there is an error with Port already being in use**
 1. go to bin
 2. go to www file
 3. find `var port = normalizePort(process.env.PORT || '3001');` 
