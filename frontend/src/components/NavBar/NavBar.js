@@ -12,8 +12,8 @@ const NavBar = () => {
 
   return (
   <div className={styles["nav-bar"]}>
-    { buttons.map(buttonInfo => 
-      (<NavBarButton to={buttonInfo.to} label={buttonInfo.label}>{buttonInfo.icon}</NavBarButton>)
+    { buttons.map((buttonInfo, index) => 
+      (<NavBarButton key={index} to={buttonInfo.to} label={buttonInfo.label}>{buttonInfo.icon}</NavBarButton>)
       )
     }
   </div>

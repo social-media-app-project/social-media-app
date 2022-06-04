@@ -9,7 +9,7 @@ const LikesView = () => {
     <div className={styles['likes-view']}>
         {
             likes.length<=0? <div>There are no likes</div>:
-            likes.likes.map(like =><Like user={like.user} picURL={like.profilePicUrl} />)
+            likes.likes.map((like, index) =><Like key={index} user={like.user} picURL={like.profilePicUrl} />)
 
         }
 

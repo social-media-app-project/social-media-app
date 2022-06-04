@@ -8,7 +8,7 @@ const CommentsSection = () => {
     return (
     <div className={styles['comments-section']}>
         <CreateComment />
-        {comments.comments.map(comment => <Comment comment={comment} />)}
+        {comments.comments.map((comment, index) => <Comment key={index} comment={comment} />)}
     </div>
     )
 };
