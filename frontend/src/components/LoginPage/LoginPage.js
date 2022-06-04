@@ -1,5 +1,6 @@
 import LoginPanel from "./LoginPanel/LoginPanel";
 import styles from "./LoginPage.module.css";
+import React from 'react';
 
 function LoginPage() {
     return <div className={styles["login-page"]}>
