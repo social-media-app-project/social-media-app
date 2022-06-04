@@ -2,9 +2,20 @@
     flex: 1;
     display: flex;
     justify-content: center;
+    max-width: 426px;
+    max-height: 240px;
+    border: 1.5px var(--primary-accent) solid;
+    border-radius: 1.25rem;
+    overflow: hidden;
 }
 
 img.picture {
-    max-width: 100%;
-    max-height: 40vh;
+    /**
+     *---------------------------------------------------
+     * change object-fit to conver to see another option
+     *----------------------------------------------------
+     */
+    object-fit:contain;
+    height: 100%;
+    width: 100%;
 }
