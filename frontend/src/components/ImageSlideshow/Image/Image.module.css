@@ -1,4 +1,6 @@
 .picture-container {
+  display: flex;
+  justify-content: center;
   max-width: 426px;
   max-height: 240px;
   border: 1.5px var(--primary-accent) solid;
