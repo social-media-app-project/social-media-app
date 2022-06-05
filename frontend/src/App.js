@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomeFeed from "./components/HomeFeed/HomeFeed";
 import Profile from "./components/Profile/Profile";
 import Friends from "./components/Friends/Friends";
+import React from 'react';
 
 function App() {
   return (
