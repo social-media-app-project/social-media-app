@@ -10,7 +10,8 @@ const UserSchema = new Schema({
   profilePicUrl:{type:String},
   date_created:{type:Date, required:true,default:Date.now()},
   dob:{type:Date, required:true},
-  friends:[{type:Schema.Types.ObjectId, ref:'Friends'}]
+  friends:[{type:Schema.Types.ObjectId, ref:'Friends'}],
+  bio:{type:String, maxlength:200}
 })
 
 UserSchema.virtual('full_name')
@@ -25,4 +26,4 @@ UserSchema.virtual('formatted_date_created')
   })
 
 
-module.exports = mongoose.model('Users', UserSchema);
+module.exports = mongoose.model('User', UserSchema);
