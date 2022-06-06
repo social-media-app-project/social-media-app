@@ -9,6 +9,9 @@ const UserSchema = new Schema({
   password:{type:String,required:true, minlength:2},
   profilePicUrl:{type:String},
   date_created:{type:Date, required:true,default:Date.now()},
+  dob:{type:Date, required:true},
+  friends:[{type:Schema.Types.ObjectId, ref:'Friends'}],
+  bio:{type:String, maxlength:200}
 })
 
 UserSchema.virtual('full_name')
