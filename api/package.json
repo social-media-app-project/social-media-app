@@ -8,6 +8,8 @@
     "serverstart": "DEBUG=api:* npm run dev"
   },
   "dependencies": {
+    "async": "^3.2.3",
+    "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.0.1",
