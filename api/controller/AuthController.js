@@ -5,7 +5,6 @@ exports.jwt_signup_post = [
   body('first_name').trim().escape().isLength({min:1}).withMessage("First name is required").matches(/^[A-Za-z]+$/).withMessage('Name must be alphabetic.'),
   body('last_name').trim().escape().isLength({min:1}).withMessage("Last name is required").matches(/^[A-Za-z]+$/).withMessage('Name must be alphabetic.'),
   body('username').trim().escape().isLength({min:1}).withMessage("Username is required"),
-  body('dob').trim().escape().isLength({min:1}).withMessage('birthday is required').isISO8601().toDate.withMessage("error with birthday"),
   body('password').trim().escape().isLength({min:1}).withMessage("Password is required"),
   body('password_confirm').trim().escape().isLength({min:1}).withMessage("Password is required"),
   body('bio').trim().escape(),
@@ -46,7 +45,7 @@ exports.jwt_signup_post = [
       })
       user.save(function(err){
         if(err){
-          return res.status(404).send({error:[{msg:'There was and error'}]})
+          return res.status(404).send({errors:[{msg:'There was and error'}]})
         }
         /**
          * Can set up JWT token to be sent here on the sign up 
@@ -55,7 +54,7 @@ exports.jwt_signup_post = [
          
       })
       if(err){
-        return res.status(404).send({error:[{msg:"There was some error"}]})
+        return res.status(404).send({errors:[{msg:"There was some error"}]})
       }
     })
     res.status(200).send({success:[{msg:'Thanks for signing up'}]})
