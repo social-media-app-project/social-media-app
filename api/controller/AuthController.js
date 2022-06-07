@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const{body, validationResult, check} = require('express-validator');
 const User = require('../models/Users');
+const jwt = require('jsonwebtoken');
 exports.jwt_signup_post = [
   body('first_name').trim().escape().isLength({min:1}).withMessage("First name is required").matches(/^[A-Za-z]+$/).withMessage('Name must be alphabetic.'),
   body('last_name').trim().escape().isLength({min:1}).withMessage("Last name is required").matches(/^[A-Za-z]+$/).withMessage('Name must be alphabetic.'),
@@ -60,5 +61,51 @@ exports.jwt_signup_post = [
       
     }
     return res.status(200).send({success:[{msg:'Thanks for signing up'}]})
+  }
+] 
+
+
+exports.jwt_signin_post = [
+  body('username').trim().escape().isLength({min:1}).withMessage("Username is required"),
+  body('password').trim().escape().isLength({min:1}).withMessage("Password is required"),
+  check('username', 'username not found')
+    .custom(async(val) =>{
+      let user = await User.findOne({username:val})
+      if(user === null){
+        return Promise.reject()
+      }
+    }),
+  (req,res) =>{
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+      return res.status(404).send({errors:errors.array()})
+    }
+    try {
+      User.findOne({'username':req.body.username},function(err,user){
+        if(err){
+          throw(err);
+        }
+        if(user===null){
+          throw('user not found');
+        }
+        bcrypt.compare(req.body.password, user.password,(err,pass)=>{
+          if(err){
+            throw(err)
+          }
+          //token will expire in 5 days
+          const expiresIn = 1000*60*60*24*5+Date.now();
+          const opts = {};
+          opts.expiresIn = expiresIn; 
+          const secret = process.env.SECRET; 
+          const token = jwt.sign({'userid':user._id},secret,opts)
+          if(pass){
+            return res.status(200).send({success:true,token:"Bearer "+token, expiresIn:expiresIn})
+          }
+        })
+      })
+    } catch (error) {
+      return res.status(404).json({errors:[{errors:error}]})
+    }
+
   }
 ]
