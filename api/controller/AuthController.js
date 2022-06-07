@@ -18,45 +18,47 @@ exports.jwt_signup_post = [
     }),
   check('username', 'username already exists')
     .custom(async(val) =>{
-    User.findOne({'username':val},function(err,user){
-        if(err){
-          return Promise.reject("there was an error")
-        }
-        if(user !== null){
-          return Promise.reject("Username already exists")
-        }
-      })
+      let user = await User.findOne({username:val})
+      if(user!==null){
+        return Promise.reject('username already in use')
+      }
     }),
-  (req,res,) =>{
+
+  (req,res) =>{
     const errors = validationResult(req);
     if(!errors.isEmpty()){
       //maybe there should be a different error code 
       return res.status(404).send({errors:errors.array()})
     }
-    bcrypt.hash(req.body.passowrd,10,(err,hashed)=>{
-      const user = new User({
-        first_name:req.body.first_name,
-        last_name:req.body.last_name,
-        username:req.body.username,
-        password: hashed,
-        dob:req.body.dob,
-        friends:[],
-        bio:req.body.bio,
-      })
-      user.save(function(err){
+    try {
+      bcrypt.hash(req.body.password,10,(err,hashed)=>{
+        const user = new User({
+          first_name:req.body.first_name,
+          last_name:req.body.last_name,
+          username:req.body.username,
+          password: hashed+"",
+          dob:req.body.dob,
+          friends:[],
+          bio:req.body.bio,
+        })
+        user.save(function(err){
+          if(err){
+            throw(err);
+          }
+          /**
+           * Can set up JWT token to be sent here on the sign up 
+           * and can have it on sign in 
+           */
+        })
         if(err){
-          return res.status(404).send({errors:[{msg:'There was and error'}]})
+          throw (err);
         }
-        /**
-         * Can set up JWT token to be sent here on the sign up 
-         * or can just have it on sign in 
-         */
-         
       })
-      if(err){
-        return res.status(404).send({errors:[{msg:"There was some error"}]})
-      }
-    })
-    res.status(200).send({success:[{msg:'Thanks for signing up'}]})
+      
+    } catch (error) {
+      return res.status(400).send({errors:[{msg:"internal errorf"}]});
+      
+    }
+    return res.status(200).send({success:[{msg:'Thanks for signing up'}]})
   }
 ]
