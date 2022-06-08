@@ -2,16 +2,16 @@ const bcrypt = require('bcryptjs');
 const{body, validationResult, check} = require('express-validator');
 const User = require('../models/Users');
 const jwt = require('jsonwebtoken');
-exports.jwt_signup_post = [
-  body('first_name').trim().escape().isLength({min:1}).withMessage("First name is required").matches(/^[A-Za-z]+$/).withMessage('Name must be alphabetic.'),
-  body('last_name').trim().escape().isLength({min:1}).withMessage("Last name is required").matches(/^[A-Za-z]+$/).withMessage('Name must be alphabetic.'),
-  body('username').trim().escape().isLength({min:1}).withMessage("Username is required"),
+exports.jwtSignupPost = [
+  body('first_name').trim().escape().isLength({min:1}).withMessage("First name is required").matches(/^[A-Za-z]+$/).withMessage('Name must be alphabetic.').isLength({max:25}).withMessage('first name is too long'),
+  body('last_name').trim().escape().isLength({min:1}).withMessage("Last name is required").matches(/^[A-Za-z]+$/).withMessage('Name must be alphabetic.').isLength({max:25}).withMessage('last name is too long'),
+  body('username').trim().escape().isLength({min:1}).withMessage("Username is required").isLength({max:25}).withMessage('username is too long'),
   body('email').trim().escape().isLength({min:1}).withMessage("email is required").isEmail().withMessage('email is not valid'),
-  body('password').trim().escape().isLength({min:1}).withMessage("Password is required"),
-  body('password_confirm').trim().escape().isLength({min:1}).withMessage("Password is required"),
-  body('bio').trim().escape(),
+  body('password').trim().escape().isLength({min:1}).withMessage("Password is required").isLength({max:25}).withMessage('password is too long'),
+  body('password_confirm').trim().escape().isLength({min:1}).withMessage("Password is required").isLength({max:25}).withMessage('password is too long'),
+  body('bio').trim().escape().isLength({max:250}),
   check('password_confirm', 'passwords do not match')
-    .custom((val,{req})=>{
+    .custom(function doPasswordsMatch(val,{req}){
       if(val===req.body.password){
         return true;
       }else{
@@ -19,7 +19,7 @@ exports.jwt_signup_post = [
       }
     }),
   check('username', 'username already exists')
-    .custom(async(val) =>{
+    .custom(async function doesUsernameExist (val){
       let user = await User.findOne({username:val})
       if(user!==null){
         return Promise.reject('username already in use')
@@ -34,6 +34,9 @@ exports.jwt_signup_post = [
     }
     try {
       bcrypt.hash(req.body.password,10,(err,hashed)=>{
+        if(err){
+          throw (err);
+        }
         const user = new User({
           first_name:req.body.first_name,
           last_name:req.body.last_name,
@@ -53,9 +56,6 @@ exports.jwt_signup_post = [
            * and can have it on sign in 
            */
         })
-        if(err){
-          throw (err);
-        }
       })
       
     } catch (error) {
@@ -67,16 +67,9 @@ exports.jwt_signup_post = [
 ] 
 
 
-exports.jwt_signin_post = [
+exports.jwtLoginPost = [
   body('username').trim().escape().isLength({min:1}).withMessage("Username is required"),
   body('password').trim().escape().isLength({min:1}).withMessage("Password is required"),
-  check('username', 'username not found')
-    .custom(async(val) =>{
-      let user = await User.findOne({username:val})
-      if(user === null){
-        return Promise.reject()
-      }
-    }),
   (req,res) =>{
     const errors = validationResult(req);
     if(!errors.isEmpty()){
@@ -95,13 +88,15 @@ exports.jwt_signin_post = [
             throw(err)
           }
           //token will expire in 5 days
-          const expiresIn = 1000*60*60*24*5+Date.now();
+          const expiresDate = 1000*60*60*24*5+Date.now();
           const opts = {};
-          opts.expiresIn = expiresIn; 
+          opts.expiresDate = expiresDate; 
           const secret = process.env.SECRET; 
           const token = jwt.sign({'userid':user._id},secret,opts)
           if(pass){
-            return res.status(200).send({success:true,token:"Bearer "+token, expiresIn:expiresIn})
+            return res.status(200).send({success:true,token:"Bearer "+token, expiresIn:expiresDate})
+          }else{
+            throw("password is incorrect")
           }
         })
       })
