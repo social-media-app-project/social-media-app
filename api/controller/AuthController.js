@@ -39,6 +39,7 @@ exports.jwt_signup_post = [
           last_name:req.body.last_name,
           username:req.body.username,
           password: hashed,
+          email:req.body.email,
           dob:req.body.dob,
           friends:[],
           bio:req.body.bio,
