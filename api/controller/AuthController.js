@@ -68,8 +68,8 @@ exports.jwtSignupPost = [
 
 
 exports.jwtLoginPost = [
-  body('username').trim().escape().isLength({min:1}).withMessage("Username is required"),
-  body('password').trim().escape().isLength({min:1}).withMessage("Password is required"),
+  body('username').trim().escape().isLength({min:1}).withMessage("Username is required").isLength({max:25}).withMessage('username is too long'),
+  body('password').trim().escape().isLength({min:1}).withMessage("Password is required").isLength({max:25}).withMessage('password is too long'),
   (req,res) =>{
     const errors = validationResult(req);
     if(!errors.isEmpty()){
