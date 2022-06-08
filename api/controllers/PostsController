@@ -4,6 +4,10 @@ const Post = require('../models/Posts');
 const PostsValidator = require('./validators/PostsValidator');
 
 // May want to add folder for "QueryExecutors"
+// Maybe in a separate "custom-middleware" folder where we keep:
+// QueryExecutors
+// Validators
+// responders
 const executeFeedQuery = async (req, res, next) => {};
 const executeGetPostQuery = async (req, res, next) => {};
 const executeGetCommentsQuery = async (req, res, next) => {};
