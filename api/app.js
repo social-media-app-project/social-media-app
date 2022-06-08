@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const authArouter = require('./routes/auth');
-const postsRouter = require('./routes/posts')(passport);
+const postsRouter = require('./routes/posts');
 
 app.use('/', indexRouter);
 app.use('/auth', authArouter);
