@@ -3,13 +3,11 @@ const { body, validationResult, check } = require('express-validator');
 const Post = require('../models/Posts');
 const PostsValidator = require('./validators/PostsValidator');
 
-const PostsController = {
-  getFeed: () => {},
-  getPost: () => {},
-  getComments: () => {},
-  getLikes: () => {},
-  post: () => {},
-  deletePost: () => {},
-};
+exports.getFeed = [];
+exports.getPost = [];
+exports.getComments = [];
+exports.getLikes = [];
 
-export default PostsController;
+exports.post = [];
+exports.likePost = [];
+exports.commentPost = [];
