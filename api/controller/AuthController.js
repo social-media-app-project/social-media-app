@@ -97,6 +97,7 @@ exports.jwtLoginPost = [
     .withMessage('Password is required')
     .isLength({ max: 25 })
     .withMessage('password is too long'),
+  // eslint-disable-next-line consistent-return
   (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -117,12 +118,12 @@ exports.jwtLoginPost = [
           //  token will expire in 5 days
           const expiresDate = 1000 * 60 * 60 * 24 * 5 + Date.now();
           const opts = {};
-          opts.expiresDate = expiresDate;
+          opts.expiresIn = expiresDate;
           const secret = process.env.SECRET;
           // eslint-disable-next-line no-underscore-dangle
           const token = jwt.sign({ userid: user._id }, secret, opts);
           if (pass) {
-            return res.status(200).send({ success: true, token: `Bearer  ${token}`, expiresIn: expiresDate });
+            return res.status(200).send({ success: true, token: `Bearer  ${token}`, expiresDate });
           }
           throw new Error('password is incorrect');
         });
@@ -130,6 +131,5 @@ exports.jwtLoginPost = [
     } catch (error) {
       return res.status(404).json({ errors: [{ errors: error }] });
     }
-    return res.status(404).json({ error: 'there was an error' });
   },
 ];
