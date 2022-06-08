@@ -13,10 +13,6 @@ const db = mongoose.connection;
 // eslint-disable-next-line no-console
 db.on('error', console.error.bind(console, 'mongo connection error'));
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const authArouter = require('./routes/auth');
-
 passport.use(JWTStrategy);
 
 const app = express();
@@ -27,8 +23,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const authArouter = require('./routes/auth');
+const postsRouter = require('./routes/posts')(passport);
+
 app.use('/', indexRouter);
 app.use('/auth', authArouter);
 app.use('/users', passport.authenticate('jwt', { session: false }), usersRouter);
+app.use('/posts', postsRouter);
 
 module.exports = app;
