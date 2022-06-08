@@ -4,6 +4,21 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/Users');
 
+async function doesUsernameExist(val) {
+  const user = await User.findOne({ username: val });
+  if (user !== null) {
+    return Promise.reject(Error('username already in use'));
+  }
+  return true;
+}
+
+function doPasswordsMatch(val, req) {
+  if (val === req.body.password) {
+    return true;
+  }
+  return false;
+}
+
 exports.jwtSignupPost = [
   body('first_name').trim().escape().isLength({ min: 1 })
     .withMessage('First name is required')
@@ -35,20 +50,10 @@ exports.jwtSignupPost = [
     .withMessage('password is too long'),
   body('bio').trim().escape().isLength({ max: 250 }),
   check('password_confirm', 'passwords do not match')
-    .custom((val, { req }) => {
-      if (val === req.body.password) {
-        return true;
-      }
-      return false;
-    }),
+    //  checks if passwords match
+    .custom((val, { req }) => doPasswordsMatch(val, req)),
   check('username', 'username already exists')
-    .custom(async (val) => {
-      const user = await User.findOne({ username: val });
-      if (user !== null) {
-        return Promise.reject(Error('username already in use'));
-      }
-      return true;
-    }),
+    .custom((val) => doesUsernameExist(val)),
 
   (req, res) => {
     const errors = validationResult(req);
