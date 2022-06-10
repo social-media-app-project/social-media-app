@@ -31,6 +31,6 @@ const postsRouter = require('./routes/posts');
 app.use('/', indexRouter);
 app.use('/auth', authArouter);
 app.use('/users', passport.authenticate('jwt', { session: false }), usersRouter);
-app.use('/posts', postsRouter);
+app.use('/posts', passport.authenticate('jwt', { session: false }), postsRouter);
 
 module.exports = app;

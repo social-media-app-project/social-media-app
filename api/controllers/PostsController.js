@@ -7,7 +7,7 @@ exports.getFeed = [
 
 exports.getPost = [
   ...pv.validatePostParams,
-  pq.executeGetPostQuery,
+  pq.getPost,
 ];
 exports.getComments = [
   ...pv.validatePostParams,

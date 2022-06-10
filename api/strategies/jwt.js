@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = process.env.SECRET || 's';
+opts.secretOrKey = process.env.SECRET;
 
 module.exports = new JWTStrategy(opts, (jwtPayload, done) => {
   User.findById(jwtPayload.userid, (err, user) => {
