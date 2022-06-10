@@ -1,4 +1,4 @@
-const { body, check } = require('express-validator');
+const { body, validationResult, check } = require('express-validator');
 const q = require('../query-executors/AuthQueryExecutor');
 
 const doesUsernameExist = async (val) => {
@@ -44,4 +44,13 @@ exports.validateSignupBody = [
     .custom((val, { req }) => val === req.body.password),
   check('username', 'username already exists')
     .custom((val) => doesUsernameExist(val)),
+  // TODO: We should have a single function that captures all errors and sends a response
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      //  maybe there should be a different error code
+      res.status(404).send({ errors: errors.array() });
+    }
+    next();
+  },
 ];
