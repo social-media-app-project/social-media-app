@@ -29,9 +29,8 @@ exports.saveNewUser = (req, res, next) => {
          */
       });
     });
+    next();
   } catch (error) {
     res.status(400).send({ errors: [{ msg: 'internal errorf' }] });
-  } finally {
-    next();
   }
 };
