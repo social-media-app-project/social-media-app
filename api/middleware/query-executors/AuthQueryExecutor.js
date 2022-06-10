@@ -1,8 +1,9 @@
+const bcrypt = require('bcryptjs');
 const User = require('../../models/Users');
 
 exports.findUser = (val) => User.findOne({ username: val });
 
-exports.saveNewUser = () => {
+exports.saveNewUser = (req, res, next) => {
   try {
     bcrypt.hash(req.body.password, 10, (err, hashed) => {
       if (err) {
@@ -29,6 +30,8 @@ exports.saveNewUser = () => {
       });
     });
   } catch (error) {
-    return res.status(400).send({ errors: [{ msg: 'internal errorf' }] });
+    res.status(400).send({ errors: [{ msg: 'internal errorf' }] });
+  } finally {
+    next();
   }
 };

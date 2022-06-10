@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const { body, validationResult, check } = require('express-validator');
+const { body, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/Users');
@@ -8,7 +8,7 @@ const q = require('../middleware/query-executors/AuthQueryExecutor');
 
 exports.jwtSignupPost = [
   ...v.validateSignupBody,
-  q.saveNewUser(),
+  q.saveNewUser,
   (req, res) => res.status(200).send({ success: [{ msg: 'Thanks for signing up' }] }),
 
 ];
