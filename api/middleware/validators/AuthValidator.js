@@ -50,7 +50,8 @@ exports.validateSignupBody = [
     if (!errors.isEmpty()) {
       //  maybe there should be a different error code
       res.status(404).send({ errors: errors.array() });
+    } else {
+      next();
     }
-    next();
   },
 ];
