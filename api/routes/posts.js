@@ -15,4 +15,4 @@ router.post('/posts/:postId/likes', passport.authenticate('jwt', { session: fals
 
 router.delete('/posts/:postId', passport.authenticate('jwt', { session: false }), PostsController.deletePost);
 
-export default router;
+module.exports = router;

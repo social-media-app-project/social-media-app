@@ -3,58 +3,10 @@ const { body, validationResult, check } = require('express-validator');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/Users');
-
-async function doesUsernameExist(val) {
-  const user = await User.findOne({ username: val });
-  if (user !== null) {
-    return Promise.reject(Error('username already in use'));
-  }
-  return true;
-}
-
-function doPasswordsMatch(val, req) {
-  if (val === req.body.password) {
-    return true;
-  }
-  return false;
-}
+const v = require('../middleware/validators/AuthValidator');
 
 exports.jwtSignupPost = [
-  body('first_name').trim().escape().isLength({ min: 1 })
-    .withMessage('First name is required')
-    .matches(/^[A-Za-z]+$/)
-    .withMessage(' Name must be alphabetic.')
-    .isLength({ max: 25 })
-    .withMessage('first name is too long'),
-  body('last_name').trim().escape().isLength({ min: 1 })
-    .withMessage('Last name is required')
-    .matches(/^[A-Za-z]+$/)
-    .withMessage('Name must be alphabetic.')
-    .isLength({ max: 25 })
-    .withMessage('last name is too long'),
-  body('username').trim().escape().isLength({ min: 1 })
-    .withMessage('Username is required')
-    .isLength({ max: 25 })
-    .withMessage('username is too long'),
-  body('email').trim().escape().isLength({ min: 1 })
-    .withMessage('email is required')
-    .isEmail()
-    .withMessage('email is not valid'),
-  body('password').trim().escape().isLength({ min: 1 })
-    .withMessage('Password is required')
-    .isLength({ max: 25 })
-    .withMessage('password is too long'),
-  body('password_confirm').trim().escape().isLength({ min: 1 })
-    .withMessage('Password is required')
-    .isLength({ max: 25 })
-    .withMessage('password is too long'),
-  body('bio').trim().escape().isLength({ max: 250 }),
-  check('password_confirm', 'passwords do not match')
-    //  checks if passwords match
-    .custom((val, { req }) => doPasswordsMatch(val, req)),
-  check('username', 'username already exists')
-    .custom((val) => doesUsernameExist(val)),
-
+  ...v.validateSignupBody,
   (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -128,7 +80,7 @@ exports.jwtLoginPost = [
           // eslint-disable-next-line no-underscore-dangle
           const token = jwt.sign({ userid: user._id }, secret, opts);
           if (pass) {
-            return res.status(200).send({ success: true, token: `Bearer  ${token}`, expiresDate });
+            return res.status(200).send({ success: true, token: `Bearer ${token}`, expiresDate });
           }
           throw new Error('password is incorrect');
         });
