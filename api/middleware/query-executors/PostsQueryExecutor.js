@@ -5,7 +5,7 @@ exports.executeFeedQuery = async (req, res, next) => {};
 exports.getPost = async (req, res) => {
   try {
     console.log(req.params.postId);
-    const post = await Post.findById(req.params.postId);
+    const post = await Post.findById(req.params.postId).exec();
     if (!post) {
       throw new Error('couldnt find post');
     }
