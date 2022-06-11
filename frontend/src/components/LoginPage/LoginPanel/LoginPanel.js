@@ -1,9 +1,8 @@
 import TextButton from "../../common/form/TextButton/TextButton";
 import LoginForm from "../LoginForm/LoginForm";
 import styles from "./LoginPanel.module.css";
-import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import React from "react";
+import SignInWithPanel from "../SignInWithPanel/SignInWithPanel";
 
 function LoginPanel() {
   return (
@@ -14,10 +13,8 @@ function LoginPanel() {
       <div className={styles["inputs-container"]}>
         <LoginForm />
         <hr></hr>
-        <button className={styles["sign-in-with-google"]}>
-          <FontAwesomeIcon icon={faGoogle} />
-          Sign In With Google
-        </button>
+        <SignInWithPanel />
+
         <div className={styles["password-button-container"]}>
           <TextButton
             text="Forgot Password?"
