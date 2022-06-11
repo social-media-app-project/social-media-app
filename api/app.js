@@ -2,16 +2,9 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const mongoose = require('mongoose');
 require('dotenv').config();
 const passport = require('passport');
 const JWTStrategy = require('./strategies/jwt');
-// Connect to DB
-const mongodb = process.env.MONGO_URI;
-mongoose.connect(mongodb, { useUnifiedTopology: true, useNewUrlParser: true });
-const db = mongoose.connection;
-// eslint-disable-next-line no-console
-db.on('error', console.error.bind(console, 'mongo connection error'));
 
 passport.use(JWTStrategy);
 
