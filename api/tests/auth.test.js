@@ -29,7 +29,7 @@ test('signup works', (done) => {
     .expect(200, done);
 });
 
-test('signup (name in use) does not work', () => {
+test('signup (name in use) does not work', (done) => {
   request(app)
     .post('/auth/signup')
     .send({
@@ -41,18 +41,23 @@ test('signup (name in use) does not work', () => {
       email: 'testemail@gmail.com',
       bio: 'Hello this is a bio',
     })
-    .then(() => request(app)
-      .post('/auth/signup')
-      .send({
-        username: 'my_name',
-        password: 'password',
-        password_confirm: 'password',
-        first_name: 'Name',
-        last_name: 'Name',
-        email: 'testemail@gmail.com',
-        bio: 'Hello this is a bio',
-      })
-      .expect(404));
+    .end((err) => {
+      if (err) {
+        done(err);
+      }
+      request(app)
+        .post('/auth/signup')
+        .send({
+          username: 'my_name',
+          password: 'password',
+          password_confirm: 'password',
+          first_name: 'Name',
+          last_name: 'Name',
+          email: 'testemail@gmail.com',
+          bio: 'Hello this is a bio',
+        })
+        .expect(404, done);
+    });
 });
 
 test('password confirm does not match', (done) => {
@@ -175,7 +180,7 @@ test('bio too long', (done) => {
     .expect(404, done);
 });
 
-test('successful login', () => {
+test('successful login', (done) => {
   request(app)
     .post('/auth/signup')
     .send({
@@ -185,24 +190,26 @@ test('successful login', () => {
       first_name: 'Name',
       last_name: 'Name',
       email: 'testemail@gmail.com',
-      bio: 'Hello this is a bio',
     })
-    .then(() => request(app)
-      .post('/auth/login')
-      .send({
-        username: 'my_name',
-        password: 'password',
-      })
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect((res) => {
-        console.log(res.body);
-        expect(res.body).toHaveProperty('token');
-      })
-      .expect(200));
+    .expect(200)
+    .end((err) => {
+      if (err) {
+        done(err);
+      }
+      request(app)
+        .post('/auth/login')
+        .send({
+          username: 'my_name',
+          password: 'password',
+        })
+        .expect((res) => {
+          expect(res.body).toHaveProperty('token');
+        })
+        .expect(200, done);
+    });
 });
 
-test('unsuccessful login (username)', () => {
+test('unsuccessful login (username)', (done) => {
   request(app)
     .post('/auth/signup')
     .send({
@@ -214,16 +221,22 @@ test('unsuccessful login (username)', () => {
       email: 'testemail@gmail.com',
       bio: 'Hello this is a bio',
     })
-    .then(() => request(app)
-      .post('/auth/login')
-      .send({
-        username: 'my_namee',
-        password: 'password',
-      })
-      .expect(404));
+    .expect(200)
+    .end((err) => {
+      if (err) {
+        done(err);
+      }
+      request(app)
+        .post('/auth/login')
+        .send({
+          username: 'my_namee',
+          password: 'password',
+        })
+        .expect(404, done);
+    });
 });
 
-test('unsuccessful login (password)', () => {
+test('unsuccessful login (password)', (done) => {
   request(app)
     .post('/auth/signup')
     .send({
@@ -235,11 +248,17 @@ test('unsuccessful login (password)', () => {
       email: 'testemail@gmail.com',
       bio: 'Hello this is a bio',
     })
-    .then(() => request(app)
-      .post('/auth/login')
-      .send({
-        username: 'my_name',
-        password: 'passworde',
-      })
-      .expect(404));
+    .expect(200)
+    .end((err) => {
+      if (err) {
+        done(err);
+      }
+      request(app)
+        .post('/auth/login')
+        .send({
+          username: 'my_name',
+          password: 'passworde',
+        })
+        .expect(404, done);
+    });
 });
