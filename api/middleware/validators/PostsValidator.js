@@ -1,15 +1,5 @@
-const { body, validationResult } = require('express-validator');
-
-// TODO: We should have a single function that captures all errors and sends a response
-const sendResponseOnError = (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    //  maybe there should be a different error code
-    res.status(404).send({ errors: errors.array() });
-  } else {
-    next();
-  }
-};
+const { body } = require('express-validator');
+const { sendResponseOnError } = require('./util');
 
 // Not sure what to validate here
 exports.validatePostParams = [];

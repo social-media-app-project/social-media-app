@@ -4,7 +4,7 @@ const User = require('../../models/Users');
 
 exports.findUser = (val) => User.findOne({ username: val }).exec();
 
-exports.saveNewUser = async (req, res) => {
+exports.saveNewUser = async (req, res, next) => {
   try {
     const hash = await bcrypt.hash(req.body.password, 10);
 
@@ -19,21 +19,21 @@ exports.saveNewUser = async (req, res) => {
     const savedUser = await user.save();
 
     if (savedUser !== user) {
-      throw new Error('couldnt save');
+      throw new Error();
     }
 
     res.status(200).send({ success: [{ msg: 'Thanks for signing up' }] });
   } catch (error) {
-    res.status(400).send({ errors: [{ msg: 'internal errorf' }] });
+    next({ statusCode: 500, errors: ['Internal server error: Could not register user'] });
   }
 };
 
-exports.loginUser = async (req, res) => {
+exports.loginUser = async (req, res, next) => {
   try {
     const user = await User.findOne({ username: req.body.username }).exec();
 
     if (user === null) {
-      res.status(404).send();
+      next({ statusCode: 404, errors: ['Username or password is incorrect'] });
     } else {
       const result = await bcrypt.compare(req.body.password, user.password);
 
@@ -47,10 +47,10 @@ exports.loginUser = async (req, res) => {
         const token = jwt.sign({ userid: user._id }, secret, opts);
         res.status(200).send({ success: true, token: `Bearer ${token}`, expiresDate });
       } else {
-        res.status(404).send();
+        next({ statusCode: 404, errors: ['Username or password is incorrect'] });
       }
     }
   } catch (error) {
-    res.status(404).json({ errors: [error] });
+    next({ statusCode: 500, errors: ['Internal server error: Could not login user'] });
   }
 };

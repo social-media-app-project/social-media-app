@@ -1,5 +1,6 @@
-const { body, validationResult, check } = require('express-validator');
+const { body, check } = require('express-validator');
 const q = require('../query-executors/AuthQueryExecutor');
+const { sendResponseOnError } = require('./util');
 
 const checkUsernameAvailable = async (val, errMsg) => {
   const user = await q.findUser(val);
@@ -7,17 +8,6 @@ const checkUsernameAvailable = async (val, errMsg) => {
     return Promise.reject(new Error(errMsg));
   }
   return true;
-};
-
-// TODO: We should have a single function that captures all errors and sends a response
-const sendResponseOnError = (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    //  maybe there should be a different error code
-    res.status(404).send({ errors: errors.array() });
-  } else {
-    next();
-  }
 };
 
 exports.validateSignupBody = [
