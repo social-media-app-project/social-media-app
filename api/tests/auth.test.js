@@ -22,8 +22,6 @@ test('signup works', (done) => {
       username: 'my_name',
       password: 'password',
       password_confirm: 'password',
-      first_name: 'Name',
-      last_name: 'Name',
       email: 'testemail@gmail.com',
     })
     .expect(200, done);
@@ -36,8 +34,6 @@ test('signup (name in use) does not work', (done) => {
       username: 'my_name',
       password: 'password',
       password_confirm: 'password',
-      first_name: 'Name',
-      last_name: 'Name',
       email: 'testemail@gmail.com',
       bio: 'Hello this is a bio',
     })
@@ -51,8 +47,6 @@ test('signup (name in use) does not work', (done) => {
           username: 'my_name',
           password: 'password',
           password_confirm: 'password',
-          first_name: 'Name',
-          last_name: 'Name',
           email: 'testemail@gmail.com',
           bio: 'Hello this is a bio',
         })
@@ -67,8 +61,6 @@ test('password confirm does not match', (done) => {
       username: 'my_name',
       password: 'password',
       password_confirm: 'passworde',
-      first_name: 'Name',
-      last_name: 'Name',
       email: 'testemail@gmail.com',
       bio: 'Hello this is a bio',
     })
@@ -82,8 +74,6 @@ test('no username', (done) => {
       username: '',
       password: 'password',
       password_confirm: 'password',
-      first_name: 'Name',
-      last_name: 'Name',
       email: 'testemail@gmail.com',
       bio: 'Hello this is a bio',
     })
@@ -97,38 +87,6 @@ test('no password', (done) => {
       username: 'my_name',
       password: '',
       password_confirm: 'password',
-      first_name: 'Name',
-      last_name: 'Name',
-      email: 'testemail@gmail.com',
-      bio: 'Hello this is a bio',
-    })
-    .expect(404, done);
-});
-
-test('no first name', (done) => {
-  request(app)
-    .post('/auth/signup')
-    .send({
-      username: 'my_name',
-      password: 'password',
-      password_confirm: 'password',
-      first_name: '',
-      last_name: 'Name',
-      email: 'testemail@gmail.com',
-      bio: 'Hello this is a bio',
-    })
-    .expect(404, done);
-});
-
-test('no last name', (done) => {
-  request(app)
-    .post('/auth/signup')
-    .send({
-      username: 'my_name',
-      password: 'password',
-      password_confirm: 'password',
-      first_name: 'Name',
-      last_name: '',
       email: 'testemail@gmail.com',
       bio: 'Hello this is a bio',
     })
@@ -142,8 +100,6 @@ test('no email', (done) => {
       username: 'my_name',
       password: 'password',
       password_confirm: 'password',
-      first_name: 'Name',
-      last_name: 'Name',
       email: '',
       bio: 'Hello this is a bio',
     })
@@ -157,8 +113,6 @@ test('malformed email', (done) => {
       username: 'my_name',
       password: 'password',
       password_confirm: 'password',
-      first_name: 'Name',
-      last_name: 'Name',
       email: 'testemailgmail.com',
       bio: 'Hello this is a bio',
     })
@@ -172,8 +126,6 @@ test('bio too long', (done) => {
       username: 'my_name',
       password: 'password',
       password_confirm: 'password',
-      first_name: 'Name',
-      last_name: 'Name',
       email: 'testemail@gmail.com',
       bio: 'bioooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo',
     })
@@ -187,8 +139,6 @@ test('successful login', (done) => {
       username: 'my_name',
       password: 'password',
       password_confirm: 'password',
-      first_name: 'Name',
-      last_name: 'Name',
       email: 'testemail@gmail.com',
     })
     .expect(200)
@@ -216,8 +166,6 @@ test('unsuccessful login (username)', (done) => {
       username: 'my_name',
       password: 'password',
       password_confirm: 'password',
-      first_name: 'Name',
-      last_name: 'Name',
       email: 'testemail@gmail.com',
       bio: 'Hello this is a bio',
     })
@@ -243,8 +191,6 @@ test('unsuccessful login (password)', (done) => {
       username: 'my_name',
       password: 'password',
       password_confirm: 'password',
-      first_name: 'Name',
-      last_name: 'Name',
       email: 'testemail@gmail.com',
       bio: 'Hello this is a bio',
     })
