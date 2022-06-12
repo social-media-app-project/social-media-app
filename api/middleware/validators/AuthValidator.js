@@ -21,18 +21,6 @@ const sendResponseOnError = (req, res, next) => {
 };
 
 exports.validateSignupBody = [
-  body('first_name').trim().escape().isLength({ min: 1 })
-    .withMessage('First name is required')
-    .matches(/^[A-Za-z]+$/)
-    .withMessage(' Name must be alphabetic.')
-    .isLength({ max: 25 })
-    .withMessage('first name is too long'),
-  body('last_name').trim().escape().isLength({ min: 1 })
-    .withMessage('Last name is required')
-    .matches(/^[A-Za-z]+$/)
-    .withMessage('Name must be alphabetic.')
-    .isLength({ max: 25 })
-    .withMessage('last name is too long'),
   body('username').trim().escape().isLength({ min: 1 })
     .withMessage('Username is required')
     .isLength({ max: 25 })

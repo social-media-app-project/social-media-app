@@ -9,12 +9,9 @@ exports.saveNewUser = async (req, res) => {
     const hash = await bcrypt.hash(req.body.password, 10);
 
     const user = new User({
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
       username: req.body.username,
       password: hash,
       email: req.body.email,
-      dob: req.body.dob,
       friends: [],
       bio: req.body.bio,
     });

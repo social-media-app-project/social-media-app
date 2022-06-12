@@ -9,6 +9,13 @@ const http = require('http');
 const app = require('../app');
 
 /**
+ * Setup database connection (MANUALLY ADDED)
+ */
+const setupDatabase = require('../setup-db');
+
+setupDatabase();
+
+/**
  * Get port from environment and store in Express.
  */
 
