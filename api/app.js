@@ -26,4 +26,12 @@ app.use('/auth', authArouter);
 app.use('/users', passport.authenticate('jwt', { session: false }), usersRouter);
 app.use('/posts', passport.authenticate('jwt', { session: false }), postsRouter);
 
+app.use((err, req, res, next) => {
+  if (res.headersSent) {
+    next(err);
+  } else {
+    res.status(err.statusCode).send({ errors: err.errors });
+  }
+});
+
 module.exports = app;

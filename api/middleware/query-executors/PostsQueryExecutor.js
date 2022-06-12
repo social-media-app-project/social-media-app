@@ -2,16 +2,16 @@ const Post = require('../../models/Posts');
 
 exports.executeFeedQuery = async (req, res, next) => {};
 
-exports.getPost = async (req, res) => {
+exports.getPost = async (req, res, next) => {
   try {
-    console.log(req.params.postId);
     const post = await Post.findById(req.params.postId).exec();
     if (!post) {
-      throw new Error('couldnt find post');
+      next({ statusCode: 404, errors: ['Could not find post'] });
+    } else {
+      res.send({ post });
     }
-    res.json({ post });
   } catch (error) {
-    res.status(400).send({ errors: [{ error }] });
+    next({ statusCode: 500, errors: ['Internal server error'] });
   }
 };
 

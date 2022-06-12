@@ -50,7 +50,7 @@ test('signup (name in use) does not work', (done) => {
           email: 'testemail@gmail.com',
           bio: 'Hello this is a bio',
         })
-        .expect(404, done);
+        .expect(400, done);
     });
 });
 
@@ -64,7 +64,7 @@ test('password confirm does not match', (done) => {
       email: 'testemail@gmail.com',
       bio: 'Hello this is a bio',
     })
-    .expect(404, done);
+    .expect(400, done);
 });
 
 test('no username', (done) => {
@@ -77,7 +77,7 @@ test('no username', (done) => {
       email: 'testemail@gmail.com',
       bio: 'Hello this is a bio',
     })
-    .expect(404, done);
+    .expect(400, done);
 });
 
 test('no password', (done) => {
@@ -90,7 +90,7 @@ test('no password', (done) => {
       email: 'testemail@gmail.com',
       bio: 'Hello this is a bio',
     })
-    .expect(404, done);
+    .expect(400, done);
 });
 
 test('no email', (done) => {
@@ -103,7 +103,7 @@ test('no email', (done) => {
       email: '',
       bio: 'Hello this is a bio',
     })
-    .expect(404, done);
+    .expect(400, done);
 });
 
 test('malformed email', (done) => {
@@ -116,7 +116,7 @@ test('malformed email', (done) => {
       email: 'testemailgmail.com',
       bio: 'Hello this is a bio',
     })
-    .expect(404, done);
+    .expect(400, done);
 });
 
 test('bio too long', (done) => {
@@ -129,7 +129,7 @@ test('bio too long', (done) => {
       email: 'testemail@gmail.com',
       bio: 'bioooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo',
     })
-    .expect(404, done);
+    .expect(400, done);
 });
 
 test('successful login', (done) => {
