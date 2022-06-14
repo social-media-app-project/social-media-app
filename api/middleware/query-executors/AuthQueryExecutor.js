@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('../../models/Users');
+const User = require('../../models/User');
 
 exports.findUser = (val) => User.findOne({ username: val }).exec();
 

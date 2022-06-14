@@ -16,7 +16,8 @@ exports.validateCommentBody = [
   sendResponseOnError,
 ];
 
-exports.validateLikePermitted = (req, res, next) => {};
+exports.validateLikePermitted = (req, res, next) => {
+};
 
 exports.validateCommentPermitted = (req, res, next) => {};
 
