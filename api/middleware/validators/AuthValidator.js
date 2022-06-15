@@ -1,6 +1,5 @@
 const { body, check } = require('express-validator');
 const q = require('../query-executors/AuthQueryExecutor');
-const { sendResponseOnError } = require('./util');
 
 const checkUsernameAvailable = async (val, errMsg) => {
   const user = await q.findUser(val);
@@ -33,7 +32,6 @@ exports.validateSignupBody = [
     .custom((val, { req }) => val === req.body.password),
   check('username', 'username already exists')
     .custom((val) => checkUsernameAvailable(val, 'username is already in use')),
-  sendResponseOnError,
 ];
 
 exports.validateLoginBody = [
@@ -45,6 +43,5 @@ exports.validateLoginBody = [
     .withMessage('Password is required')
     .isLength({ max: 25 })
     .withMessage('password is too long'),
-  sendResponseOnError,
 
 ];
