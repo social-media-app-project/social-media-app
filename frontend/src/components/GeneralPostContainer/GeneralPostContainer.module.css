@@ -2,7 +2,7 @@
   padding: 12px;
   display: flex;
   gap: 1rem;
-  font-size: clamp(0.96rem, -0.875rem + 4.333vw, 1.1rem);
+  font-size: clamp(0.85rem, -0.875rem + 4.333vw, 1.1rem);
 }
 
 .content-container {

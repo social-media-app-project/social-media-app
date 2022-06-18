@@ -1,14 +1,19 @@
-
-.like-holder{
+.like-holder {
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: .9rem;
+  font-size: clamp(0.8rem, -0.875rem + 4.333vw, 1.12rem);
+
   margin: 0px 10px;
 }
 
-.like-img{
+.like-img {
   border-radius: 50%;
   width: 30px;
+}
 
+@media (max-width: 400px) {
+  .like-img {
+    width: 25px;
+  }
 }
