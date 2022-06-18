@@ -95,10 +95,10 @@ exports.executeLikePostQuery = async (req, res, next) => {
 
     const updateResult = await Post.updateOne(
       { _id: postId },
-      { $push: { likes: _id } },
+      { $addToSet: { likes: _id } },
     ).exec();
 
-    if (updateResult.modifiedCount === 1) {
+    if (updateResult.matchedCount === 1) {
       res.status(200).send({ success: [{ msg: 'Thanks for liking' }] });
     } else {
       next({ statusCode: 400, errors: ['Could not find the post to like'] });
