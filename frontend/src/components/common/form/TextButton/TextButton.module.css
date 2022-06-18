@@ -1,14 +1,11 @@
 .text-button {
-    border: none;
-    font-size: 1.2rem;
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    border-radius: 15px;
+  border: none;
+  font-size: clamp(0.96rem, -0.875rem + 4.333vw, 1.2rem);
+  padding: 6px 12px;
+  border-radius: 15px;
 }
 
 .text-button:hover {
-    cursor: pointer;
-    background-color: grey;
+  cursor: pointer;
+  background-color: grey;
 }
