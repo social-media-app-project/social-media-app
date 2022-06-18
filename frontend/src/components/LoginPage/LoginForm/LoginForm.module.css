@@ -1,17 +1,17 @@
 .login-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 1rem;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 1rem;
+  gap: 1rem;
 }
 
 .login-button {
-    background-color: var(--primary-button-color);
-    color: var(--primary-button-color-inv);
+  background-color: var(--primary-button-color);
+  color: var(--primary-button-color-inv);
 }
 
 .login-button:hover {
-    background-color: var(--primary-button-color-inv);
-    color: var(--primary-button-color);
+  background-color: var(--primary-button-color-inv);
+  color: var(--primary-button-color);
 }
