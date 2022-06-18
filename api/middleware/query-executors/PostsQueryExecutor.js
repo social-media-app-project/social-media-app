@@ -81,7 +81,10 @@ exports.executeCreatePostQuery = async (req, res, next) => {
     if (savedPost !== post) {
       throw new Error();
     } else {
-      res.status(200).send({ success: [{ msg: 'Thanks for posting' }] });
+      res.status(200).send({
+        msg: 'Thanks for posting',
+        post: savedPost,
+      });
     }
   } catch (error) {
     next({ statusCode: 500, errors: ['Internal server error: Could not create post'] });
