@@ -1,27 +1,32 @@
 .comment-container {
-    font-size: 0.9rem;
-    display: flex;
+  font-size: clamp(0.8rem, -0.875rem + 4.333vw, 1rem);
+
+  margin-right: 5px;
+  display: flex;
 }
 
 .comment-container > .profile-pic-container {
-    padding: 0.5rem;
+  padding: 5px;
 }
 
 .comment-container .comment {
-    padding: 0.5rem;
-    background-color: var(--primary-background);
-    border-radius: 15px;
+  padding: 10px 10px;
+  background-color: var(--primary-background);
+  border-radius: 1.1rem;
+  line-height: 15px;
 }
 
 .comment-container .right-section {
-    flex: 1;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+  flex: 1;
+  margin: 8px 0px;
 }
 
 .comment-container .right-section .comment-header-info {
-    padding-left: 0.5rem;
-    display: flex;
-    gap: 1rem;
-    padding-bottom: 0.2rem;
+  margin-left: 7px;
+  display: flex;
+  gap: 12px;
+  padding-bottom: 0.2rem;
+}
+
+@media (max-width: 400px) {
 }

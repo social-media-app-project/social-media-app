@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./Friends.module.css";
 import Friend from "./Friend/Friend";
-
 const Friends = () => {
   // Fetch data using route path and params
 

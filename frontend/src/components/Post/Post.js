@@ -1,56 +1,70 @@
-import React, { useState } from 'react';
-import GeneralPostContainer from '../GeneralPostContainer/GeneralPostContainer';
-import ImageSlideshow from '../ImageSlideshow/ImageSlideshow';
-import styles from './Post.module.css';
-import { FaRegComment } from 'react-icons/fa';
-import { HiOutlineThumbUp, HiThumbUp } from 'react-icons/hi';
-import CommentsSection from './CommentsSection/CommentsSection';
-import LikesView from './LikesView/LikesView';
+import React, { useState } from "react";
+import GeneralPostContainer from "../GeneralPostContainer/GeneralPostContainer";
+import ImageSlideshow from "../ImageSlideshow/ImageSlideshow";
+import styles from "./Post.module.css";
+import { FaRegComment } from "react-icons/fa";
+import { HiOutlineThumbUp, HiThumbUp } from "react-icons/hi";
+import CommentsSection from "./CommentsSection/CommentsSection";
+import LikesView from "./LikesView/LikesView";
 
-const Post = props => {
-    const [ commentsExpanded, setCommentsExpanded ] = useState(false);
-    const [likesExpanded, setLikesExpanded ] = useState(false);
+const Post = (props) => {
+  const [commentsExpanded, setCommentsExpanded] = useState(false);
+  const [likesExpanded, setLikesExpanded] = useState(false);
 
-    const isOwner = true;
-    const { post } = props;
-    const { description, profilePicUrl, user, timestamp, numLikes, numComments } = props.post;
+  const isOwner = true;
+  const { post } = props;
+  const { description, profilePicUrl, user, timestamp, numLikes, numComments } =
+    props.post;
 
-    const toggleComments = () => {
-        setCommentsExpanded(!commentsExpanded);
-        if(likesExpanded){
-            setLikesExpanded(false)
-        }
+  const toggleComments = () => {
+    setCommentsExpanded(!commentsExpanded);
+    if (likesExpanded) {
+      setLikesExpanded(false);
     }
+  };
 
-    const toggleLikes = () =>{
-        setLikesExpanded(!likesExpanded);
-        if(commentsExpanded){
-            setCommentsExpanded(false)
-        }
+  const toggleLikes = () => {
+    setLikesExpanded(!likesExpanded);
+    if (commentsExpanded) {
+      setCommentsExpanded(false);
     }
+  };
 
-
-    return (
-    <div className={styles['post-container']}>
-        <GeneralPostContainer isOwner={isOwner} timestamp={timestamp}>
-            <div className={styles['post-text']}>
-                <span>{description}</span>
-            </div>
-        </GeneralPostContainer>
-        <div className={styles['slideshow-container']}>
-            <ImageSlideshow />
+  return (
+    <div className={styles["post-container"]}>
+      <GeneralPostContainer isOwner={isOwner} timestamp={timestamp}>
+        <div className={styles["post-text"]}>
+          <span>{description}</span>
         </div>
-        <div className={styles['additional-info-container']}>
-            <div className={styles['post-info-container']}>
-                <button className={styles['post-info-button']} name='like' onClick={toggleLikes}>{numLikes} likes</button>
-                <button className={styles['post-info-button']}><HiOutlineThumbUp className={styles['post-info-icon']} /> Like</button>
-                <button className={styles['post-info-button']} name='comment' onClick={toggleComments}>{numComments} comments</button>
-            </div>
-            { commentsExpanded ? <CommentsSection /> : null }
-            {likesExpanded ? <LikesView /> : null}
+      </GeneralPostContainer>
+      <div className={styles["slideshow-container"]}>
+        <ImageSlideshow />
+      </div>
+      <div className={styles["additional-info-container"]}>
+        <div className={styles["post-info-container"]}>
+          <button
+            className={styles["post-info-button"]}
+            name="like"
+            onClick={toggleLikes}
+          >
+            {numLikes} likes
+          </button>
+          <button className={styles["post-info-button"]}>
+            <HiOutlineThumbUp className={styles["post-info-icon"]} /> Like
+          </button>
+          <button
+            className={styles["post-info-button"]}
+            name="comment"
+            onClick={toggleComments}
+          >
+            {numComments} comments
+          </button>
         </div>
+        {commentsExpanded ? <CommentsSection /> : null}
+        {likesExpanded ? <LikesView /> : null}
+      </div>
     </div>
-    )
+  );
 };
 
 export default Post;
