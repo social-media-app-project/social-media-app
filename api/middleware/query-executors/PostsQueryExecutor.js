@@ -1,3 +1,4 @@
+const { Schema } = require('mongoose');
 const Post = require('../../models/Post');
 const User = require('../../models/User');
 
@@ -194,7 +195,9 @@ exports.isUserFriendsWithAuthor = async (userId, postId) => {
 
   if (post.author === userId) return true;
 
-  const user = await User.findOne({ _id: userId, friends: post.author }).exec();
+  const user = await User.findOne({
+    _id: userId, friends: { $all: post.author },
+  }).exec();
   return user;
 };
 
