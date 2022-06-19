@@ -1,17 +1,16 @@
 .text-input-label {
-    text-align: left;
-    display: block;
-    padding-bottom: 0.5rem;
-    cursor: text;
+  text-align: left;
+  display: block;
+  padding-bottom: 0.5rem;
+  cursor: text;
 }
 
 .text-input {
-    display: block;
-    outline: none;
-    width: 18rem;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 2px;
+  display: block;
+  outline: none;
+  width: 18rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 2px;
 }
-

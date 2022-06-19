@@ -1,18 +1,18 @@
 .nav-bar-button {
-    color: var(--text-color);
-    font-size: 1.3rem;
-    padding: 8px;
-    display: flex;
-    border-radius: 15px;
-    align-items: center;
-    max-width: fit-content;
-    text-decoration: none;
+  color: var(--text-color);
+  font-size: clamp(1.1rem, -0.875rem + 6.333vw, 1.3rem);
+  padding: 8px;
+  display: flex;
+  border-radius: 15px;
+  align-items: center;
+  max-width: fit-content;
+  text-decoration: none;
 }
 
 .nav-bar-button:hover {
-    background-color: var(--primary-background);
+  background-color: var(--primary-background);
 }
 
 .nav-button-label {
-    padding-left: 10px;
+  padding-left: 10px;
 }

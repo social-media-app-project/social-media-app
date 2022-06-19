@@ -1,34 +1,38 @@
 .create-comment-container {
-    display: flex;
+  display: flex;
+  margin: 7px 9px;
 }
 
 .create-comment-container > .profile-pic-container {
-    padding: 0.5rem;
+  margin: 5px 5px;
 }
 
 .create-comment-container .input-container {
-    padding-top: 0.5em;
-    padding-right: 0.5em;
+  margin: 7px 0px;
+  font-size: clamp(0.8rem, -0.875rem + 4.333vw, 1.12rem);
+  line-height: 15px;
 }
 
 .create-comment-container .input-container > .input {
-    border: none;
-    outline: none;
-    cursor: text;
-    overflow-wrap: anywhere;
+  border: none;
+  outline: none;
+  cursor: text;
+  overflow-wrap: anywhere;
 }
 
 .create-comment-container > button {
-    font-size: 1.2rem;
-    color: grey;
+  font-size: 1rem;
+  color: grey;
 }
 
 .create-comment-container > button:hover {
-    color: var(--primary-accent);
+  color: var(--primary-accent);
 }
 
 .create-comment-container .right-section {
-    flex: 1;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+  flex: 1;
+  margin: 7px 3px;
+}
+.comment-button {
+  margin: 5px 10px;
 }
