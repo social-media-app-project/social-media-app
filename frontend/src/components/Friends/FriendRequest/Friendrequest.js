@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./Friend.module.css";
+import styles from "./Friendrequest.module.css";
 
-const Friend = (props) => {
+const FriendRequest = (props) => {
   return (
     <div className={styles["fr"]}>
       <div className={styles["name-pic"]}>
@@ -12,10 +12,11 @@ const Friend = (props) => {
         </div>
       </div>
       <div className={styles["fr-buttons"]}>
+        <div>Accept</div>
         <div>Delete</div>
       </div>
     </div>
   );
 };
 
-export default Friend;
+export default FriendRequest;
