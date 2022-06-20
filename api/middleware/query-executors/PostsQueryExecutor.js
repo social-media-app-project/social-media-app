@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Post = require('../../models/Post');
 const User = require('../../models/User');
 
@@ -190,19 +191,18 @@ exports.executeUpdatePostQuery = async (req, res, next) => {
 
 exports.isUserFriendsWithAuthor = async (userId, postId) => {
   const post = await Post.findById(postId).select('author').exec();
-  if (!post) return false;
-
-  if (post.author === userId) return true;
+  if (!post) return Promise.reject(new Error('Post not found'));
+  if (new mongoose.Types.ObjectId(userId).equals(post.author)) return Promise.resolve('User is author of post');
 
   const user = await User.findOne({
     _id: userId, friends: { $all: post.author },
   }).exec();
-  return user;
+  return user ? Promise.resolve('User is friends with author') : Promise.reject(new Error('User is not friends with author'));
 };
 
 exports.isUserAuthorOfPost = async (userId, postId) => {
   const post = await Post.findById(postId).select('author').exec();
-  if (!post) return false;
+  if (!post) return Promise.reject(new Error('Post not found'));
 
-  return post.author === userId;
+  return new mongoose.Types.ObjectId(userId).equals(post.author) ? Promise.resolve('User is author of post') : Promise.reject(new Error('User is not author of post'));
 };

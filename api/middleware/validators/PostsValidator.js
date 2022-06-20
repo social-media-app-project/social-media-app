@@ -21,8 +21,7 @@ exports.validateLikePermitted = [
   param('postId', 'user is not friends with poster')
     .custom(async (postId, { req }) => {
       const { _id } = req.user;
-      const result = await isUserFriendsWithAuthor(_id, postId);
-      return result;
+      return isUserFriendsWithAuthor(_id, postId);
     }),
 ];
 
@@ -30,8 +29,7 @@ exports.validateCommentPermitted = [
   param('postId', 'user is not friends with poster')
     .custom(async (postId, { req }) => {
       const { _id } = req.user;
-      const result = await isUserFriendsWithAuthor(_id, postId);
-      return result;
+      return isUserFriendsWithAuthor(_id, postId);
     }),
 ];
 
@@ -39,8 +37,7 @@ exports.validateDeletePermitted = [
   param('postId', 'user is not author of post')
     .custom(async (postId, { req }) => {
       const { _id } = req.user;
-      const result = await isUserAuthorOfPost(_id, postId);
-      return result;
+      return isUserAuthorOfPost(_id, postId);
     }),
 ];
 
@@ -48,7 +45,6 @@ exports.validateUpdatePermitted = [
   param('postId', 'user is not author of post')
     .custom(async (postId, { req }) => {
       const { _id } = req.user;
-      const result = await isUserAuthorOfPost(_id, postId);
-      return result;
+      return isUserAuthorOfPost(_id, postId);
     }),
 ];
