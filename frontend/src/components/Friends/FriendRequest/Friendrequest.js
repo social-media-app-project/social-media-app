@@ -12,8 +12,8 @@ const FriendRequest = (props) => {
         </div>
       </div>
       <div className={styles["fr-buttons"]}>
-        <div>Accept</div>
-        <div>Delete</div>
+        <button>Accept</button>
+        <button>Delete</button>
       </div>
     </div>
   );

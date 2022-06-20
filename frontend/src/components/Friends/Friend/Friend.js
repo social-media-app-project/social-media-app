@@ -12,7 +12,7 @@ const Friend = (props) => {
         </div>
       </div>
       <div className={styles["fr-buttons"]}>
-        <div>Delete</div>
+        <button>Delete</button>
       </div>
     </div>
   );
