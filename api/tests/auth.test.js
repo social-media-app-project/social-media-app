@@ -15,8 +15,8 @@ afterAll(async () => {
   await db.dropDatabase();
 });
 
-test('signup works', (done) => {
-  request(app)
+test('signup works', async () => {
+  await request(app)
     .post('/auth/signup')
     .send({
       username: 'my_name',
@@ -24,11 +24,20 @@ test('signup works', (done) => {
       password_confirm: 'password',
       email: 'testemail@gmail.com',
     })
-    .expect(200, done);
+    .expect(200);
 });
 
-test('signup (name in use) does not work', (done) => {
-  request(app)
+test('signup (name in use) does not work', async () => {
+  await request(app)
+    .post('/auth/signup')
+    .send({
+      username: 'my_name',
+      password: 'password',
+      password_confirm: 'password',
+      email: 'testemail@gmail.com',
+      bio: 'Hello this is a bio',
+    });
+  await request(app)
     .post('/auth/signup')
     .send({
       username: 'my_name',
@@ -37,25 +46,11 @@ test('signup (name in use) does not work', (done) => {
       email: 'testemail@gmail.com',
       bio: 'Hello this is a bio',
     })
-    .end((err) => {
-      if (err) {
-        done(err);
-      }
-      request(app)
-        .post('/auth/signup')
-        .send({
-          username: 'my_name',
-          password: 'password',
-          password_confirm: 'password',
-          email: 'testemail@gmail.com',
-          bio: 'Hello this is a bio',
-        })
-        .expect(400, done);
-    });
+    .expect(400);
 });
 
-test('password confirm does not match', (done) => {
-  request(app)
+test('password confirm does not match', async () => {
+  await request(app)
     .post('/auth/signup')
     .send({
       username: 'my_name',
@@ -64,11 +59,11 @@ test('password confirm does not match', (done) => {
       email: 'testemail@gmail.com',
       bio: 'Hello this is a bio',
     })
-    .expect(400, done);
+    .expect(400);
 });
 
-test('no username', (done) => {
-  request(app)
+test('no username', async () => {
+  await request(app)
     .post('/auth/signup')
     .send({
       username: '',
@@ -77,11 +72,11 @@ test('no username', (done) => {
       email: 'testemail@gmail.com',
       bio: 'Hello this is a bio',
     })
-    .expect(400, done);
+    .expect(400);
 });
 
-test('no password', (done) => {
-  request(app)
+test('no password', async () => {
+  await request(app)
     .post('/auth/signup')
     .send({
       username: 'my_name',
@@ -90,11 +85,11 @@ test('no password', (done) => {
       email: 'testemail@gmail.com',
       bio: 'Hello this is a bio',
     })
-    .expect(400, done);
+    .expect(400);
 });
 
-test('no email', (done) => {
-  request(app)
+test('no email', async () => {
+  await request(app)
     .post('/auth/signup')
     .send({
       username: 'my_name',
@@ -103,11 +98,11 @@ test('no email', (done) => {
       email: '',
       bio: 'Hello this is a bio',
     })
-    .expect(400, done);
+    .expect(400);
 });
 
-test('malformed email', (done) => {
-  request(app)
+test('malformed email', async () => {
+  await request(app)
     .post('/auth/signup')
     .send({
       username: 'my_name',
@@ -116,11 +111,11 @@ test('malformed email', (done) => {
       email: 'testemailgmail.com',
       bio: 'Hello this is a bio',
     })
-    .expect(400, done);
+    .expect(400);
 });
 
-test('bio too long', (done) => {
-  request(app)
+test('bio too long', async () => {
+  await request(app)
     .post('/auth/signup')
     .send({
       username: 'my_name',
@@ -129,11 +124,11 @@ test('bio too long', (done) => {
       email: 'testemail@gmail.com',
       bio: 'bioooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo',
     })
-    .expect(400, done);
+    .expect(400);
 });
 
-test('successful login', (done) => {
-  request(app)
+test('successful login', async () => {
+  await request(app)
     .post('/auth/signup')
     .send({
       username: 'my_name',
@@ -141,26 +136,19 @@ test('successful login', (done) => {
       password_confirm: 'password',
       email: 'testemail@gmail.com',
     })
-    .expect(200)
-    .end((err) => {
-      if (err) {
-        done(err);
-      }
-      request(app)
-        .post('/auth/login')
-        .send({
-          username: 'my_name',
-          password: 'password',
-        })
-        .expect((res) => {
-          expect(res.body).toHaveProperty('token');
-        })
-        .expect(200, done);
-    });
+    .expect(200);
+  const res = await request(app)
+    .post('/auth/login')
+    .send({
+      username: 'my_name',
+      password: 'password',
+    })
+    .expect(200);
+  expect(res.body).toHaveProperty('token');
 });
 
-test('unsuccessful login (username)', (done) => {
-  request(app)
+test('unsuccessful login (username)', async () => {
+  await request(app)
     .post('/auth/signup')
     .send({
       username: 'my_name',
@@ -169,23 +157,18 @@ test('unsuccessful login (username)', (done) => {
       email: 'testemail@gmail.com',
       bio: 'Hello this is a bio',
     })
-    .expect(200)
-    .end((err) => {
-      if (err) {
-        done(err);
-      }
-      request(app)
-        .post('/auth/login')
-        .send({
-          username: 'my_namee',
-          password: 'password',
-        })
-        .expect(404, done);
-    });
+    .expect(200);
+  await request(app)
+    .post('/auth/login')
+    .send({
+      username: 'my_namee',
+      password: 'password',
+    })
+    .expect(404);
 });
 
-test('unsuccessful login (password)', (done) => {
-  request(app)
+test('unsuccessful login (password)', async () => {
+  await request(app)
     .post('/auth/signup')
     .send({
       username: 'my_name',
@@ -194,17 +177,12 @@ test('unsuccessful login (password)', (done) => {
       email: 'testemail@gmail.com',
       bio: 'Hello this is a bio',
     })
-    .expect(200)
-    .end((err) => {
-      if (err) {
-        done(err);
-      }
-      request(app)
-        .post('/auth/login')
-        .send({
-          username: 'my_name',
-          password: 'passworde',
-        })
-        .expect(404, done);
-    });
+    .expect(200);
+  await request(app)
+    .post('/auth/login')
+    .send({
+      username: 'my_name',
+      password: 'passworde',
+    })
+    .expect(404);
 });
