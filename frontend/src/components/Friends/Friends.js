@@ -34,8 +34,10 @@ const Friends = () => {
           })}
       </div>
       <div className={styles["your-friends"]}>
-        <h1>Your Friends</h1>
-        <span>{user.length}</span>
+        <h1>
+          Your Friends
+          <span>{user.length}</span>
+        </h1>
       </div>
       <div className={styles["fr-container"]}>
         {user.map((person, index) => {

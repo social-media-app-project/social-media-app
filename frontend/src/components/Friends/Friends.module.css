@@ -46,7 +46,7 @@
 .your-friends {
   display: flex;
   width: 100%;
-  justify-content: space-around;
+  justify-content: flex-start;
   box-shadow: 0px 3px 2px 0px grey;
   align-items: center;
   padding: 10px 15px;
@@ -54,4 +54,6 @@
 }
 .your-friends > h1 {
   font-size: 1.2rem;
+  display: flex;
+  gap: 10px;
 }
