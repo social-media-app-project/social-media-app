@@ -1,5 +1,6 @@
 .post-container {
   border-bottom: 1px solid grey;
+  width: 100%;
 }
 
 .post-text {

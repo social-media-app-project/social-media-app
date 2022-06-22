@@ -1,0 +1,44 @@
+.profile-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: inline;
+}
+.create-post:not(:active):hover::before {
+  content: "add post";
+  position: fixed;
+  bottom: 100px;
+  font-size: 1rem;
+  color: white;
+}
+.create-post {
+  background-color: green;
+  position: fixed;
+  right: 40px;
+  bottom: 50px;
+  cursor: pointer;
+  color: black;
+  z-index: 2;
+  width: 50px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  border-radius: 1.2rem;
+  box-shadow: 0 5px 0 hsl(120, 100%, 16%);
+}
+
+.create-post:active {
+  box-shadow: none;
+  transform: translateY(5px);
+}
+
+@media (max-width: 400px) {
+  .create-post {
+    bottom: 60px;
+    right: 25px;
+  }
+}
