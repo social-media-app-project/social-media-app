@@ -8,12 +8,14 @@ const ModalImageSlideshow = (props) => {
 
   const [imageIndex, setImageIndex] = useState(index || 0);
 
-  const handleBackClick = () => {
+  const handleBackClick = (e) => {
+    e.stopPropagation();
     const newImageIndex = imageIndex === 0 ? images.length - 1 : imageIndex - 1;
     setImageIndex(newImageIndex);
   };
 
-  const handleForwardClick = () => {
+  const handleForwardClick = (e) => {
+    e.stopPropagation();
     let newImageIndex = (imageIndex + 1) % images.length;
     setImageIndex(newImageIndex);
   };
@@ -33,6 +35,7 @@ const ModalImageSlideshow = (props) => {
               index={index}
               imageSrc={imageSrc}
               currIndex={imageIndex}
+              onClick={(e) => e.stopPropagation()}
             />
           );
         })}
