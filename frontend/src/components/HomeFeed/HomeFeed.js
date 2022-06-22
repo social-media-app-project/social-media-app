@@ -4,22 +4,48 @@ import Post from "../Post/Post";
 import styles from "./HomeFeed.module.css";
 import { posts } from "../../test-data/post-data.js";
 import { user } from "../../test-data/user-data.js";
-import Modal from "../Modal/Modal";
+import ImageModal from "../ImageModal/ImageModal";
 
 const HomeFeed = () => {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [modalImages, setModalImages] = useState([]);
+  const [modalIndex, setModalIndex] = useState(0);
+
+  const handlePostImageClick = (images, index) => {
+    changeBodyStyle();
+    setModalImages(images);
+    setModalIndex(index);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    document.body.style.overflow = "auto";
+    document.body.style.height = "auto";
+    setModalOpen(false);
+  };
+
+  // Changing the body style is required to prevent scrolling while modal is open
+  const changeBodyStyle = () => {
+    document.body.style.overflow = "hidden";
+    document.body.style.height = "100%";
+  };
 
   return (
     <>
-      <button onClick={() => setModalOpen(true)}>hello</button>
       <CreatePost user={user} />
       {posts.map((post, index) => (
-        <Post key={index} post={post} />
+        <Post
+          key={index}
+          post={post}
+          handlePostImageClick={handlePostImageClick}
+        />
       ))}
       {isModalOpen && (
-        <Modal
-          onOverlayClick={() => setModalOpen(false)}
-          onClose={() => setModalOpen(false)}
+        <ImageModal
+          onOverlayClick={closeModal}
+          onClose={closeModal}
+          images={modalImages}
+          index={modalIndex}
         />
       )}
     </>

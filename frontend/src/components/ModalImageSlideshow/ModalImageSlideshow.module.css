@@ -1,0 +1,21 @@
+.slideshow {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow {
+  background: none;
+  border: none;
+  border-radius: 50%;
+  padding: 5px;
+  color: var(--text-color);
+  font-size: 2rem;
+}
+
+.arrow:hover {
+  background-color: var(--primary-background);
+  cursor: pointer;
+}
