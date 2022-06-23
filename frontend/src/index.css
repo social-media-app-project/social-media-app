@@ -74,6 +74,8 @@ code {
   --darkened-text-color: #f3f3f3a6;
   --primary-button-color: #0000ff;
   --primary-button-color-inv: #fff;
+  --bad-button-color: rgba(255, 0, 0, 0.808);
+  --bad-button-color-dark: rgba(255, 0, 0, 0.404);
 }
 
 button {

@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  position: inline;
+  position: relative;
 }
 .create-post:not(:active):hover::before {
   content: "add post";
@@ -41,4 +41,11 @@
     bottom: 60px;
     right: 25px;
   }
+}
+
+.absolute-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
 }

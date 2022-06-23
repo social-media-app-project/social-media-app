@@ -47,3 +47,9 @@
   flex: 1;
   word-break: break-word;
 }
+.friend-status-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  background-color: var(--secondary-background);
+}

@@ -6,6 +6,7 @@ import { user } from "../../test-data/user-data";
 import { posts } from "../../test-data/post-data";
 import { AiOutlinePlus } from "react-icons/ai";
 import ImageModal from "../ImageModal/ImageModal";
+import LogoutButton from "../LogoutButton/LogoutButton";
 
 const Profile = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -18,12 +19,17 @@ const Profile = () => {
     setModalOpen(true);
   };
 
-  const isFriendsWithUser = true;
+  // TODO: something to determine whether user is owner of profile
   const isUser = true;
 
   // Fetch data using route path and params
   return (
     <div className={styles["profile-container"]}>
+      {isUser && (
+        <div className={styles["absolute-btn"]}>
+          <LogoutButton />
+        </div>
+      )}
       <ProfileHeader
         img={user.profilePicUrl}
         name={user.displayName}

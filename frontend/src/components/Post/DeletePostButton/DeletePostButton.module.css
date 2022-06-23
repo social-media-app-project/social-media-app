@@ -1,5 +1,5 @@
 .delete-button {
-  color: #dc2626;
+  color: var(--bad-button-color);
   cursor: pointer;
   background: none;
   font-size: 0.95rem;
@@ -7,5 +7,5 @@
 }
 
 .delete-button:hover {
-  color: #991b1b;
+  color: var(--bad-button-color-dark);
 }
