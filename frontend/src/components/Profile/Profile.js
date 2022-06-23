@@ -18,6 +18,9 @@ const Profile = () => {
     setModalOpen(true);
   };
 
+  const isFriendsWithUser = true;
+  const isUser = true;
+
   // Fetch data using route path and params
   return (
     <div className={styles["profile-container"]}>
