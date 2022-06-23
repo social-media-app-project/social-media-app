@@ -8,6 +8,13 @@
 
 img.picture {
   object-fit: contain;
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 70%;
+  max-height: 70%;
+}
+
+@media (max-width: 900px) {
+  img.picture {
+    max-width: 100%;
+    max-height: 100%;
+  }
 }
