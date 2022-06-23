@@ -1,33 +1,27 @@
 import React, { useState } from "react";
-import styles from "./ImageSlideshow.module.css";
-import picOne from "../../test-data/test-images/landscape1.jpg";
-import picTwo from "../../test-data/test-images/landscape2.jpg";
-import picThree from "../../test-data/test-images/vertical.jpg";
+import styles from "./ModalImageSlideshow.module.css";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import Image from "./Image/Image";
 
-const ImageSlideshow = () => {
-  const [imageIndex, setImageIndex] = useState(0);
+const ModalImageSlideshow = (props) => {
+  const { index, images } = props;
 
-  const images = [picOne, picTwo, picThree];
+  const [imageIndex, setImageIndex] = useState(index || 0);
 
-  const handleBackClick = () => {
+  const handleBackClick = (e) => {
+    e.stopPropagation();
     const newImageIndex = imageIndex === 0 ? images.length - 1 : imageIndex - 1;
     setImageIndex(newImageIndex);
   };
 
-  const handleForwardClick = () => {
+  const handleForwardClick = (e) => {
+    e.stopPropagation();
     let newImageIndex = (imageIndex + 1) % images.length;
     setImageIndex(newImageIndex);
   };
 
   return (
     <>
-      {images.length > 1 ? (
-        <span>
-          {imageIndex + 1} of {images.length}
-        </span>
-      ) : null}
       <div className={styles["slideshow"]}>
         {images.length > 1 ? (
           <button className={styles["arrow"]} onClick={handleBackClick}>
@@ -41,6 +35,7 @@ const ImageSlideshow = () => {
               index={index}
               imageSrc={imageSrc}
               currIndex={imageIndex}
+              onClick={(e) => e.stopPropagation()}
             />
           );
         })}
@@ -54,4 +49,4 @@ const ImageSlideshow = () => {
   );
 };
 
-export default ImageSlideshow;
+export default ModalImageSlideshow;

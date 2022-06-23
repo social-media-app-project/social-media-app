@@ -1,33 +1,36 @@
 import React, { useState } from "react";
 import GeneralPostContainer from "../GeneralPostContainer/GeneralPostContainer";
-import ImageSlideshow from "../ImageSlideshow/ImageSlideshow";
+import PostImageSlideshow from "../PostImageSlideshow/PostImageSlideshow";
 import styles from "./Post.module.css";
-import { FaRegComment } from "react-icons/fa";
 import { HiOutlineThumbUp, HiThumbUp } from "react-icons/hi";
 import CommentsSection from "./CommentsSection/CommentsSection";
 import LikesView from "./LikesView/LikesView";
+import picOne from "../../test-data/test-images/landscape1.jpg";
+import picTwo from "../../test-data/test-images/landscape2.jpg";
+import picThree from "../../test-data/test-images/vertical.jpg";
 
 const Post = (props) => {
   const [commentsExpanded, setCommentsExpanded] = useState(false);
   const [likesExpanded, setLikesExpanded] = useState(false);
 
   const isOwner = true;
-  const { post } = props;
+  const { post, handlePostImageClick } = props;
+  const images = [picOne, picTwo, picThree];
   const { description, profilePicUrl, user, timestamp, numLikes, numComments } =
     props.post;
 
   const toggleComments = () => {
-    setCommentsExpanded(!commentsExpanded);
     if (likesExpanded) {
       setLikesExpanded(false);
     }
+    setCommentsExpanded(!commentsExpanded);
   };
 
   const toggleLikes = () => {
-    setLikesExpanded(!likesExpanded);
     if (commentsExpanded) {
       setCommentsExpanded(false);
     }
+    setLikesExpanded(!likesExpanded);
   };
 
   return (
@@ -38,7 +41,10 @@ const Post = (props) => {
         </div>
       </GeneralPostContainer>
       <div className={styles["slideshow-container"]}>
-        <ImageSlideshow />
+        <PostImageSlideshow
+          images={images}
+          handlePostImageClick={handlePostImageClick}
+        />
       </div>
       <div className={styles["additional-info-container"]}>
         <div className={styles["post-info-container"]}>

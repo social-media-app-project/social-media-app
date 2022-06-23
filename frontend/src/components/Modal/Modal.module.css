@@ -1,0 +1,29 @@
+.transparent-overlay {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.close-button {
+  color: var(--text-color);
+  cursor: pointer;
+  background: none;
+  font-size: 1rem;
+  border: none;
+  border-radius: 15px;
+  padding: 5px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 5px;
+}
+
+.close-button:hover {
+  background-color: var(--primary-background);
+}
