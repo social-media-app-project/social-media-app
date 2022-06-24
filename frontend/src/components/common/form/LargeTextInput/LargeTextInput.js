@@ -3,14 +3,23 @@ import styles from "./LargeTextInput.module.css";
 
 const LargeTextInput = (props) => {
   return (
-    <div className={styles["text-input-container"]}>
+    <div
+      className={
+        props.classNames
+          ? [styles["text-input-container"], ...props.classNames].join(" ")
+          : styles["text-input-container"]
+      }
+    >
       <div
         className={styles["text-input"]}
         contentEditable
         role="textbox"
         spellCheck={false}
-        placeholder={props.placeholder || "What would you like to say?"}
-      />
+        placeholder={props.placeholder}
+        onChange={props.onChange}
+      >
+        {props.value}
+      </div>
     </div>
   );
 };

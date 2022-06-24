@@ -7,7 +7,9 @@ import styles from "./CreatePostForm.module.css";
 const CreatePostForm = () => {
   return (
     <form>
-      <LargeTextInput></LargeTextInput>
+      <LargeTextInput
+        placeholder={"What would you like to say?"}
+      ></LargeTextInput>
       <div className={styles["buttons-container"]}>
         <AttachmentsBar></AttachmentsBar>
         <CreatePostButton></CreatePostButton>

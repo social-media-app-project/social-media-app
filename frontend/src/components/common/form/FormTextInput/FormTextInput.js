@@ -13,7 +13,6 @@ function FormTextInput(props) {
         id={props.inputName}
         name={props.inputName}
         value={props.value}
-        style={{ width: props.width }}
         onChange={(event) =>
           props.handleTextChange(event, props.setStateToNewText)
         }
