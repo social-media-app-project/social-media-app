@@ -1,7 +1,5 @@
 import React from "react";
 import FriendStatus from "../FriendStatus/FriendStatus";
-import Bio from "./Bio/Bio";
-import HeaderName from "./HeaderName/HeaderName";
 import styles from "./ProfileHeader.module.css";
 
 const ProfileHeader = (props) => {
@@ -16,11 +14,11 @@ const ProfileHeader = (props) => {
       <div className={styles["not-bio"]}>
         <img src={props.img} alt="header-img" />
         <div className={styles["names"]}>
-          <HeaderName name={props.name} />
+          <h1 className={styles["name"]}>{props.name}</h1>
           <p>{props.username}</p>
         </div>
       </div>
-      <Bio bio={props.bio} />
+      <div className={styles["bio"]}>{props.bio}</div>
       {!isUser && (
         <div className={styles["friend-status-container"]}>
           <FriendStatus />
