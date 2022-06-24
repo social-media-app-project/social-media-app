@@ -19,6 +19,7 @@
 .settings-form {
   flex-basis: 500px;
   flex-shrink: 1;
+  margin: 10px;
 }
 
 .edit-name-container,
