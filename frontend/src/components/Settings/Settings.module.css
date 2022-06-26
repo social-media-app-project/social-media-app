@@ -1,0 +1,89 @@
+.settings-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.settings-header {
+  font-size: clamp(1.5rem, -0.875rem + 10.333vw, 3.4rem);
+  font-weight: 600;
+  margin: 15px 0px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.settings-form {
+  flex-basis: 500px;
+  flex-shrink: 1;
+  margin: 10px;
+}
+
+.edit-name-container,
+.edit-bio-container,
+.save-button-container,
+.edit-pic-container,
+.logout-button-container {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.edit-pic-container,
+.save-button-container,
+.logout-button-container {
+  display: flex;
+}
+
+.edit-pic-container,
+.logout-button-container {
+  justify-content: center;
+}
+
+.save-button-container {
+  justify-content: flex-end;
+}
+
+.text-input-label {
+  text-align: left;
+  cursor: text;
+  margin-left: 5px;
+}
+
+.text-input {
+  display: block;
+  outline: none;
+  padding: 7px;
+  font-size: 1rem;
+  border: none;
+  width: 100%;
+  border-radius: 2px;
+  background-color: var(--primary-background);
+  color: var(--text-color);
+  margin-top: 5px;
+}
+
+.bio-input {
+  padding: 7px;
+  background-color: var(--primary-background);
+  margin-top: 5px;
+}
+
+.save-button {
+  background-color: green;
+}
+
+.save-button:hover {
+  background-color: var(--text-color);
+  color: green;
+}
+
+.logout-button {
+  background-color: var(--bad-button-color);
+}
+
+.logout-button:hover {
+  background-color: var(--bad-button-color-dark);
+}

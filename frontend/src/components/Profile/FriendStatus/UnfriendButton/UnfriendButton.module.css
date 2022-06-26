@@ -1,0 +1,14 @@
+.unfriend-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-color);
+  background-color: var(--bad-button-color);
+  margin: 5px;
+  padding: 5px;
+  border-radius: 0.4rem;
+}
+
+.unfriend-button:hover {
+  background-color: var(--bad-button-color-dark);
+}

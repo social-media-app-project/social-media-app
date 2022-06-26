@@ -1,0 +1,6 @@
+.friend-status {
+  font-size: clamp(0.96rem, -0.875rem + 4.333vw, 1.2rem);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
