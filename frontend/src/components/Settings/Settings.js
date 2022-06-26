@@ -45,10 +45,10 @@ const Settings = (props) => {
               classNames={[styles["save-button"]]}
             />
           </div>
-          <div className={styles["logout-button-container"]}>
-            <TextButton text="Logout" classNames={[styles["logout-button"]]} />
-          </div>
         </form>
+      </div>
+      <div className={styles["logout-button-container"]}>
+        <TextButton text="Logout" classNames={[styles["logout-button"]]} />
       </div>
     </div>
   );
