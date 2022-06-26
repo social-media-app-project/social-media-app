@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import FormTextInput from "../common/form/FormTextInput/FormTextInput";
 import LargeTextInput from "../common/form/LargeTextInput/LargeTextInput";
 import TextButton from "../common/form/TextButton/TextButton";
-import LogoutButton from "../LogoutButton/LogoutButton";
 import ChangeProfilePic from "./ChangeProfilePic/ChangeProfilePic";
 import styles from "./Settings.module.css";
 
