@@ -25,14 +25,25 @@
 .edit-name-container,
 .edit-bio-container,
 .save-button-container,
-.edit-pic-container {
+.edit-pic-container,
+.logout-button-container {
   width: 100%;
   margin-bottom: 10px;
 }
 
-.edit-pic-container {
+.edit-pic-container,
+.save-button-container,
+.logout-button-container {
   display: flex;
+}
+
+.edit-pic-container,
+.logout-button-container {
   justify-content: center;
+}
+
+.save-button-container {
+  justify-content: flex-end;
 }
 
 .text-input-label {
@@ -61,11 +72,18 @@
 }
 
 .save-button {
-  float: right;
   background-color: green;
 }
 
 .save-button:hover {
   background-color: var(--text-color);
   color: green;
+}
+
+.logout-button {
+  background-color: var(--bad-button-color);
+}
+
+.logout-button:hover {
+  background-color: var(--bad-button-color-dark);
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import FormTextInput from "../common/form/FormTextInput/FormTextInput";
 import LargeTextInput from "../common/form/LargeTextInput/LargeTextInput";
 import TextButton from "../common/form/TextButton/TextButton";
+import LogoutButton from "../LogoutButton/LogoutButton";
 import ChangeProfilePic from "./ChangeProfilePic/ChangeProfilePic";
 import styles from "./Settings.module.css";
 
@@ -45,6 +46,9 @@ const Settings = (props) => {
               type="submit"
               classNames={[styles["save-button"]]}
             />
+          </div>
+          <div className={styles["logout-button-container"]}>
+            <TextButton text="Logout" classNames={[styles["logout-button"]]} />
           </div>
         </form>
       </div>

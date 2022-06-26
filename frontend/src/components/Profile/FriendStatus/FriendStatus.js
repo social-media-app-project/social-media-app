@@ -7,7 +7,7 @@ import { AiOutlineCheck } from "react-icons/ai";
 const FriendStatus = () => {
   // TODO: logic for determining this
   const isFriendsWithUser = false;
-  const friendRequested = true;
+  const friendRequested = false;
 
   return (
     <div className={styles["friend-status"]}>

@@ -4,7 +4,7 @@ import styles from "./ProfileHeader.module.css";
 
 const ProfileHeader = (props) => {
   // TODO: something to determine whether user is owner of profile (prop or function)
-  const isUser = true;
+  const isUser = false;
 
   const msg = {
     /**TODO: create a settings button which takes user to settings tab */
