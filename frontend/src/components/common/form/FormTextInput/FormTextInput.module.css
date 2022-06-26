@@ -1,15 +1,15 @@
 .text-input-label {
   text-align: left;
   display: block;
-  padding-bottom: 0.5rem;
+  padding-bottom: 7px;
   cursor: text;
 }
 
 .text-input {
   display: block;
   outline: none;
-  width: 18rem;
-  padding: 0.5rem;
+  width: 250px;
+  padding: 7px;
   font-size: 1rem;
   border: none;
   border-radius: 2px;

@@ -6,6 +6,7 @@
   align-items: center;
   position: inline;
 }
+
 .create-post:not(:active):hover::before {
   content: "add post";
   position: fixed;
@@ -13,6 +14,7 @@
   font-size: 1rem;
   color: white;
 }
+
 .create-post {
   background-color: green;
   position: fixed;

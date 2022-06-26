@@ -17,6 +17,7 @@
   border-left: 1px solid grey;
   border-right: 1px solid grey;
 }
+
 @media (max-width: 400px) {
   .controls-container {
     position: fixed;
@@ -25,6 +26,10 @@
     width: 100vw;
     bottom: 0;
     padding: 0px 7px;
+  }
+
+  .content-container {
+    border: none;
   }
 
   .main-page {

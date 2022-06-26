@@ -1,0 +1,16 @@
+.add-friend-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-color);
+  background-color: var(--primary-button-color);
+  color: var(--primary-button-color-inv);
+  margin: 5px;
+  padding: 5px;
+  border-radius: 0.4rem;
+}
+
+.add-friend-button:hover {
+  color: var(--primary-button-color);
+  background-color: var(--primary-button-color-inv);
+}

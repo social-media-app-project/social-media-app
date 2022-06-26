@@ -1,7 +1,11 @@
 import React from "react";
+import FriendStatus from "../FriendStatus/FriendStatus";
 import styles from "./ProfileHeader.module.css";
 
 const ProfileHeader = (props) => {
+  // TODO: something to determine whether user is owner of profile (prop or function)
+  const isUser = false;
+
   const msg = {
     /**TODO: create a settings button which takes user to settings tab */
   };
@@ -15,6 +19,11 @@ const ProfileHeader = (props) => {
         </div>
       </div>
       <div className={styles["bio"]}>{props.bio}</div>
+      {!isUser && (
+        <div className={styles["friend-status-container"]}>
+          <FriendStatus />
+        </div>
+      )}
     </div>
   );
 };

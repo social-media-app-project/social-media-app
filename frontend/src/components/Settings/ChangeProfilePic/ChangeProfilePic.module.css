@@ -1,0 +1,21 @@
+.change-profile-pic {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-pic {
+  border-radius: 50%;
+  padding: 3px;
+  width: 150px;
+  height: 150px;
+}
+
+.pic-button {
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.pic-button:hover {
+  background-color: var(--primary-background);
+}

@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomeFeed from "./components/HomeFeed/HomeFeed";
 import Profile from "./components/Profile/Profile";
 import Friends from "./components/Friends/Friends";
+import Settings from "./components/Settings/Settings";
 import React from "react";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="profile" element={<Profile />} />
           <Route path=":userId/friends" element={<Friends />} />
           <Route path="friends" element={<Friends />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
     </Router>

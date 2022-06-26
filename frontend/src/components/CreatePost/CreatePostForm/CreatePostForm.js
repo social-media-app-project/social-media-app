@@ -1,13 +1,15 @@
 import React from "react";
 import AttachmentsBar from "../AttachmentsBar/AttachmentsBar";
 import CreatePostButton from "../CreatePostButton/CreatePostButton";
-import PostTextInput from "../PostTextInput/PostTextInput";
+import LargeTextInput from "../../common/form/LargeTextInput/LargeTextInput";
 import styles from "./CreatePostForm.module.css";
 
 const CreatePostForm = () => {
   return (
     <form>
-      <PostTextInput></PostTextInput>
+      <LargeTextInput
+        placeholder={"What would you like to say?"}
+      ></LargeTextInput>
       <div className={styles["buttons-container"]}>
         <AttachmentsBar></AttachmentsBar>
         <CreatePostButton></CreatePostButton>
