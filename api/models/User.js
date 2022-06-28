@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const findorCreate = require('mongoose-findorcreate');
 
 const { Schema } = mongoose;
 const { DateTime } = require('luxon');
@@ -8,14 +9,14 @@ const UserSchema = new Schema({
   password: { type: String, required: true, minlength: 2 },
   email: { type: String, required: true, minlength: 5 },
   profilePicUrl: { type: String },
-  facebookID: { type: String },
+  facebookId: { type: String },
   date_created: { type: Date, required: true, default: Date.now() },
   friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   outgoing_requests: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   incoming_requests: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   bio: { type: String, maxlength: 200 },
 });
-
+UserSchema.plugin(findorCreate);
 UserSchema.virtual('full_name')
   .get(() => `${this.first_name} ${this.last_name}`);
 

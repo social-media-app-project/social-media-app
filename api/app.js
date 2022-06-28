@@ -5,8 +5,10 @@ const logger = require('morgan');
 require('dotenv').config();
 const passport = require('passport');
 const JWTStrategy = require('./strategies/jwt');
+const FacebookStrategy = require('./strategies/facebook');
 
 passport.use(JWTStrategy);
+passport.use(FacebookStrategy);
 
 const app = express();
 app.use(logger('dev'));
@@ -23,8 +25,8 @@ const postsRouter = require('./routes/posts');
 
 app.use('/', indexRouter);
 app.use('/auth', authArouter);
-app.use('/users', passport.authenticate('jwt', { session: false }), usersRouter);
-app.use('/posts', passport.authenticate('jwt', { session: false }), postsRouter);
+app.use('/users', passport.authenticate(['jwt', { session: false }, 'facebook']), usersRouter);
+app.use('/posts', passport.authenticate(['jwt', { session: false }, 'facebook']), postsRouter);
 
 app.use((err, req, res, next) => {
   if (res.headersSent) {
