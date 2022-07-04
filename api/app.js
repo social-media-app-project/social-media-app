@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 require('dotenv').config();
 const passport = require('passport');
+const compression = require('compression');
+const helmet = require('helmet');
 const JWTStrategy = require('./strategies/jwt');
 const FacebookStrategy = require('./strategies/facebook');
 
@@ -11,6 +13,8 @@ passport.use(JWTStrategy);
 passport.use(FacebookStrategy);
 
 const app = express();
+app.use(compression());
+app.use(helmet());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(passport.initialize());

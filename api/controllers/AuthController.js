@@ -14,3 +14,7 @@ exports.jwtLoginPost = [
   sendResponseOnError,
   q.loginUser,
 ];
+
+exports.facebookLogin = [
+
+];
