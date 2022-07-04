@@ -3,25 +3,44 @@ import styles from "./Friends.module.css";
 import { user } from "../../test-data/users";
 import FriendRequest from "./FriendRequest/Friendrequest";
 import Friend from "./Friend/Friend";
+import TextButton from "../common/form/TextButton/TextButton";
+
 const Friends = () => {
-  const [fr, setFr] = useState(false);
-  useEffect(() => {
-    console.log(user);
-  }, []);
+  const [frOpen, setFrOpen] = useState(false);
+  const [requestText, setRequestText] = useState("");
+
   const seeFriendRequests = () => {
-    setFr(!fr);
+    setFrOpen(!frOpen);
   };
 
   return (
     <div className={styles["friends-container"]}>
       <h1 className={styles["friends-header"]}>Friends</h1>
 
+      <div className={styles["send-request-container"]}>
+        <div className={styles["input-container"]}>
+          <input
+            type="text"
+            className={styles["send-request-input"]}
+            id="req-username"
+            name="Request Username Input"
+            value={requestText}
+            onChange={(e) => setRequestText(e.target.value)}
+          />
+        </div>
+        <TextButton
+          text="Request"
+          type="submit"
+          classNames={[styles["send-button"]]}
+        />
+      </div>
+
       <div onClick={seeFriendRequests} className={styles["f-bar"]}>
         Friend Requests
         <span>{user.length}</span>
       </div>
       <div className={styles["fr-container"]}>
-        {fr &&
+        {frOpen &&
           user.map((person, index) => {
             return (
               <FriendRequest

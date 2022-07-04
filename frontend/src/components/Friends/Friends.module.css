@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
 }
+
 .friends-header {
   font-size: clamp(1.5rem, -0.875rem + 10.333vw, 3.4rem);
   font-weight: 600;
@@ -22,6 +23,7 @@
   padding: 5px 0px;
   margin-bottom: 0;
 }
+
 .f-bar:hover {
   border: 2px solid var(--primary-accent);
   transition: border 0.1s ease-in;
@@ -43,6 +45,7 @@
   width: 100%;
   gap: 5px;
 }
+
 .your-friends {
   display: flex;
   width: 100%;
@@ -52,8 +55,50 @@
   padding: 10px 15px;
   margin-top: 10px;
 }
+
 .your-friends > h1 {
   font-size: 1.2rem;
   display: flex;
   gap: 10px;
+}
+
+.send-request-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+}
+
+.send-request-label {
+  text-align: left;
+  cursor: text;
+  margin-left: 5px;
+}
+
+.input-container {
+  flex-basis: 350px;
+  flex-shrink: 1;
+}
+
+.send-request-input {
+  width: 100%;
+  outline: none;
+  padding: 7px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 2px;
+  background-color: var(--primary-background);
+  color: var(--text-color);
+  margin-top: 5px;
+}
+
+.send-button {
+  background-color: green;
+}
+
+.send-button:hover {
+  background-color: var(--text-color);
+  color: green;
 }
