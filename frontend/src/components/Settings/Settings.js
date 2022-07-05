@@ -3,12 +3,12 @@ import ChangeProfilePicModal from "../ChangeProfilePicModal/ChangeProfilePicModa
 import LargeTextInput from "../common/form/LargeTextInput/LargeTextInput";
 import TextButton from "../common/form/TextButton/TextButton";
 import ChangeProfilePic from "./ChangeProfilePic/ChangeProfilePic";
-import profilePicTest from "../../test-data/test-images/profilePicTest.jpg";
+import profilePicTest from "../../test-data/test-images/landscape2.jpg";
 import styles from "./Settings.module.css";
 
 const Settings = (props) => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [profilePicture, setProfilePicture] = useState("");
+  const [profilePicture, setProfilePicture] = useState(profilePicTest);
 
   const handleChangePicClick = () => {
     setModalOpen(true);

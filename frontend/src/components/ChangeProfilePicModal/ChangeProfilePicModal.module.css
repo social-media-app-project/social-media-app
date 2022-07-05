@@ -1,0 +1,24 @@
+.change-pic-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  gap: 5px;
+}
+
+.upload-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-color);
+  background-color: var(--primary-button-color);
+  color: var(--primary-button-color-inv);
+  padding: 5px;
+  border-radius: 0.4rem;
+}
+
+.upload-button:hover {
+  color: var(--primary-button-color);
+  background-color: var(--primary-button-color-inv);
+}

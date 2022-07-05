@@ -1,8 +1,9 @@
-import { FaImages } from "react-icons/fa";
 import React, { useRef } from "react";
 import styles from "./ImageUploadButton.module.css";
 
-const ImageUploadButton = () => {
+const ImageUploadButton = (props) => {
+  const { className, children } = props;
+
   const imageInputRef = useRef();
 
   const handleImageUpload = (e) => {
@@ -12,8 +13,11 @@ const ImageUploadButton = () => {
 
   return (
     <div>
-      <button onClick={() => imageInputRef.current.click()}>
-        <FaImages />
+      <button
+        onClick={() => imageInputRef.current.click()}
+        className={className ? className : styles["upload-button"]}
+      >
+        {children}
       </button>
       <input
         ref={imageInputRef}
