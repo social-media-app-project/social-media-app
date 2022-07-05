@@ -10,7 +10,8 @@
   align-items: center;
 }
 
-.close-button {
+.close-button,
+.close-button-contained {
   color: var(--text-color);
   cursor: pointer;
   background: none;
@@ -18,12 +19,35 @@
   border: none;
   border-radius: 15px;
   padding: 5px;
-  position: fixed;
-  top: 0;
-  right: 0;
   margin: 5px;
 }
 
-.close-button:hover {
+.close-button:hover,
+.close-button-contained:hover {
   background-color: var(--primary-background);
+}
+
+.close-button {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.modal-container {
+  width: min(100%, 600px);
+  background-color: var(--secondary-background);
+}
+
+.modal-container > .header {
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (min-width: 600px) {
+  .modal-container {
+    box-shadow: 0 0 30px 5px var(--primary-accent);
+    border-radius: 15px;
+  }
 }

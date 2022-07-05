@@ -1,12 +1,25 @@
 import React, { useState } from "react";
+import ChangeProfilePicModal from "../ChangeProfilePicModal/ChangeProfilePicModal";
 import LargeTextInput from "../common/form/LargeTextInput/LargeTextInput";
 import TextButton from "../common/form/TextButton/TextButton";
 import ChangeProfilePic from "./ChangeProfilePic/ChangeProfilePic";
+import profilePicTest from "../../test-data/test-images/profilePicTest.jpg";
 import styles from "./Settings.module.css";
 
 const Settings = (props) => {
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [profilePicture, setProfilePicture] = useState("");
+
+  const handleChangePicClick = () => {
+    setModalOpen(true);
+  };
+
   const [nameText, setNameText] = useState("some name");
   const [bioText, setBioText] = useState("some bio");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <div className={styles["settings-container"]}>
@@ -14,9 +27,12 @@ const Settings = (props) => {
         <h1 className={styles["settings-header"]}>Settings</h1>
       </div>
       <div className={styles["form-container"]}>
-        <form className={styles["settings-form"]}>
+        <form className={styles["settings-form"]} onSubmit={handleSubmit}>
           <div className={styles["edit-pic-container"]}>
-            <ChangeProfilePic />
+            <ChangeProfilePic
+              handleClick={handleChangePicClick}
+              src={profilePicTest}
+            />
           </div>
           <div className={styles["edit-name-container"]}>
             <label className={styles["text-input-label"]}>Name</label>
@@ -50,6 +66,13 @@ const Settings = (props) => {
       <div className={styles["logout-button-container"]}>
         <TextButton text="Logout" classNames={[styles["logout-button"]]} />
       </div>
+      {isModalOpen && (
+        <ChangeProfilePicModal
+          onOverlayClick={() => setModalOpen(false)}
+          onClose={() => setModalOpen(false)}
+          pic={profilePicture}
+        />
+      )}
     </div>
   );
 };
