@@ -20,9 +20,16 @@ const ChangeProfilePicModal = (props) => {
         <ImageUploadButton className={styles["upload-button"]}>
           Upload a Picture
         </ImageUploadButton>
-        <ReactCrop crop={crop} onChange={(c) => setCrop(c)}>
-          <img src={pic} alt={"Candidate Profile"} />
-        </ReactCrop>
+        <div className={styles["crop-tool-container"]}>
+          <ReactCrop
+            crop={crop}
+            onChange={(c) => setCrop(c)}
+            aspect={1}
+            className={styles["crop-tool"]}
+          >
+            <img src={pic} alt={"Candidate Profile"} />
+          </ReactCrop>
+        </div>
       </div>
     </Modal>
   );

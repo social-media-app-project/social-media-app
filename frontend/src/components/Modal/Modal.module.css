@@ -6,8 +6,7 @@
   top: 0;
   left: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: scroll;
 }
 
 .close-button,
@@ -36,6 +35,9 @@
 .modal-container {
   width: min(100%, 600px);
   background-color: var(--secondary-background);
+  display: flex;
+  flex-direction: column;
+  margin: auto;
 }
 
 .modal-container > .header {
@@ -48,6 +50,10 @@
 .modal-container > .header h1 {
   font-size: 1rem;
   font-weight: 500;
+}
+
+.modal-content {
+  flex: 1;
 }
 
 @media (min-width: 600px) {

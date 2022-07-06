@@ -3,7 +3,7 @@ import ChangeProfilePicModal from "../ChangeProfilePicModal/ChangeProfilePicModa
 import LargeTextInput from "../common/form/LargeTextInput/LargeTextInput";
 import TextButton from "../common/form/TextButton/TextButton";
 import ChangeProfilePic from "./ChangeProfilePic/ChangeProfilePic";
-import profilePicTest from "../../test-data/test-images/landscape2.jpg";
+import profilePicTest from "../../test-data/test-images/landscape1.jpg";
 import styles from "./Settings.module.css";
 
 const Settings = (props) => {
