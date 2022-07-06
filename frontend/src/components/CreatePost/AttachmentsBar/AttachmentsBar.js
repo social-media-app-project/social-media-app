@@ -6,7 +6,7 @@ import styles from "./AttachmentsBar.module.css";
 const AttachmentsBar = () => {
   return (
     <div className={styles["attachments-bar"]}>
-      <ImageUploadButton>
+      <ImageUploadButton multiple>
         <FaImages />
       </ImageUploadButton>
     </div>

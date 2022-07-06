@@ -3,7 +3,7 @@ import ChangeProfilePicModal from "../ChangeProfilePicModal/ChangeProfilePicModa
 import LargeTextInput from "../common/form/LargeTextInput/LargeTextInput";
 import TextButton from "../common/form/TextButton/TextButton";
 import ChangeProfilePic from "./ChangeProfilePic/ChangeProfilePic";
-import profilePicTest from "../../test-data/test-images/landscape1.jpg";
+import profilePicTest from "../../test-data/test-images/vertical.jpg";
 import styles from "./Settings.module.css";
 
 const Settings = (props) => {
@@ -31,7 +31,7 @@ const Settings = (props) => {
           <div className={styles["edit-pic-container"]}>
             <ChangeProfilePic
               handleClick={handleChangePicClick}
-              src={profilePicTest}
+              src={profilePicture}
             />
           </div>
           <div className={styles["edit-name-container"]}>
@@ -70,6 +70,7 @@ const Settings = (props) => {
         <ChangeProfilePicModal
           onOverlayClick={() => setModalOpen(false)}
           onClose={() => setModalOpen(false)}
+          onChange={(pic) => setProfilePicture(pic)}
           pic={profilePicture}
         />
       )}

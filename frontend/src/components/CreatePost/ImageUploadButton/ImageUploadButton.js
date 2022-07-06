@@ -2,14 +2,9 @@ import React, { useRef } from "react";
 import styles from "./ImageUploadButton.module.css";
 
 const ImageUploadButton = (props) => {
-  const { className, children } = props;
+  const { className, children, handleImageUpload, multiple } = props;
 
   const imageInputRef = useRef();
-
-  const handleImageUpload = (e) => {
-    //validate the files
-    //display the images
-  };
 
   return (
     <div>
@@ -23,7 +18,7 @@ const ImageUploadButton = (props) => {
         ref={imageInputRef}
         accept="image/*"
         onChange={handleImageUpload}
-        multiple
+        multiple={multiple}
         type="file"
         hidden
       />

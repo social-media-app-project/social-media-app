@@ -52,10 +52,6 @@
   font-weight: 500;
 }
 
-.modal-content {
-  flex: 1;
-}
-
 @media (min-width: 600px) {
   .modal-container {
     box-shadow: 0 0 30px 5px var(--primary-accent);

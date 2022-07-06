@@ -10,6 +10,7 @@ const TextButton = (props) => (
         : styles["text-button"]
     }
     type={props.type}
+    onClick={props.onClick}
   >
     {props.text}
   </button>
