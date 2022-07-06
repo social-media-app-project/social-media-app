@@ -22,7 +22,7 @@ const Modal = (props) => {
   }, []);
 
   return (
-    <div className={styles["transparent-overlay"]} onClick={onOverlayClick}>
+    <div className={styles["transparent-overlay"]} onMouseDown={onOverlayClick}>
       {fullWindow ? (
         <>
           <button className={styles["close-button"]} onClick={onClose}>
@@ -33,7 +33,7 @@ const Modal = (props) => {
       ) : (
         <div
           className={styles["modal-container"]}
-          onClick={(e) => e.stopPropagation()}
+          onMouseDown={(e) => e.stopPropagation()}
         >
           <div className={styles["header"]}>
             <h1>{title}</h1>
