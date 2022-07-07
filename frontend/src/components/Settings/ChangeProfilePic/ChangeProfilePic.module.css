@@ -17,5 +17,5 @@
 }
 
 .pic-button:hover {
-  background-color: var(--primary-background);
+  background-color: var(--secondary-background);
 }

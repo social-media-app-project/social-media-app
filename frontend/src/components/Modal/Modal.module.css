@@ -23,7 +23,7 @@
 
 .close-button:hover,
 .close-button-contained:hover {
-  background-color: var(--primary-background);
+  background-color: var(--secondary-background);
 }
 
 .close-button {
@@ -34,7 +34,7 @@
 
 .modal-container {
   width: min(100%, 600px);
-  background-color: var(--secondary-background);
+  background-color: var(--primary-background);
   display: flex;
   flex-direction: column;
   margin: auto;
