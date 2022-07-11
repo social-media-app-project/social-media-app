@@ -7,7 +7,7 @@ const ImageModal = (props) => {
   const { images, index, onOverlayClick, onClose } = props;
 
   return (
-    <Modal onClose={onClose} onOverlayClick={onOverlayClick}>
+    <Modal onClose={onClose} onOverlayClick={onOverlayClick} fullWindow>
       <ModalImageSlideshow images={images} index={index} />
     </Modal>
   );

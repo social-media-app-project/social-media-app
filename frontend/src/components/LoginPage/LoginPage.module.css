@@ -1,7 +1,7 @@
 .login-container {
   display: flex;
   flex-basis: 500px;
-  background-color: var(--secondary-background);
+  background-color: var(--primary-background);
   box-shadow: 0 0 30px 5px var(--primary-accent);
   border-radius: 15px;
   padding-top: 2rem;
@@ -15,6 +15,7 @@
   justify-content: center;
   align-items: center;
 }
+
 @media (max-width: 900px) {
   .login-container {
     box-shadow: none;

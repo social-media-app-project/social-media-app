@@ -1,0 +1,34 @@
+.change-pic-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 10px 10px 10px;
+  gap: 5px;
+  flex: 1;
+}
+
+.upload-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-color);
+  background-color: var(--primary-button-color);
+  color: var(--primary-button-color-inv);
+  padding: 5px;
+  border-radius: 0.4rem;
+}
+
+.upload-button:hover {
+  color: var(--primary-button-color);
+  background-color: var(--primary-button-color-inv);
+}
+
+.change-button {
+  color: var(--text-color);
+  background-color: green;
+}
+
+.change-button:hover {
+  color: green;
+  background-color: var(--text-color);
+}

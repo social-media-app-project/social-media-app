@@ -1,0 +1,14 @@
+.upload-icon {
+  color: var(--primary-accent);
+  font-size: 1.3rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.upload-icon:hover {
+  cursor: pointer;
+  color: var(--text-color);
+}

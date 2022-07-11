@@ -60,14 +60,14 @@
   border: none;
   width: 100%;
   border-radius: 2px;
-  background-color: var(--primary-background);
+  background-color: var(--secondary-background);
   color: var(--text-color);
   margin-top: 5px;
 }
 
 .bio-input {
   padding: 7px;
-  background-color: var(--primary-background);
+  background-color: var(--secondary-background);
   margin-top: 5px;
 }
 

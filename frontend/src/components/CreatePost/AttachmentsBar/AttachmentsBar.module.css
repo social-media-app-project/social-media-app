@@ -1,13 +1,3 @@
-.attachments-bar button {
-  color: var(--primary-accent);
-  font-size: 1.1em;
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-
 .attachments-bar {
   display: flex;
   align-items: center;

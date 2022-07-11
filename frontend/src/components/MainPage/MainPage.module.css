@@ -1,6 +1,6 @@
 .main-page {
   display: flex;
-  background-color: var(--secondary-background);
+  background-color: var(--primary-background);
   justify-content: center;
   min-height: 100vh;
 }

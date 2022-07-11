@@ -3,7 +3,7 @@ import styles from "./Modal.module.css";
 import { AiOutlineClose } from "react-icons/ai";
 
 const Modal = (props) => {
-  const { children, onOverlayClick, onClose } = props;
+  const { children, onOverlayClick, onClose, fullWindow, title } = props;
 
   // Changing the body style is required to prevent scrolling while modal is open
   const changeBodyStyle = () => {
@@ -22,14 +22,32 @@ const Modal = (props) => {
   }, []);
 
   return (
-    <>
-      <div className={styles["transparent-overlay"]} onClick={onOverlayClick}>
-        <button className={styles["close-button"]} onClick={onClose}>
-          <AiOutlineClose />
-        </button>
-        {children}
-      </div>
-    </>
+    <div className={styles["transparent-overlay"]} onMouseDown={onOverlayClick}>
+      {fullWindow ? (
+        <>
+          <button className={styles["close-button"]} onClick={onClose}>
+            <AiOutlineClose />
+          </button>
+          {children}
+        </>
+      ) : (
+        <div
+          className={styles["modal-container"]}
+          onMouseDown={(e) => e.stopPropagation()}
+        >
+          <div className={styles["header"]}>
+            <h1>{title}</h1>
+            <button
+              className={styles["close-button-contained"]}
+              onClick={onClose}
+            >
+              <AiOutlineClose />
+            </button>
+          </div>
+          <div className={styles["modal-content"]}>{children}</div>
+        </div>
+      )}
+    </div>
   );
 };
 

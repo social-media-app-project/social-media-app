@@ -10,7 +10,7 @@ const NavBarButton = (props) => {
       className={styles["nav-bar-button"]}
       style={({ isActive }) => {
         return {
-          backgroundColor: isActive ? "var(--primary-background)" : undefined,
+          backgroundColor: isActive ? "var(--secondary-background)" : undefined,
         };
       }}
     >
