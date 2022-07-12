@@ -3,8 +3,8 @@
   justify-content: center;
   max-width: 426px;
   max-height: 240px;
-  border-radius: 1.25rem;
   overflow: hidden;
+  position: relative;
 }
 
 img.picture {
@@ -15,4 +15,19 @@ img.picture {
 
 img.picture:hover {
   cursor: pointer;
+}
+
+.delete-button {
+  color: var(--bad-button-color);
+  cursor: pointer;
+  background: none;
+  font-size: 0.95rem;
+  border: none;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.delete-button:hover {
+  color: var(--bad-button-color-dark);
 }

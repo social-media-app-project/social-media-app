@@ -4,7 +4,8 @@ import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import Image from "./Image/Image";
 
 const PostImageSlideshow = (props) => {
-  const { index, images, handlePostImageClick } = props;
+  const { index, images, handlePostImageClick, editable, handleRemoveImage } =
+    props;
 
   const [imageIndex, setImageIndex] = useState(index || 0);
 
@@ -34,11 +35,17 @@ const PostImageSlideshow = (props) => {
         {images.map((imageSrc, index) => {
           return (
             <Image
+              handleRemove={handleRemoveImage}
+              editable={editable}
               key={index}
               index={index}
               imageSrc={imageSrc}
               currIndex={imageIndex}
-              onClick={() => handlePostImageClick(images, index)}
+              onClick={
+                handlePostImageClick
+                  ? () => handlePostImageClick(images, index)
+                  : undefined
+              }
             />
           );
         })}

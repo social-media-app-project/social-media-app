@@ -10,7 +10,8 @@ const ImageUploadButton = (props) => {
     <div>
       <button
         onClick={() => imageInputRef.current.click()}
-        className={className ? className : styles["upload-button"]}
+        className={className ? className : styles["upload-icon"]}
+        type="button"
       >
         {children}
       </button>
