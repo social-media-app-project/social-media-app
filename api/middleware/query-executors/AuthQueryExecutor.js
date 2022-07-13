@@ -7,14 +7,15 @@ exports.hashPassword = async (password) => {
   return hash;
 };
 
-exports.findUser = (val) => User.findOne({ username: val }).exec();
+exports.findUser = (val) => User.findOne({ email: val }).exec();
 
 exports.saveNewUser = async (req, res, next) => {
   try {
     const hash = await exports.hashPassword(req.body.password);
 
     const user = new User({
-      username: req.body.username,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
       password: hash,
       email: req.body.email,
       friends: [],

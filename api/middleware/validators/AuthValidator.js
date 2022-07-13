@@ -1,7 +1,7 @@
 const { body, check } = require('express-validator');
 const q = require('../query-executors/AuthQueryExecutor');
 
-const checkUsernameAvailable = async (val, errMsg) => {
+const checkEmailAvailable = async (val, errMsg) => {
   const user = await q.findUser(val);
   if (user) {
     return Promise.reject(new Error(errMsg));
@@ -10,10 +10,14 @@ const checkUsernameAvailable = async (val, errMsg) => {
 };
 
 exports.validateSignupBody = [
-  body('username').trim().escape().isLength({ min: 1 })
-    .withMessage('Username is required')
+  body('first_name').trim().escape().isLength({ min: 1 })
+    .withMessage('First name is required')
     .isLength({ max: 25 })
-    .withMessage('username is too long'),
+    .withMessage('First name is too long'),
+  body('last_name').trim().escape().isLength({ min: 1 })
+    .withMessage('Last name is required')
+    .isLength({ max: 25 })
+    .withMessage('Last name is too long'),
   body('email').trim().escape().isLength({ min: 1 })
     .withMessage('email is required')
     .isEmail()
@@ -30,8 +34,8 @@ exports.validateSignupBody = [
   check('password_confirm', 'passwords do not match')
     //  checks if passwords match
     .custom((val, { req }) => val === req.body.password),
-  check('username', 'username already exists')
-    .custom((val) => checkUsernameAvailable(val, 'username is already in use')),
+  check('email', 'email already exists')
+    .custom((val) => checkEmailAvailable(val, 'email is already in use')),
 ];
 
 exports.validateLoginBody = [
