@@ -16,8 +16,6 @@ const CreatePost = (props) => {
       fileURLs.push(URL.createObjectURL(e.target.files[i]));
     }
 
-    console.log(fileURLs);
-
     setImages([...images, ...fileURLs]);
   };
 
