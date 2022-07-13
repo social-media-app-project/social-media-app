@@ -1,0 +1,29 @@
+.login-container {
+  display: flex;
+  flex-basis: 500px;
+  background-color: var(--secondary-background);
+  box-shadow: 0 0 30px 5px var(--primary-accent);
+  border-radius: 15px;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  justify-content: center;
+}
+
+.login-page {
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .login-container {
+    box-shadow: none;
+    border: none;
+    border-radius: 0%;
+    height: 100vh;
+    flex: 1;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+}

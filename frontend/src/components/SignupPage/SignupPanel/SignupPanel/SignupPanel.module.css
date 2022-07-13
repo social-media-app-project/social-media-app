@@ -1,0 +1,60 @@
+.login-panel {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-heading-container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 2rem;
+}
+
+.login-heading {
+  font-size: 3rem;
+}
+
+.inputs-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.forgot-password-button {
+  background: none;
+  color: var(--primary-accent);
+  font-size: 1rem;
+}
+
+.forgot-password-button:hover {
+  text-decoration: underline;
+  background: none;
+}
+
+.create-account-button {
+  background-color: #009425;
+  color: #fff;
+  font-weight: 600;
+}
+
+.create-account-button:hover {
+  background-color: #fff;
+  color: #009425;
+}
+hr {
+  width: 100%;
+}
+.sign-in-with-google {
+  justify-content: center;
+  flex: 1;
+  display: flex;
+  gap: 7px;
+  background-color: white;
+  color: black;
+  padding: 10px 7px;
+  font-size: 1rem;
+}

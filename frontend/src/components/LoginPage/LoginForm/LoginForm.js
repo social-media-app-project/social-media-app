@@ -5,7 +5,7 @@ import TextButton from "../../common/form/TextButton/TextButton";
 import React from "react";
 
 function LoginForm() {
-  const [usernameText, setUsernameText] = useState("");
+  const [emailText, setEmailText] = useState("");
   const [passwordText, setPasswordText] = useState("");
 
   const handleSubmit = (event) => {
@@ -20,10 +20,10 @@ function LoginForm() {
   return (
     <form onSubmit={handleSubmit} className={styles["login-form"]}>
       <FormTextInput
-        label="Username"
-        inputName="username"
-        value={usernameText}
-        setStateToNewText={setUsernameText}
+        label="email"
+        inputName="email"
+        value={emailText}
+        setStateToNewText={setEmailText}
         handleTextChange={handleTextChange}
       />
       <FormTextInput
