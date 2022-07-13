@@ -6,12 +6,10 @@ import styles from "./MainPage.module.css";
 const MainPage = () => {
   return (
     <div className={styles["main-page"]}>
-      <div className={styles["controls-container"]}>
-        <NavBar />
-      </div>
       <div className={styles["content-container"]}>
         <Outlet />
       </div>
+      <NavBar />
     </div>
   );
 };

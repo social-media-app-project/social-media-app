@@ -1,14 +1,9 @@
 .main-page {
   display: flex;
+  flex-direction: row-reverse;
   background-color: var(--primary-background);
   justify-content: center;
   min-height: 100vh;
-}
-
-.controls-container {
-  padding: 7px;
-  display: flex;
-  flex-direction: column;
 }
 
 .content-container {
@@ -19,23 +14,7 @@
 }
 
 @media (max-width: 400px) {
-  .controls-container {
-    position: fixed;
-    background-color: black;
-    flex: 1;
-    width: 100vw;
-    bottom: 0;
-    padding: 0px 7px;
-  }
-
   .content-container {
     border: none;
-  }
-
-  .main-page {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 60px;
   }
 }
