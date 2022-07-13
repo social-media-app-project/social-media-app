@@ -4,17 +4,11 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 require('dotenv').config();
 const passport = require('passport');
-const compression = require('compression');
-const helmet = require('helmet');
 const JWTStrategy = require('./strategies/jwt');
-const FacebookStrategy = require('./strategies/facebook');
 
 passport.use(JWTStrategy);
-passport.use(FacebookStrategy);
 
 const app = express();
-app.use(compression());
-app.use(helmet());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(passport.initialize());
@@ -29,8 +23,8 @@ const postsRouter = require('./routes/posts');
 
 app.use('/', indexRouter);
 app.use('/auth', authArouter);
-app.use('/users', passport.authenticate(['jwt', { session: false }, 'facebook']), usersRouter);
-app.use('/posts', passport.authenticate(['jwt', { session: false }, 'facebook']), postsRouter);
+app.use('/users', passport.authenticate(['jwt', { session: false }]), usersRouter);
+app.use('/posts', passport.authenticate(['jwt', { session: false }]), postsRouter);
 
 app.use((err, req, res, next) => {
   if (res.headersSent) {

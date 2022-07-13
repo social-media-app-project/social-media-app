@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const findorCreate = require('mongoose-findorcreate');
 
 const { Schema } = mongoose;
 const { DateTime } = require('luxon');
@@ -16,7 +15,6 @@ const UserSchema = new Schema({
   incoming_requests: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   bio: { type: String, maxlength: 200 },
 });
-UserSchema.plugin(findorCreate);
 UserSchema.virtual('full_name')
   .get(() => `${this.first_name} ${this.last_name}`);
 
