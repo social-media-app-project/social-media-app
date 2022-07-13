@@ -4,7 +4,6 @@
   background-color: var(--primary-background);
   justify-content: center;
   min-height: 100vh;
-  align-items: flex-start;
 }
 
 .content-container {
