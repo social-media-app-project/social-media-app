@@ -13,7 +13,7 @@ router.post('/:postId/comments', PostsController.commentPost);
 router.post('/:postId/likes', PostsController.likePost);
 
 router.delete('/:postId/comments/:commentId', PostsController.deleteComment);
-router.delete('/:postId/likes', PostsController.deleteLike);
+router.delete('/:postId/likes/:userId', PostsController.deleteLike);
 
 router.delete('/:postId', PostsController.deletePost);
 router.put('/:postId', PostsController.updatePost);

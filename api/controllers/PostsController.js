@@ -52,6 +52,7 @@ exports.deleteComment = [
 exports.deleteLike = [
   ...pv.validatePostParams,
   ...pv.validateLikeParams,
+  ...pv.validateLikeDeletePermitted,
   sendResponseOnError,
   pq.deleteLike,
 ];

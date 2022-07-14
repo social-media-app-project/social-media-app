@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Post = require('../../models/Post');
 const User = require('../../models/User');
+const Comment = require('../../models/Comment');
 
 // exports.executeFeedQuery = async (req, res, next) => {};
 
@@ -98,15 +99,14 @@ exports.executeGetLikesQuery = async (req, res, next) => {
 
 exports.deleteLike = async (req, res, next) => {
   try {
-    const { _id } = req.user;
-    const { postId } = req.params;
+    const { postId, userId } = req.params;
 
     await Post.findOneAndUpdate(
       {
         _id: postId,
       },
       {
-        $pull: { likes: _id },
+        $pull: { likes: userId },
       },
     ).exec();
 
@@ -167,15 +167,22 @@ exports.executeCommentPostQuery = async (req, res, next) => {
     const { postId } = req.params;
     const { message } = req.body;
 
+    const comment = new Comment({
+      author: _id,
+      message,
+    });
+
+    const savedComment = await comment.save();
+    if (savedComment !== comment) throw new Error();
+
+    const commentId = savedComment.id;
+
     const updateResult = await Post.updateOne(
       { _id: postId },
       {
         $push:
         {
-          comments: {
-            message,
-            author: _id,
-          },
+          comments: commentId,
         },
       },
     ).exec();
@@ -183,7 +190,7 @@ exports.executeCommentPostQuery = async (req, res, next) => {
     if (updateResult.modifiedCount === 1) {
       res.status(200).send({ success: [{ msg: 'Thanks for commenting' }] });
     } else {
-      next({ statusCode: 400, errors: ['Could not find the post toc omment'] });
+      next({ statusCode: 400, errors: ['Could not find the post to comment'] });
     }
   } catch (error) {
     next({ statusCode: 500, errors: ['Internal server error: Could not comment on post'] });
@@ -255,3 +262,12 @@ exports.isUserAuthorOfPost = async (userId, postId) => {
 
   return new mongoose.Types.ObjectId(userId).equals(post.author) ? Promise.resolve('User is author of post') : Promise.reject(new Error('User is not author of post'));
 };
+
+exports.isUserAuthorOfComment = async (userId, commentId) => {
+  const comment = await Comment.findById(commentId).select('author').exec();
+  if (!comment) return Promise.reject(new Error('Comment not found'));
+
+  return new mongoose.Types.ObjectId(userId).equals(comment.author) ? Promise.resolve('User is author of comment') : Promise.reject(new Error('User is not author of comment'));
+};
+
+exports.isUserAuthorOfLike = (userId, likeId) => (userId === likeId ? Promise.resolve('User is author of like') : Promise.reject(new Error('User is not author of like')));

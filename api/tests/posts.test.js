@@ -253,6 +253,99 @@ describe('comment on a post', () => {
     expect(res.body).toHaveProperty('comments');
     expect(res.body.comments).toHaveLength(2);
   });
+
+  test('delete comment (author of post)', async () => {
+    await request(app)
+      .post(`/posts/${userOnePostId}/comments`)
+      .auth(userTwoToken, { type: 'bearer' })
+      .send({ message: 'this is a comment' })
+      .expect(200);
+
+    let res = await request(app)
+      .get(`/posts/${userOnePostId}/comments`)
+      .auth(userTwoToken, { type: 'bearer' })
+      .expect(200);
+
+    expect(res.body).toHaveProperty('comments');
+    expect(res.body.comments).toHaveLength(3);
+
+    const commentId = res.body.comments[2]['_id'];
+
+    await request(app)
+      .delete(`/posts/${userOnePostId}/comments/${commentId}`)
+      .auth(userOneToken, { type: 'bearer' })
+      .expect(200);
+
+    res = await request(app)
+      .get(`/posts/${userOnePostId}/comments`)
+      .auth(userOneToken, { type: 'bearer' })
+      .expect(200);
+
+    expect(res.body).toHaveProperty('comments');
+    expect(res.body.comments).toHaveLength(2);
+  });
+
+  test('delete comment (author of comment)', async () => {
+    await request(app)
+      .post(`/posts/${userOnePostId}/comments`)
+      .auth(userTwoToken, { type: 'bearer' })
+      .send({ message: 'this is a comment' })
+      .expect(200);
+
+    let res = await request(app)
+      .get(`/posts/${userOnePostId}/comments`)
+      .auth(userTwoToken, { type: 'bearer' })
+      .expect(200);
+
+    expect(res.body).toHaveProperty('comments');
+    expect(res.body.comments).toHaveLength(3);
+
+    const commentId = res.body.comments[2]['_id'];
+
+    await request(app)
+      .delete(`/posts/${userOnePostId}/comments/${commentId}`)
+      .auth(userTwoToken, { type: 'bearer' })
+      .expect(200);
+
+    res = await request(app)
+      .get(`/posts/${userOnePostId}/comments`)
+      .auth(userTwoToken, { type: 'bearer' })
+      .expect(200);
+
+    expect(res.body).toHaveProperty('comments');
+    expect(res.body.comments).toHaveLength(2);
+  });
+
+  test('delete comment (unauth)', async () => {
+    await request(app)
+      .post(`/posts/${userOnePostId}/comments`)
+      .auth(userTwoToken, { type: 'bearer' })
+      .send({ message: 'this is a comment' })
+      .expect(200);
+
+    let res = await request(app)
+      .get(`/posts/${userOnePostId}/comments`)
+      .auth(userTwoToken, { type: 'bearer' })
+      .expect(200);
+
+    expect(res.body).toHaveProperty('comments');
+    expect(res.body.comments).toHaveLength(3);
+
+    const commentId = res.body.comments['_id'];
+
+    await request(app)
+      .delete(`/posts/${userOnePostId}/comments/${commentId}`)
+      .auth(noFriendsUserToken, { type: 'bearer' })
+      .expect(401);
+
+    res = await request(app)
+      .get(`/posts/${userOnePostId}/comments`)
+      .auth(userTwoToken, { type: 'bearer' })
+      .expect(200);
+
+    expect(res.body).toHaveProperty('comments');
+    expect(res.body.comments).toHaveLength(3);
+  });
 });
 
 describe('update a post', () => {

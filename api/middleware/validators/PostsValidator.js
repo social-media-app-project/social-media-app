@@ -1,10 +1,22 @@
 const { body, param } = require('express-validator');
-const { isUserFriendsWithAuthor, isUserAuthorOfPost } = require('../query-executors/PostsQueryExecutor');
+const {
+  isUserFriendsWithAuthor, isUserAuthorOfPost, isUserAuthorOfComment, isUserAuthorOfLike,
+} = require('../query-executors/PostsQueryExecutor');
 
 // Not sure what to validate here
 exports.validatePostParams = [
   param('postId').trim().isLength({ min: 24, max: 24 })
     .withMessage('Post Id is not the correct length'),
+];
+
+exports.validateCommentParams = [
+  param('commentId').trim().isLength({ min: 24, max: 24 })
+    .withMessage('Comment Id is not the correct length'),
+];
+
+exports.validateLikeParams = [
+  param('userId').trim().isLength({ min: 24, max: 24 })
+    .withMessage('user Id is not the correct length'),
 ];
 
 exports.validatePostBody = [
@@ -46,5 +58,23 @@ exports.validateUpdatePermitted = [
     .custom(async (postId, { req }) => {
       const { _id } = req.user;
       return isUserAuthorOfPost(_id, postId);
+    }),
+];
+
+exports.validateCommentDeletePermitted = [
+  param(['commentId', 'postId'], 'user is not author of post or comment')
+    .custom(async (params, { req }) => {
+      const { _id } = req.user;
+      const { postId, commentId } = params;
+      return Promise.any([isUserAuthorOfPost(_id, postId), isUserAuthorOfComment(_id, commentId)]);
+    }),
+];
+
+exports.validateLikeDeletePermitted = [
+  param(['commentId', 'postId'], 'user is not author of post or like')
+    .custom(async (params, { req }) => {
+      const { _id } = req.user;
+      const { postId, userId } = params;
+      return Promise.any([isUserAuthorOfPost(_id, postId), isUserAuthorOfLike(_id, userId)]);
     }),
 ];
