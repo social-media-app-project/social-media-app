@@ -44,6 +44,35 @@ exports.executeGetCommentsQuery = async (req, res, next) => {
   }
 };
 
+exports.deleteComment = async (req, res, next) => {
+  try {
+    const { postId, commentId } = req.params;
+
+    await Post.findOneAndUpdate(
+      {
+        _id: postId,
+      },
+      {
+        $pull: { comments: commentId },
+      },
+    ).exec();
+
+    const deleteResult = await Comment.deleteOne(
+      {
+        _id: commentId,
+      },
+    ).exec();
+
+    if (deleteResult.deletedCount === 1) {
+      res.status(200).send({ success: [{ msg: 'Thanks for deleting' }] });
+    } else {
+      next({ statusCode: 400, errors: ['Could not find the comment to delete'] });
+    }
+  } catch (error) {
+    next({ statusCode: 500, errors: ['Internal server error: Could not delete comment'] });
+  }
+};
+
 exports.executeGetLikesQuery = async (req, res, next) => {
   try {
     const post = await Post
@@ -64,6 +93,26 @@ exports.executeGetLikesQuery = async (req, res, next) => {
     }
   } catch (error) {
     next({ statusCode: 500, errors: ['Internal server error'] });
+  }
+};
+
+exports.deleteLike = async (req, res, next) => {
+  try {
+    const { _id } = req.user;
+    const { postId } = req.params;
+
+    await Post.findOneAndUpdate(
+      {
+        _id: postId,
+      },
+      {
+        $pull: { likes: _id },
+      },
+    ).exec();
+
+    res.status(200).send({ success: [{ msg: 'Thanks for unliking' }] });
+  } catch (error) {
+    next({ statusCode: 500, errors: ['Internal server error: Could not unlike post'] });
   }
 };
 
