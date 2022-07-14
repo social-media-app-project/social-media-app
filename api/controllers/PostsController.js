@@ -41,6 +41,21 @@ exports.commentPost = [
   pq.executeCommentPostQuery,
 ];
 
+exports.deleteComment = [
+  ...pv.validatePostParams,
+  ...pv.validateCommentParams,
+  ...pv.validateCommentDeletePermitted,
+  sendResponseOnError,
+  pq.deleteComment,
+];
+
+exports.deleteLike = [
+  ...pv.validatePostParams,
+  ...pv.validateLikeParams,
+  sendResponseOnError,
+  pq.deleteLike,
+];
+
 exports.deletePost = [
   ...pv.validatePostParams,
   ...pv.validateDeletePermitted,
