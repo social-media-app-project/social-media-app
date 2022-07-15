@@ -270,6 +270,7 @@ exports.isUserAuthorOfComment = async (userId, commentId) => {
   return new mongoose.Types.ObjectId(userId).equals(comment.author) ? Promise.resolve('User is author of comment') : Promise.reject(new Error('User is not author of comment'));
 };
 
-exports.isUserAuthorOfLike = (userId, likeId) => (
-  new mongoose.Types.ObjectId(likeId).equals(userId) ? Promise.resolve('User is author of like') : Promise.reject(new Error('User is not author of like'))
-);
+exports.isUserAuthorOfLike = (userId, likeId) => {
+  const isAuthor = new mongoose.Types.ObjectId(likeId).equals(userId);
+  return isAuthor ? Promise.resolve('User is author of like') : Promise.reject(new Error('User is not author of like'));
+};
