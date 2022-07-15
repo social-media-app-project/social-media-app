@@ -203,6 +203,96 @@ describe('like a post', () => {
     expect(res.body.likes).toHaveLength(2);
     expect(res.body.likes[0]).not.toEqual(res.body.likes[1]);
   });
+
+  test('delete like (author of post)', async () => {
+    await request(app)
+      .post(`/posts/${userOnePostId}/likes`)
+      .auth(userTwoToken, { type: 'bearer' })
+      .expect(200);
+
+    let res = await request(app)
+      .get(`/posts/${userOnePostId}/likes`)
+      .auth(userTwoToken, { type: 'bearer' })
+      .expect(200);
+
+    expect(res.body).toHaveProperty('likes');
+    expect(res.body.likes).toHaveLength(2);
+
+    const likeId = res.body.likes[1]['_id'];
+
+    await request(app)
+      .delete(`/posts/${userOnePostId}/likes/${likeId}`)
+      .auth(userOneToken, { type: 'bearer' })
+      .expect(200);
+
+    res = await request(app)
+      .get(`/posts/${userOnePostId}/likes`)
+      .auth(userOneToken, { type: 'bearer' })
+      .expect(200);
+
+    expect(res.body).toHaveProperty('likes');
+    expect(res.body.likes).toHaveLength(1);
+  });
+
+  test('delete like (author of like)', async () => {
+    await request(app)
+      .post(`/posts/${userOnePostId}/likes`)
+      .auth(userTwoToken, { type: 'bearer' })
+      .expect(200);
+
+    let res = await request(app)
+      .get(`/posts/${userOnePostId}/likes`)
+      .auth(userTwoToken, { type: 'bearer' })
+      .expect(200);
+
+    expect(res.body).toHaveProperty('likes');
+    expect(res.body.likes).toHaveLength(2);
+
+    const likeId = res.body.likes[1]['_id'];
+
+    await request(app)
+      .delete(`/posts/${userOnePostId}/likes/${likeId}`)
+      .auth(userTwoToken, { type: 'bearer' })
+      .expect(200);
+
+    res = await request(app)
+      .get(`/posts/${userOnePostId}/likes`)
+      .auth(userOneToken, { type: 'bearer' })
+      .expect(200);
+
+    expect(res.body).toHaveProperty('likes');
+    expect(res.body.likes).toHaveLength(1);
+  });
+
+  test('delete like (unauth)', async () => {
+    await request(app)
+      .post(`/posts/${userOnePostId}/likes`)
+      .auth(userTwoToken, { type: 'bearer' })
+      .expect(200);
+
+    let res = await request(app)
+      .get(`/posts/${userOnePostId}/likes`)
+      .auth(userTwoToken, { type: 'bearer' })
+      .expect(200);
+
+    expect(res.body).toHaveProperty('likes');
+    expect(res.body.likes).toHaveLength(2);
+
+    const likeId = res.body.likes[1]['_id'];
+
+    await request(app)
+      .delete(`/posts/${userOnePostId}/likes/${likeId}`)
+      .auth(noFriendsUserToken, { type: 'bearer' })
+      .expect(400);
+
+    res = await request(app)
+      .get(`/posts/${userOnePostId}/likes`)
+      .auth(userTwoToken, { type: 'bearer' })
+      .expect(200);
+
+    expect(res.body).toHaveProperty('likes');
+    expect(res.body.likes).toHaveLength(2);
+  });
 });
 
 describe('comment on a post', () => {
@@ -331,12 +421,12 @@ describe('comment on a post', () => {
     expect(res.body).toHaveProperty('comments');
     expect(res.body.comments).toHaveLength(3);
 
-    const commentId = res.body.comments['_id'];
+    const commentId = res.body.comments[2]['_id'];
 
     await request(app)
       .delete(`/posts/${userOnePostId}/comments/${commentId}`)
       .auth(noFriendsUserToken, { type: 'bearer' })
-      .expect(401);
+      .expect(400);
 
     res = await request(app)
       .get(`/posts/${userOnePostId}/comments`)

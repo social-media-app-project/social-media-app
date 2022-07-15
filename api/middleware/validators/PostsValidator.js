@@ -62,19 +62,19 @@ exports.validateUpdatePermitted = [
 ];
 
 exports.validateCommentDeletePermitted = [
-  param(['commentId', 'postId'], 'user is not author of post or comment')
-    .custom(async (params, { req }) => {
+  param(['postId'], 'user is not author of post or comment')
+    .custom(async (postId, { req }) => {
       const { _id } = req.user;
-      const { postId, commentId } = params;
+      const { commentId } = req.params;
       return Promise.any([isUserAuthorOfPost(_id, postId), isUserAuthorOfComment(_id, commentId)]);
     }),
 ];
 
 exports.validateLikeDeletePermitted = [
-  param(['commentId', 'postId'], 'user is not author of post or like')
-    .custom(async (params, { req }) => {
+  param(['postId'], 'user is not author of post or like')
+    .custom(async (postId, { req }) => {
       const { _id } = req.user;
-      const { postId, userId } = params;
+      const { userId } = req.params;
       return Promise.any([isUserAuthorOfPost(_id, postId), isUserAuthorOfLike(_id, userId)]);
     }),
 ];
