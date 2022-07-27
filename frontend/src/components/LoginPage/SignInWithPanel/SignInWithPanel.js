@@ -6,10 +6,10 @@ import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 
 const SignInWithPanel = () => {
   const facebook = () => {
-    window.open("http://localhost:3002/auth/facebook/callback", "_self");
+    window.open("http://localhost:3002/auth/facebook/", "_self");
   };
   const google = () => {
-    window.open("http://localhost:3002/auth/google/callback", "_self");
+    window.open("http://localhost:3002/auth/google/", "_self");
   };
   return (
     <div className={styles["sign-in-with-container"]}>

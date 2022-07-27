@@ -8,7 +8,7 @@ function FormTextInput(props) {
         {props.label}
       </label>
       <input
-        type={props.type || "text"}
+        type={props.type}
         className={styles["text-input"]}
         id={props.inputName}
         name={props.inputName}

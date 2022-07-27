@@ -8,11 +8,6 @@ function SignupForm(props) {
   const [emailText, setEmailText] = useState("");
   const [passwordText, setPasswordText] = useState("");
   const [confirmPasswordText, setConfirmPasswordText] = useState("");
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
-
   const handleTextChange = (event, setStateToNewText) => {
     const newText = event.target.value;
     setStateToNewText(newText);
@@ -20,31 +15,42 @@ function SignupForm(props) {
 
   const signupSubmit = async (e) => {
     e.preventDefault();
+    const data = {
+      first_name: firstNameText,
+      last_name: lastNameText,
+      email: emailText,
+      password: passwordText,
+      password_confirm: confirmPasswordText,
+    };
     try {
-      const response = await fetch(`http://localhost:3002/auth/signup/`, {
+      const signUpResponse = await fetch("http://localhost:3002/auth/signup/", {
         method: "POST",
         mode: "cors",
         credentials: "same-origin",
         headers: {
           "Content-Type": "application/json",
+          Accept: "*/*",
         },
-        body: JSON.stringify({
-          first_name: firstNameText,
-          last_name: lastNameText,
-          email: emailText,
-          password: passwordText,
-          confirm_password: confirmPasswordText,
-        }),
+        body: JSON.stringify(data),
       });
-      if (response.status === 200) {
-        console.log(response);
+      const valid = await signUpResponse.json();
+      if (signUpResponse.status === 200) {
+        props.setUserAuth(true);
+        localStorage.setItem("token", valid.token);
+        localStorage.setItem("expires", valid.expiresDate);
       }
     } catch (error) {}
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles["login-form"]}>
+    <form
+      onSubmit={(e) => {
+        signupSubmit(e);
+      }}
+      className={styles["login-form"]}
+    >
       <FormTextInput
+        type="text"
         label="First Name"
         inputName="first_name"
         value={firstNameText}
@@ -52,6 +58,7 @@ function SignupForm(props) {
         handleTextChange={handleTextChange}
       />
       <FormTextInput
+        type="text"
         label="Last Name"
         inputName="last_name"
         value={lastNameText}
