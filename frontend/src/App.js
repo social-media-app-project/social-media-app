@@ -19,50 +19,49 @@ function App() {
   const [userAuth, setuserAuth] = useState(false);
   // const cookies = new Cookies();
 
-  // useEffect(()=>{
+  useEffect(() => {
+    // const token = localStorage.getItem('token');
+    // if(token === null){
+    //   setuserAuth(false);
+    // }
+    // if(token !== null){
+    //   const expireDate = localStorage.getItem('expires');
+    //   if(expireDate>Date.now()){
+    //     setuserAuth(true);
+    //   }else{
+    //     localStorage.removeItem('token')
+    //     localStorage.removeItem('expires')
+    //     setuserAuth(false);
+    //   }
+    // }
 
-  //   const token = localStorage.getItem('token');
-  //   if(token === null){
-  //     setuserAuth(false);
-  //   }
-  //   if(token !== null){
-  //     const expireDate = localStorage.getItem('expires');
-  //     if(expireDate>Date.now()){
-  //       setuserAuth(true);
-  //     }else{
-  //       localStorage.removeItem('token')
-  //       localStorage.removeItem('expires')
-  //       setuserAuth(false);
-  //     }
-  //   }
-
-  //   const getUser = async() => {
-  //     try {
-  //       let user  = await fetch('http://localhost:3002/auth/succes', {
-  //         method: 'GET',
-  //         mode: 'cors',
-  //         credentials: 'include',
-  //         headers: {
-  //           'Accept': 'application/json',
-  //           'Content-Type': 'application/json',
-  //           'Access-Control-Allow-Credentials': 'http://localhost:3002/',
-  //         },
-  //       })
-  //       let sessionJSON;
-  //       if (user.status === 200) {
-  //         sessionJSON = user.json();
-  //         console.log(sessionJSON);
-  //       }else{
-  //         throw new Error ('auth error');
-  //       }
-
-  //     } catch (error) {
-
-  //     }
-  //   }
-  //   getUser();
-
-  // },[userAuth])
+    const getUser = async () => {
+      try {
+        let response = await fetch("http://localhost:3002/auth/success", {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": true,
+            "Access-Control-Allow-Origin": "http://localhost:3002",
+          },
+        });
+        let sessionJSON;
+        if (response.status === 200) {
+          setuserAuth(true);
+          sessionJSON = await response.json();
+          console.log(sessionJSON);
+        } else {
+          setuserAuth(false);
+          throw new Error("auth error");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getUser();
+  }, [userAuth]);
 
   return (
     <Router>

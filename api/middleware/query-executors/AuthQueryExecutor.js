@@ -27,8 +27,14 @@ exports.saveNewUser = async (req, res, next) => {
     if (savedUser !== user) {
       throw new Error();
     }
-
-    res.status(200).send({ success: [{ msg: 'Thanks for signing up' }] });
+    const expiresDate = 1000 * 60 * 60 * 24 * 5 + Date.now();
+    const opts = {};
+    opts.expiresIn = expiresDate;
+    const secret = process.env.SECRET;
+    // eslint-disable-next-line no-underscore-dangle
+    const token = jwt.sign({ userid: savedUser._id }, secret, opts);
+    res.status(200).send({ success: true, token: `Bearer ${token}`, expiresDate });
+    // res.status(200).send({ success: [{ msg: 'Thanks for signing up' }] });
   } catch (error) {
     next({ statusCode: 500, errors: ['Internal server error: Could not register user'] });
   }

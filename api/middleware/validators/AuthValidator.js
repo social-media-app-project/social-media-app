@@ -39,10 +39,10 @@ exports.validateSignupBody = [
 ];
 
 exports.validateLoginBody = [
-  body('username').trim().escape().isLength({ min: 1 })
-    .withMessage('Username is required')
-    .isLength({ max: 25 })
-    .withMessage('username is too long'),
+  body('email').trim().escape().isLength({ min: 1 })
+    .withMessage('email is required')
+    .isEmail()
+    .withMessage('this is not an email'),
   body('password').trim().escape().isLength({ min: 1 })
     .withMessage('Password is required')
     .isLength({ max: 25 })
