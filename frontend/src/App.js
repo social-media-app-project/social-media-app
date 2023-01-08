@@ -8,6 +8,7 @@ const Settings = lazy(() => import("./components/Settings/Settings"));
 const Profile = lazy(() => import("./components/Profile/Profile"));
 const LoginPage = lazy(() => import("./components/LoginPage/LoginPage"));
 const Friends = lazy(() => import("./components/Friends/Friends"));
+const SignUpPage = lazy(() => import("./components/SignUpPage/SignUpPage"));
 // import Settings from "./components/Settings/Settings";
 // import Friends from "./components/Friends/Friends";
 // import LoginPage from "./components/LoginPage/LoginPage";
@@ -22,6 +23,14 @@ function App() {
           element={
             <Suspense>
               <LoginPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <Suspense>
+              <SignUpPage />
             </Suspense>
           }
         />
