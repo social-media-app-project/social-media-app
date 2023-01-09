@@ -1,0 +1,10 @@
+.signup-form {
+  background-color: var(--primary-background);
+  padding: 7px 10px;
+  border-radius: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  padding: 20px 10px;
+  margin-top: 20px;
+}
