@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./SignUpPage.module.css";
-import SignUpPageForm from "./SignUpPageForm/SignUpPageForm";
+import SignUpPagePanel from "./SignUpPagePanel/SignUpPagePanel";
 
 const SignUpPage = () => {
   return (
     <div className={styles["signup-page"]}>
-      <SignUpPageForm />
+      <SignUpPagePanel />
     </div>
   );
 };
