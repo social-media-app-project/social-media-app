@@ -1,0 +1,16 @@
+.panel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-background);
+  padding: 20px 10px;
+  border-radius: 0.5rem;
+  box-shadow: 5px 5px 10px var(--primary-accent),
+    -5px -5px 10px var(--primary-accent), 5px -5px 10px var(--primary-accent),
+    -5px 5px 10px var(--primary-accent);
+  width: 500px;
+}
+.signup-heading {
+  font-size: 3rem;
+}
