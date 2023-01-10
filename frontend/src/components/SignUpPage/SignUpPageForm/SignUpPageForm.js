@@ -3,11 +3,10 @@ import styles from "./SignUpPageForm.module.css";
 import FormTextInput from "../../common/form/FormTextInput/FormTextInput";
 import TextButton from "../../common/form/TextButton/TextButton";
 const SignUpPageForm = () => {
-  const [firstName, setFirstName] = useState("bob");
-  const [lastName, setLastName] = useState("bobb");
-  const [email, setEmail] = useState("bobb");
-  const [password, setPassword] = useState("bobb");
-  const [password_2, setPassword_2] = useState("bobb");
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [password_2, setPassword_2] = useState("");
 
   const handleTextChange = (event, setStateToNewText) => {
     const newText = event.target.value;
@@ -20,23 +19,17 @@ const SignUpPageForm = () => {
   return (
     <form className={styles["signup-form"]}>
       <FormTextInput
-        label="First Name"
-        inputName="first_name"
-        value={firstName}
-        setStateToNewText={setFirstName}
-        handleTextChange={handleTextChange}
-      />
-      <FormTextInput
-        label="Last Name"
-        inputName="last_name"
-        value={lastName}
-        setStateToNewText={setLastName}
+        label="Username"
+        inputName="user_name"
+        value={userName}
+        setStateToNewText={setUserName}
         handleTextChange={handleTextChange}
       />
       <FormTextInput
         label="Email"
         inputName="email"
         value={email}
+        type="email"
         setStateToNewText={setEmail}
         handleTextChange={handleTextChange}
       />
@@ -60,6 +53,7 @@ const SignUpPageForm = () => {
         type="submit"
         text="Submit"
         onClick={(e) => handelSubmit(e)}
+        classNames={[styles["signup-button"]]}
       />
     </form>
   );
