@@ -40,12 +40,12 @@ const Post = (props) => {
           <span>{description}</span>
         </div>
       </GeneralPostContainer>
-      <div className={styles["slideshow-container"]}>
-        {/* <PostImageSlideshow
+      {/* <div className={styles["slideshow-container"]}>
+        <PostImageSlideshow
           images={images}
           handlePostImageClick={handlePostImageClick}
-        /> */}
-      </div>
+        />
+      </div> */}
       <div className={styles["additional-info-container"]}>
         <div className={styles["post-info-container"]}>
           <button
