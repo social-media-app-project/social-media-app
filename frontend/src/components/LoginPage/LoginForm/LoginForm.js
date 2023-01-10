@@ -29,6 +29,7 @@ function LoginForm() {
       <FormTextInput
         label="Password"
         inputName="password"
+        type="password"
         value={passwordText}
         setStateToNewText={setPasswordText}
         handleTextChange={handleTextChange}
