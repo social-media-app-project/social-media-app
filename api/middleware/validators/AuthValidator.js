@@ -10,19 +10,31 @@ const checkUsernameAvailable = async (val, errMsg) => {
 };
 
 exports.validateSignupBody = [
-  body('username').trim().escape().isLength({ min: 1 })
+  body('username')
+    .trim()
+    .escape()
+    .isLength({ min: 1 })
     .withMessage('Username is required')
     .isLength({ max: 25 })
     .withMessage('username is too long'),
-  body('email').trim().escape().isLength({ min: 1 })
+  body('email')
+    .trim()
+    .escape()
+    .isLength({ min: 1 })
     .withMessage('email is required')
     .isEmail()
     .withMessage('email is not valid'),
-  body('password').trim().escape().isLength({ min: 1 })
+  body('password')
+    .trim()
+    .escape()
+    .isLength({ min: 1 })
     .withMessage('Password is required')
     .isLength({ max: 25 })
     .withMessage('password is too long'),
-  body('password_confirm').trim().escape().isLength({ min: 1 })
+  body('password_confirm')
+    .trim()
+    .escape()
+    .isLength({ min: 1 })
     .withMessage('Password is required')
     .isLength({ max: 25 })
     .withMessage('password is too long'),
@@ -30,18 +42,24 @@ exports.validateSignupBody = [
   check('password_confirm', 'passwords do not match')
     //  checks if passwords match
     .custom((val, { req }) => val === req.body.password),
-  check('username', 'username already exists')
-    .custom((val) => checkUsernameAvailable(val, 'username is already in use')),
+  check('username', 'username already exists').custom((val) =>
+    checkUsernameAvailable(val, 'username is already in use'),
+  ),
 ];
 
 exports.validateLoginBody = [
-  body('username').trim().escape().isLength({ min: 1 })
+  body('username')
+    .trim()
+    .escape()
+    .isLength({ min: 1 })
     .withMessage('Username is required')
     .isLength({ max: 25 })
     .withMessage('username is too long'),
-  body('password').trim().escape().isLength({ min: 1 })
+  body('password')
+    .trim()
+    .escape()
+    .isLength({ min: 1 })
     .withMessage('Password is required')
     .isLength({ max: 25 })
     .withMessage('password is too long'),
-
 ];
