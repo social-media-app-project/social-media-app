@@ -3,26 +3,42 @@ import styles from "./SignUpPageForm.module.css";
 import FormTextInput from "../../common/form/FormTextInput/FormTextInput";
 import TextButton from "../../common/form/TextButton/TextButton";
 const SignUpPageForm = () => {
-  const [userName, setUserName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [password_2, setPassword_2] = useState("");
+  const [password_confirm, setPassword_Confirm] = useState("");
 
   const handleTextChange = (event, setStateToNewText) => {
     const newText = event.target.value;
     setStateToNewText(newText);
   };
-  const handelSubmit = (e) => {
+  const handelSubmit = async (e) => {
     e.preventDefault();
-    console.log("hello");
+    try {
+      let res = await fetch("http://localhost:3002/auth/signup", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: {
+          username,
+          email,
+          password,
+          password_confirm,
+        },
+      });
+      let data = await res.json();
+      console.log(data);
+    } catch (error) {}
   };
   return (
     <form className={styles["signup-form"]}>
       <FormTextInput
         label="Username"
         inputName="user_name"
-        value={userName}
-        setStateToNewText={setUserName}
+        value={username}
+        setStateToNewText={setUsername}
         handleTextChange={handleTextChange}
       />
       <FormTextInput
@@ -43,10 +59,10 @@ const SignUpPageForm = () => {
       />
       <FormTextInput
         label="Password Confirmation"
-        inputName="password_2"
-        value={password_2}
+        inputName="password_confirm"
+        value={password_confirm}
         type="password"
-        setStateToNewText={setPassword_2}
+        setStateToNewText={setPassword_Confirm}
         handleTextChange={handleTextChange}
       />
       <TextButton
