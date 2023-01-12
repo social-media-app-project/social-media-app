@@ -29,7 +29,10 @@ exports.saveNewUser = async (req, res, next) => {
 
     res.status(200).send({ success: [{ msg: 'Thanks for signing up' }] });
   } catch (error) {
-    next({ statusCode: 500, errors: ['Internal server error: Could not register user'] });
+    next({
+      statusCode: 500,
+      errors: ['Internal server error: Could not register user'],
+    });
   }
 };
 
@@ -50,12 +53,20 @@ exports.loginUser = async (req, res, next) => {
         const secret = process.env.SECRET;
         // eslint-disable-next-line no-underscore-dangle
         const token = jwt.sign({ userid: user._id }, secret, opts);
-        res.status(200).send({ success: true, token: `Bearer ${token}`, expiresDate });
+        res
+          .status(200)
+          .send({ success: true, token: `Bearer ${token}`, expiresDate });
       } else {
-        next({ statusCode: 404, errors: ['Username or password is incorrect'] });
+        next({
+          statusCode: 404,
+          errors: ['Username or password is incorrect'],
+        });
       }
     }
   } catch (error) {
-    next({ statusCode: 500, errors: ['Internal server error: Could not login user'] });
+    next({
+      statusCode: 500,
+      errors: ['Internal server error: Could not login user'],
+    });
   }
 };
