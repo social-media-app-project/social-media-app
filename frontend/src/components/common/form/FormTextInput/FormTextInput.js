@@ -16,7 +16,7 @@ function FormTextInput(props) {
         onChange={(event) =>
           props.handleTextChange(event, props.setStateToNewText)
         }
-        autoComplete
+        autoComplete="true"
       ></input>
     </div>
   );
