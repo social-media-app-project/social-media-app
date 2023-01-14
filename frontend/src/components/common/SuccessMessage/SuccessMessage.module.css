@@ -1,0 +1,11 @@
+.success {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  width: 100vw;
+  height: 40px;
+  font-size: 1.4rem;
+  background-color: #3f9939da;
+}
