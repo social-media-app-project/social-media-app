@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./SignUpPageForm.module.css";
 import FormTextInput from "../../common/form/FormTextInput/FormTextInput";
 import TextButton from "../../common/form/TextButton/TextButton";
+import ErrorMessage from "../../ErrorMessage/ErrorMessage";
+import SuccessMessage from "../../common/SuccessMessage/SuccessMessage";
+import { useNavigate } from "react-router-dom";
 const SignUpPageForm = () => {
+  // TODO : DEBOUNCE FOR USERNAME
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirm, setPassword_Confirm] = useState("");
-
+  const [errors, setErrors] = useState([]);
+  const [success, setSuccess] = useState(false);
+  const [successMsg, setSuccessMsg] = useState("");
+  const navigate = useNavigate();
   const handleTextChange = (event, setStateToNewText) => {
     const newText = event.target.value;
     setStateToNewText(newText);
@@ -19,21 +26,34 @@ const SignUpPageForm = () => {
         method: "POST",
         mode: "cors",
         headers: {
+          Accept: "*/*",
           "Content-Type": "application/json",
         },
-        body: {
-          username,
-          email,
-          password,
-          password_confirm,
-        },
+        body: JSON.stringify({
+          username: username,
+          email: email,
+          password: password,
+          password_confirm: password_confirm,
+        }),
       });
       let data = await res.json();
-      console.log(data);
+      if (res.status !== 200) {
+        let val = data.errors.errors;
+        setErrors(val);
+      } else {
+        setErrors([]);
+        setSuccess(true);
+        setSuccessMsg("Thank You For Signing Up");
+        setTimeout(() => {
+          navigate("/login");
+        }, 2800);
+      }
     } catch (error) {}
   };
+  useEffect(() => {}, [errors]);
   return (
     <form className={styles["signup-form"]}>
+      {success && <SuccessMessage msg={successMsg} />}
       <FormTextInput
         label="Username"
         inputName="user_name"
@@ -65,6 +85,9 @@ const SignUpPageForm = () => {
         setStateToNewText={setPassword_Confirm}
         handleTextChange={handleTextChange}
       />
+      {errors.map((error) => {
+        return <ErrorMessage key={error.param} msg={error.msg} />;
+      })}
       <TextButton
         type="submit"
         text="Submit"
