@@ -1,17 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "./Friends.module.css";
 import { user } from "../../test-data/users";
 import FriendRequest from "./FriendRequest/Friendrequest";
 import Friend from "./Friend/Friend";
 import TextButton from "../common/form/TextButton/TextButton";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../App";
 
 const Friends = () => {
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
   const [frOpen, setFrOpen] = useState(false);
   const [requestText, setRequestText] = useState("");
 
   const seeFriendRequests = () => {
     setFrOpen(!frOpen);
   };
+
+  useEffect(() => {
+    if (auth.isAuthenticated !== true) {
+      navigate("/login");
+    }
+  }, [auth.isAuthenticated]);
 
   return (
     <div className={styles["friends-container"]}>

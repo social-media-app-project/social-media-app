@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "./Profile.module.css";
 import ProfileHeader from "./ProfileHeader/ProfileHeader";
 import Post from "../Post/Post";
@@ -6,8 +6,12 @@ import { user } from "../../test-data/user-data";
 import { posts } from "../../test-data/post-data";
 import { AiOutlinePlus } from "react-icons/ai";
 import ImageModal from "../ImageModal/ImageModal";
+import { AuthContext } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalImages, setModalImages] = useState([]);
   const [modalIndex, setModalIndex] = useState(0);
@@ -17,6 +21,12 @@ const Profile = () => {
     setModalIndex(index);
     setModalOpen(true);
   };
+
+  useEffect(() => {
+    if (auth.isAuthenticated !== true) {
+      navigate("/login");
+    }
+  }, [auth.isAuthenticated]);
 
   // Fetch data using route path and params
   return (
