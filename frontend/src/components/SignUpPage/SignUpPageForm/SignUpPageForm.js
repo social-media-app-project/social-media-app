@@ -5,6 +5,7 @@ import TextButton from "../../common/form/TextButton/TextButton";
 import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 import SuccessMessage from "../../common/SuccessMessage/SuccessMessage";
 import { useNavigate } from "react-router-dom";
+import { v4 } from "uuid";
 const SignUpPageForm = () => {
   // TODO : DEBOUNCE FOR USERNAME
   const [username, setUsername] = useState("");
@@ -22,7 +23,7 @@ const SignUpPageForm = () => {
   const handelSubmit = async (e) => {
     e.preventDefault();
     try {
-      let res = await fetch("http://localhost:3002/auth/signup", {
+      let res = await fetch(`${process.env.REACT_APP_TEST_URL}auth/signup`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -86,7 +87,7 @@ const SignUpPageForm = () => {
         handleTextChange={handleTextChange}
       />
       {errors.map((error) => {
-        return <ErrorMessage key={error.param} msg={error.msg} />;
+        return <ErrorMessage key={v4()} msg={error.msg} />;
       })}
       <TextButton
         type="submit"
