@@ -1,4 +1,10 @@
-import React, { Suspense, lazy } from "react";
+import React, {
+  Suspense,
+  lazy,
+  useState,
+  createContext,
+  useEffect,
+} from "react";
 
 import MainPage from "./components/MainPage/MainPage";
 import "./App.css";
@@ -14,70 +20,75 @@ const SignUpPage = lazy(() => import("./components/SignUpPage/SignUpPage"));
 // import LoginPage from "./components/LoginPage/LoginPage";
 // import Profile from "./components/Profile/Profile";
 
+export const AuthContext = createContext(null);
 function App() {
+  const [isAuthenticated, setAuthenticated] = useState(true);
+
   return (
     <Router>
-      <Routes>
-        <Route
-          path="/login"
-          element={
-            <Suspense>
-              <LoginPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <Suspense>
-              <SignUpPage />
-            </Suspense>
-          }
-        />
-        <Route element={<MainPage />}>
-          <Route path="/" element={<HomeFeed />} />
+      <AuthContext.Provider value={{ isAuthenticated, setAuthenticated }}>
+        <Routes>
           <Route
-            path=":userId"
+            path="/login"
             element={
               <Suspense>
-                <Profile />
+                <LoginPage />
               </Suspense>
             }
           />
           <Route
-            path="profile"
+            path="/signup"
             element={
               <Suspense>
-                <Profile />
+                <SignUpPage />
               </Suspense>
             }
           />
-          <Route
-            path=":userId/friends"
-            element={
-              <Suspense>
-                <Friends />
-              </Suspense>
-            }
-          />
-          <Route
-            path="friends"
-            element={
-              <Suspense>
-                <Friends />
-              </Suspense>
-            }
-          />
-          <Route
-            path="settings"
-            element={
-              <Suspense>
-                <Settings />
-              </Suspense>
-            }
-          />
-        </Route>
-      </Routes>
+          <Route element={<MainPage />}>
+            <Route path="/" element={<HomeFeed />} />
+            <Route
+              path=":userId"
+              element={
+                <Suspense>
+                  <Profile />
+                </Suspense>
+              }
+            />
+            <Route
+              path="profile"
+              element={
+                <Suspense>
+                  <Profile />
+                </Suspense>
+              }
+            />
+            <Route
+              path=":userId/friends"
+              element={
+                <Suspense>
+                  <Friends />
+                </Suspense>
+              }
+            />
+            <Route
+              path="friends"
+              element={
+                <Suspense>
+                  <Friends />
+                </Suspense>
+              }
+            />
+            <Route
+              path="settings"
+              element={
+                <Suspense>
+                  <Settings />
+                </Suspense>
+              }
+            />
+          </Route>
+        </Routes>
+      </AuthContext.Provider>
     </Router>
   );
 }
