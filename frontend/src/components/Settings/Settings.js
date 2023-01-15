@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ChangeProfilePicModal from "../ChangeProfilePicModal/ChangeProfilePicModal";
 import LargeTextInput from "../common/form/LargeTextInput/LargeTextInput";
 import TextButton from "../common/form/TextButton/TextButton";
 import ChangeProfilePic from "./ChangeProfilePic/ChangeProfilePic";
 import profilePicTest from "../../test-data/test-images/vertical.jpg";
 import styles from "./Settings.module.css";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../App";
 
 const Settings = (props) => {
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false);
   const [profilePicture, setProfilePicture] = useState(profilePicTest);
 
@@ -20,6 +24,12 @@ const Settings = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
+  useEffect(() => {
+    if (auth.isAuthenticated !== true) {
+      navigate("/login");
+    }
+  }, [auth.isAuthenticated]);
 
   return (
     <div className={styles["settings-container"]}>

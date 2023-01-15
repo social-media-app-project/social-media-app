@@ -1,23 +1,26 @@
 import React, { useState } from "react";
 import GeneralPostContainer from "../GeneralPostContainer/GeneralPostContainer";
-import PostImageSlideshow from "../PostImageSlideshow/PostImageSlideshow";
 import styles from "./Post.module.css";
-import { HiOutlineThumbUp, HiThumbUp } from "react-icons/hi";
+import { HiOutlineThumbUp /*HiThumbUp*/ } from "react-icons/hi";
 import CommentsSection from "./CommentsSection/CommentsSection";
 import LikesView from "./LikesView/LikesView";
-import picOne from "../../test-data/test-images/landscape1.jpg";
-import picTwo from "../../test-data/test-images/landscape2.jpg";
-import picThree from "../../test-data/test-images/vertical.jpg";
+// import picOne from "../../test-data/test-images/landscape1.jpg";
+// import picTwo from "../../test-data/test-images/landscape2.jpg";
+// import picThree from "../../test-data/test-images/vertical.jpg";
 
 const Post = (props) => {
   const [commentsExpanded, setCommentsExpanded] = useState(false);
   const [likesExpanded, setLikesExpanded] = useState(false);
 
   const isOwner = true;
-  const { post, handlePostImageClick } = props;
-  const images = [picOne, picTwo, picThree];
-  const { description, profilePicUrl, user, timestamp, numLikes, numComments } =
-    props.post;
+  // const { post, handlePostImageClick } = props;
+  // const images = [picOne, picTwo, picThree];
+  const {
+    description,
+    /*profilePicUrl, user,*/ timestamp,
+    numLikes,
+    numComments,
+  } = props.post;
 
   const toggleComments = () => {
     if (likesExpanded) {
@@ -40,12 +43,12 @@ const Post = (props) => {
           <span>{description}</span>
         </div>
       </GeneralPostContainer>
-      <div className={styles["slideshow-container"]}>
+      {/* <div className={styles["slideshow-container"]}>
         <PostImageSlideshow
           images={images}
           handlePostImageClick={handlePostImageClick}
         />
-      </div>
+      </div> */}
       <div className={styles["additional-info-container"]}>
         <div className={styles["post-info-container"]}>
           <button

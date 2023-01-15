@@ -8,7 +8,7 @@ function FormTextInput(props) {
         {props.label}
       </label>
       <input
-        type="text"
+        type={props.type || "text"}
         className={styles["text-input"]}
         id={props.inputName}
         name={props.inputName}
@@ -16,6 +16,7 @@ function FormTextInput(props) {
         onChange={(event) =>
           props.handleTextChange(event, props.setStateToNewText)
         }
+        autoComplete="true"
       ></input>
     </div>
   );

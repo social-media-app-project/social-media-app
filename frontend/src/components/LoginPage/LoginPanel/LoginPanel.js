@@ -3,6 +3,7 @@ import LoginForm from "../LoginForm/LoginForm";
 import styles from "./LoginPanel.module.css";
 import React from "react";
 import SignInWithPanel from "../SignInWithPanel/SignInWithPanel";
+import { Link } from "react-router-dom";
 
 function LoginPanel() {
   return (
@@ -23,11 +24,9 @@ function LoginPanel() {
           />
         </div>
         <div className={styles["create-button-container"]}>
-          <TextButton
-            text="Create a new account"
-            classNames={[styles["create-account-button"]]}
-            type="button"
-          />
+          <Link classNames={styles["create-account-button"]} to="/signup">
+            Create New Account
+          </Link>
         </div>
       </div>
     </div>

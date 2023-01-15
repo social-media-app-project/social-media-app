@@ -1,6 +1,6 @@
-const v = require('../middleware/validators/AuthValidator');
-const q = require('../middleware/query-executors/AuthQueryExecutor');
-const { sendResponseOnError } = require('../middleware/validators/util');
+const v = require("../middleware/validators/AuthValidator");
+const q = require("../middleware/query-executors/AuthQueryExecutor");
+const { sendResponseOnError } = require("../middleware/validators/util");
 
 exports.jwtSignupPost = [
   ...v.validateSignupBody,
