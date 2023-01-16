@@ -38,7 +38,6 @@ function LoginForm() {
       if (response.status !== 200) {
         setErrors(data.errors);
       } else if (response.ok) {
-        console.log(data);
         localStorage.setItem("token", data.token);
         localStorage.setItem("expiresDate", data.expiresDate);
         auth.setAuthenticated(true);
