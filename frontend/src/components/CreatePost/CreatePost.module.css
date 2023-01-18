@@ -1,5 +1,6 @@
 .create-post-container {
   border-bottom: 1px solid grey;
+  width: 100%;
 }
 
 .buttons-container {
