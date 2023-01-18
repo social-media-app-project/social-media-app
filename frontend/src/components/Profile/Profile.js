@@ -27,7 +27,7 @@ const Profile = () => {
     e.preventDefault();
     let token = localStorage.getItem("token");
     try {
-      let res = await fetch(`${process.env.REAC_APP_TEST_URL}posts`, {
+      let res = await fetch(`${process.env.REAC_APP_TEST_URL}`, {
         method: "GET",
         mode: "cors",
         withCredentials: true,
