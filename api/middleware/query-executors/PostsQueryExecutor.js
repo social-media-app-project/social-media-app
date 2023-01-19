@@ -4,7 +4,20 @@ const User = require("../../models/User");
 const Comment = require("../../models/Comment");
 
 // exports.executeFeedQuery = async (req, res, next) => {};
-exports.getPosts = async (req, res, next) => {};
+exports.executeUserFeedQuery = async (req, res, next) => {
+  try {
+    const { _id } = req.user;
+    console.log(req.user);
+    const posts = await Post.find({ author: _id });
+    if (!posts) {
+      next({ statusCode: 404, errors: ["Could not find posts"] });
+    } else {
+      res.send({ posts });
+    }
+  } catch (error) {
+    next({ statusCode: 500, errors: ["Internal server error"] });
+  }
+};
 
 exports.getPost = async (req, res, next) => {
   try {
