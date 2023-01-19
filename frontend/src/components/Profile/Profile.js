@@ -15,7 +15,7 @@ const Profile = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalImages, setModalImages] = useState([]);
   const [modalIndex, setModalIndex] = useState(0);
-  const [posts, setPosts] = useState(true);
+  const [posts, setPosts] = useState([]);
 
   const handleImageClick = (images, index) => {
     setModalImages(images);
@@ -23,28 +23,33 @@ const Profile = () => {
     setModalOpen(true);
   };
 
-  const fetchPosts = async (e) => {
-    e.preventDefault();
+  const fetchPosts = async () => {
     let token = localStorage.getItem("token");
     try {
-      let res = await fetch(`${process.env.REAC_APP_TEST_URL}`, {
+      let res = await fetch(`${process.env.REACT_APP_TEST_URL}posts/user/`, {
         method: "GET",
         mode: "cors",
-        withCredentials: true,
-        credentials: "include",
         headers: {
           Authorization: token,
           "Content-Type": "application/json",
         },
       });
-      let posts = res.json();
-    } catch (error) {}
+      let resPosts = await res.json();
+      setPosts(resPosts.posts);
+      console.log(resPosts);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
     if (auth.isAuthenticated !== true) {
       navigate("/login");
     }
+    async function fetchAPI() {
+      await fetchPosts();
+    }
+    fetchAPI();
   }, [auth.isAuthenticated]);
 
   // Fetch data using route path and params
@@ -80,6 +85,7 @@ const Profile = () => {
           index={modalIndex}
         />
       )}
+      <button onClick={(e) => fetchPosts(e)}>get posts</button>
     </div>
   );
 };
