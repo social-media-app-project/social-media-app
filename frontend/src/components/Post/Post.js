@@ -15,12 +15,8 @@ const Post = (props) => {
   const isOwner = true;
   // const { post, handlePostImageClick } = props;
   // const images = [picOne, picTwo, picThree];
-  const {
-    description,
-    /*profilePicUrl, user,*/ timestamp,
-    numLikes,
-    numComments,
-  } = props.post;
+  const { /*profilePicUrl, user,*/ timestamp, numLikes, numComments, message } =
+    props.post;
 
   const toggleComments = () => {
     if (likesExpanded) {
@@ -40,7 +36,7 @@ const Post = (props) => {
     <div className={styles["post-container"]}>
       <GeneralPostContainer isOwner={isOwner} timestamp={timestamp}>
         <div className={styles["post-text"]}>
-          <span>{description}</span>
+          <span>{message}</span>
         </div>
       </GeneralPostContainer>
       {/* <div className={styles["slideshow-container"]}>
