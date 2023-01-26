@@ -3,6 +3,7 @@ import LargeTextInput from "../common/form/LargeTextInput/LargeTextInput";
 import GeneralPostContainer from "../GeneralPostContainer/GeneralPostContainer";
 import styles from "./CreatePost.module.css";
 import CreatePostButton from "./CreatePostButton/CreatePostButton";
+import { handleCreatePost } from "../../services/postService";
 // import PostImageSlideshow from "../PostImageSlideshow/PostImageSlideshow";
 // import AttachmentsBar from "./AttachmentsBar/AttachmentsBar";
 
@@ -26,39 +27,25 @@ const CreatePost = (props) => {
   //   ]);
   // };
   const textArea = useRef();
-  const handelCreatePost = async (e) => {
+
+  const fetchCreatePost = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
-    const text = textArea.current;
     try {
-      let response = await fetch(`${process.env.REACT_APP_TEST_URL}posts`, {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          Authorization: token,
-          Accept: "*/*",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          message: text,
-        }),
-      });
-      let data = await response.json();
+      const response = await handleCreatePost({ message: textArea.current });
       if (response.ok) {
+        let data = await response.json();
         console.log(data);
-      } else {
-        throw new Error("cannot send data");
       }
     } catch (error) {
     } finally {
-      let val = e.target.querySelector("#textBox");
+      const val = e.target.querySelector("#textBox");
       val.textContent = "";
     }
   };
 
   return (
     <div className={styles["create-post-container"]}>
-      <form onSubmit={(event) => handelCreatePost(event)}>
+      <form onSubmit={(event) => fetchCreatePost(event)}>
         <GeneralPostContainer props={props}>
           <LargeTextInput
             placeholder={"What would you like to say?"}
