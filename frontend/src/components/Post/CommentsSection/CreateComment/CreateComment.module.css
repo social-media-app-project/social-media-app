@@ -6,10 +6,14 @@
 .create-comment-container > .profile-pic-container {
   margin: 5px 5px;
 }
+.form-container {
+  display: flex;
+  width: 100%;
+}
 
 .create-comment-container .input-container {
   margin: 7px 0px;
-  font-size: clamp(0.8rem, -0.875rem + 4.333vw, 1.12rem);
+  font-size: clamp(0.8rem, -0.875rem + 4.3vw, 1rem);
   line-height: 15px;
 }
 
@@ -21,7 +25,7 @@
 }
 
 .create-comment-container > button {
-  font-size: 1rem;
+  font-size: 23px;
   color: grey;
 }
 

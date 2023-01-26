@@ -14,13 +14,13 @@ const Comment = (props) => {
       </div>
       <div className={styles["right-section"]}>
         <div className={styles["comment-header-info"]}>
-          <ProfileNameButton name={comment.user} />
+          <ProfileNameButton name={comment.author.username} />
           <div>
-            <PostDateLabel timestamp={comment.timestamp} />
+            <PostDateLabel timestamp={comment.date} />
           </div>
         </div>
         <div className={styles["comment"]}>
-          <span>{comment.comment}</span>
+          <span>{comment.message}</span>
         </div>
       </div>
     </div>

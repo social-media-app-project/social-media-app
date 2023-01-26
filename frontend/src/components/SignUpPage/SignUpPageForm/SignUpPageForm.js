@@ -6,6 +6,7 @@ import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 import SuccessMessage from "../../common/SuccessMessage/SuccessMessage";
 import { useNavigate } from "react-router-dom";
 import { v4 } from "uuid";
+import { handleSignup } from "../../../services/authService";
 const SignUpPageForm = () => {
   // TODO : DEBOUNCE FOR USERNAME
   const [username, setUsername] = useState("");
@@ -16,6 +17,7 @@ const SignUpPageForm = () => {
   const [success, setSuccess] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
   const navigate = useNavigate();
+
   const handleTextChange = (event, setStateToNewText) => {
     const newText = event.target.value;
     setStateToNewText(newText);
@@ -23,34 +25,42 @@ const SignUpPageForm = () => {
   const handelSubmit = async (e) => {
     e.preventDefault();
     try {
-      let res = await fetch(`${process.env.REACT_APP_TEST_URL}auth/signup`, {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          Accept: "*/*",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: username,
-          email: email,
-          password: password,
-          password_confirm: password_confirm,
-        }),
+      const response = await handleSignup({
+        username: username,
+        email: email,
+        password: password,
+        password_confirm: password_confirm,
       });
-      let data = await res.json();
-      if (res.status !== 200) {
-        let val = data.errors.errors;
-        setErrors(val);
-      } else {
+      const data = await response.json();
+      if (response.ok) {
         setErrors([]);
         setSuccess(true);
         setSuccessMsg("Thank You For Signing Up");
         setTimeout(() => {
           navigate("/login");
         }, 2800);
+      } else {
+        const val = data.errors.errors;
+        setErrors(val);
       }
     } catch (error) {}
   };
+
+  function debounce(func, timeout = 500) {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func.apply(this, args);
+      }, timeout);
+    };
+  }
+
+  function saveInput() {
+    console.log("Saving data");
+  }
+  const processChange = debounce(() => saveInput());
+
   useEffect(() => {}, [errors]);
   return (
     <form className={styles["signup-form"]}>
@@ -61,6 +71,7 @@ const SignUpPageForm = () => {
         value={username}
         setStateToNewText={setUsername}
         handleTextChange={handleTextChange}
+        debounce={processChange}
       />
       <FormTextInput
         label="Email"

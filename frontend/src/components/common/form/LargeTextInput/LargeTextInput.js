@@ -11,12 +11,13 @@ const LargeTextInput = (props) => {
       }
     >
       <div
+        id="textBox"
         className={styles["text-input"]}
-        contentEditable
         role="textbox"
         spellCheck={false}
+        contentEditable
         placeholder={props.placeholder}
-        onChange={props.onChange}
+        onInput={props.onChange}
       >
         {props.value}
       </div>

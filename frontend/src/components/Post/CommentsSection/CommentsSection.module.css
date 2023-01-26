@@ -1,3 +1,9 @@
 .comments-section {
   margin-bottom: 10px;
 }
+.no-comments {
+  padding: 7px 20px;
+  font-size: 1.3rem;
+  color: white;
+  text-shadow: 2px 2px 6px gray;
+}

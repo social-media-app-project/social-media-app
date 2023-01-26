@@ -1,16 +1,11 @@
-const pv = require('../middleware/validators/PostsValidator');
-const pq = require('../middleware/query-executors/PostsQueryExecutor');
-const { sendResponseOnError } = require('../middleware/validators/util');
+const pv = require("../middleware/validators/PostsValidator");
+const pq = require("../middleware/query-executors/PostsQueryExecutor");
+const { sendResponseOnError } = require("../middleware/validators/util");
 
-exports.getFeed = [
-  pq.executeFeedQuery,
-];
+exports.getFeed = [pq.executeFeedQuery];
+exports.getPosts = [pq.getUserFeedQuery];
 
-exports.getPost = [
-  ...pv.validatePostParams,
-  sendResponseOnError,
-  pq.getPost,
-];
+exports.getPost = [...pv.validatePostParams, sendResponseOnError, pq.getPost];
 exports.getComments = [
   ...pv.validatePostParams,
   sendResponseOnError,
