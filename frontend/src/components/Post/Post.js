@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, Suspense, lazy, useEffect } from "react";
 import GeneralPostContainer from "../GeneralPostContainer/GeneralPostContainer";
 import styles from "./Post.module.css";
 import { HiOutlineThumbUp /*HiThumbUp*/ } from "react-icons/hi";
-import CommentsSection from "./CommentsSection/CommentsSection";
+// import CommentsSection from "./CommentsSection/CommentsSection";
 import LikesView from "./LikesView/LikesView";
+import { handleCreateLike } from "../../services/postService";
 // import picOne from "../../test-data/test-images/landscape1.jpg";
 // import picTwo from "../../test-data/test-images/landscape2.jpg";
 // import picThree from "../../test-data/test-images/vertical.jpg";
+const LazyCommentsSection = lazy(() =>
+  import("./CommentsSection/CommentsSection")
+);
 
 const Post = (props) => {
   const [commentsExpanded, setCommentsExpanded] = useState(false);
@@ -15,7 +19,7 @@ const Post = (props) => {
   const isOwner = true;
   // const { post, handlePostImageClick } = props;
   // const images = [picOne, picTwo, picThree];
-  const { /*profilePicUrl, user,*/ timestamp, numLikes, numComments, message } =
+  const { /*profilePicUrl, user,*/ date, numLikes, numComments, message, _id } =
     props.post;
 
   const toggleComments = () => {
@@ -32,9 +36,22 @@ const Post = (props) => {
     setLikesExpanded(!likesExpanded);
   };
 
+  async function postLike(e) {
+    e.preventDefault();
+    try {
+      const response = await handleCreateLike(_id);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className={styles["post-container"]}>
-      <GeneralPostContainer isOwner={isOwner} timestamp={timestamp}>
+      <GeneralPostContainer isOwner={isOwner} timestamp={date}>
         <div className={styles["post-text"]}>
           <span>{message}</span>
         </div>
@@ -54,7 +71,10 @@ const Post = (props) => {
           >
             {numLikes} likes
           </button>
-          <button className={styles["post-info-button"]}>
+          <button
+            className={styles["post-info-button"]}
+            onClick={(e) => postLike(e)}
+          >
             <HiOutlineThumbUp className={styles["post-info-icon"]} /> Like
           </button>
           <button
@@ -65,8 +85,12 @@ const Post = (props) => {
             {numComments} comments
           </button>
         </div>
-        {commentsExpanded ? <CommentsSection /> : null}
-        {likesExpanded ? <LikesView /> : null}
+        {commentsExpanded ? (
+          <Suspense fallback={<div>loading......</div>}>
+            <LazyCommentsSection postID={_id} />
+          </Suspense>
+        ) : null}
+        {likesExpanded ? <LikesView postID={_id} /> : null}
       </div>
     </div>
   );
