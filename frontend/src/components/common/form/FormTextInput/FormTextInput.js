@@ -16,6 +16,7 @@ function FormTextInput(props) {
         onChange={(event) =>
           props.handleTextChange(event, props.setStateToNewText)
         }
+        onKeyUp={props.debounce}
         autoComplete="true"
       ></input>
     </div>

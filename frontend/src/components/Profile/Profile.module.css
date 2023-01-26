@@ -37,6 +37,9 @@
   box-shadow: none;
   transform: translateY(5px);
 }
+.first-post {
+  padding: 10px;
+}
 
 @media (max-width: 400px) {
   .create-post {

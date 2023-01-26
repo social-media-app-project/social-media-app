@@ -22,9 +22,9 @@ const HomeFeed = () => {
   };
 
   useEffect(() => {
-    if (auth.isAuthenticated !== true) {
-      navigate("/login");
-    }
+    // if (auth.isAuthenticated !== true) {
+    //   navigate("/login");
+    // }
   }, [auth.isAuthenticated]);
 
   return (
