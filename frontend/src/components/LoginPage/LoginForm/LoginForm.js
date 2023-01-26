@@ -6,7 +6,10 @@ import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 import { v4 } from "uuid";
 import { AuthContext } from "../../../App";
 import { useNavigate } from "react-router-dom";
+import { handleLogin } from "../../../services/authService";
+import Cookies from "universal-cookie";
 function LoginForm() {
+  const cookies = new Cookies();
   const auth = useContext(AuthContext);
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -16,38 +19,30 @@ function LoginForm() {
     const newText = event.target.value;
     setStateToNewText(newText);
   };
-  const handleSubmit = async (e) => {
+  const handleLoginForm = async (e) => {
     e.preventDefault();
     try {
-      let response = await fetch(
-        `${process.env.REACT_APP_TEST_URL}auth/login`,
-        {
-          method: "POST",
-          mode: "cors",
-          headers: {
-            Accept: "*/*",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: username,
-            password: password,
-          }),
-        }
-      );
-      let data = await response.json();
-      if (response.status !== 200) {
-        setErrors(data.errors);
-      } else if (response.ok) {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("expiresDate", data.expiresDate);
+      const res = await handleLogin({ username, password });
+      let data = await res.json();
+      if (res.ok) {
+        console.log(data);
         auth.setAuthenticated(true);
+        cookies.set("token", `${data.token}`, {
+          path: "/",
+          maxAge: data.expiresIn,
+          secure: true,
+        });
+      } else {
+        setErrors(data.errors);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
-    if (auth.setAuthenticated) {
-      navigate("/");
-    }
+    // if (!auth.setAuthenticated) {
+    //   navigate("/");
+    // }
   });
 
   return (
@@ -68,14 +63,14 @@ function LoginForm() {
         handleTextChange={handleTextChange}
       />
       {errors &&
-        errors.map((error, index) => {
+        errors.map((error) => {
           return <ErrorMessage key={v4()} msg={error} />;
         })}
       <TextButton
         text="Log in"
         type="submit"
         classNames={[styles["login-button"]]}
-        onClick={(e) => handleSubmit(e)}
+        onClick={(e) => handleLoginForm(e)}
       />
     </form>
   );
