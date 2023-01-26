@@ -23,6 +23,7 @@ const SignUpPage = lazy(() => import("./components/SignUpPage/SignUpPage"));
 export const AuthContext = createContext(null);
 function App() {
   const [isAuthenticated, setAuthenticated] = useState(true);
+  useEffect(() => {}, [isAuthenticated]);
 
   return (
     <Router>
