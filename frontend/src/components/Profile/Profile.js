@@ -9,34 +9,27 @@ import { AuthContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import { v4 } from "uuid";
 import CreatePost from "../CreatePost/CreatePost";
+import { handleUserPosts } from "../../services/postService";
 const Profile = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [modalImages, setModalImages] = useState([]);
-  const [modalIndex, setModalIndex] = useState(0);
+  // const [isModalOpen, setModalOpen] = useState(false);
+  // const [modalImages, setModalImages] = useState([]);
+  // const [modalIndex, setModalIndex] = useState(0);
   const [posts, setPosts] = useState([]);
 
-  const handleImageClick = (images, index) => {
-    setModalImages(images);
-    setModalIndex(index);
-    setModalOpen(true);
-  };
-
-  const fetchPosts = async () => {
-    let token = localStorage.getItem("token");
+  // const handleImageClick = (images, index) => {
+  //   setModalImages(images);
+  //   setModalIndex(index);
+  //   setModalOpen(true);
+  // };
+  const fetchUserPosts = async () => {
     try {
-      let res = await fetch(`${process.env.REACT_APP_TEST_URL}posts/user/`, {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          Authorization: token,
-          "Content-Type": "application/json",
-        },
-      });
-      let resPosts = await res.json();
-      setPosts(resPosts.posts);
-      console.log(resPosts);
+      const response = await handleUserPosts();
+      const data = await response.json();
+      if (response.ok) {
+        setPosts(data.posts);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -47,7 +40,7 @@ const Profile = () => {
       navigate("/login");
     }
     async function fetchAPI() {
-      await fetchPosts();
+      await fetchUserPosts();
     }
     fetchAPI();
   }, [auth.isAuthenticated]);
@@ -57,17 +50,16 @@ const Profile = () => {
     <div className={styles["profile-container"]}>
       <ProfileHeader
         img={user.profilePicUrl}
-        name={user.displayName}
-        username={user.username}
+        name={user.username}
         bio={user.bio}
       />
       <CreatePost />
-      {posts.length ? (
+      {posts.length >= 0 ? (
         posts.map((post) => (
           <Post
             key={v4()}
             post={post}
-            handlePostImageClick={handleImageClick}
+            // handlePostImageClick={handleImageClick}
           />
         ))
       ) : (
@@ -77,15 +69,14 @@ const Profile = () => {
       <button className={styles["create-post"]}>
         <AiOutlinePlus />
       </button>
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <ImageModal
           onOverlayClick={() => setModalOpen(false)}
           onClose={() => setModalOpen(false)}
           images={modalImages}
           index={modalIndex}
         />
-      )}
-      <button onClick={(e) => fetchPosts(e)}>get posts</button>
+      )} */}
     </div>
   );
 };
