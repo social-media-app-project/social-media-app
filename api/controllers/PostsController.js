@@ -3,7 +3,7 @@ const pq = require("../middleware/query-executors/PostsQueryExecutor");
 const { sendResponseOnError } = require("../middleware/validators/util");
 
 exports.getFeed = [pq.executeFeedQuery];
-exports.getPosts = [pq.executeUserFeedQuery];
+exports.getPosts = [pq.getUserFeedQuery];
 
 exports.getPost = [...pv.validatePostParams, sendResponseOnError, pq.getPost];
 exports.getComments = [
