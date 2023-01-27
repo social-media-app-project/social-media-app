@@ -1,14 +1,14 @@
-const express = require('express');
-
+const express = require("express");
+const UserController = require("../controllers/UserController");
 const router = express.Router();
 
-/* GET users listing. */
+router.get("/friend/:username");
 
-/**
- * TEST PROTECTED ROUTE
- */
-router.get('/', (req, res) => {
-  res.send('respond with a resource');
-});
+router.post("/friend/:friendId");
+
+router.put("/update/username");
+router.put("/update/bio");
+
+router.delete("/delete/:friendId");
 
 module.exports = router;
