@@ -51,6 +51,14 @@
   cursor: text;
   margin-left: 5px;
 }
+.error-message {
+  padding: 7px;
+  color: red;
+}
+.error-message-valid {
+  padding: 7px;
+  color: green;
+}
 
 .text-input {
   display: block;
@@ -63,6 +71,21 @@
   background-color: var(--secondary-background);
   color: var(--text-color);
   margin-top: 5px;
+  border: 2px red solid;
+}
+
+.text-input-valid {
+  display: block;
+  padding: 7px;
+  font-size: 1rem;
+  border: none;
+  width: 100%;
+  border-radius: 2px;
+  background-color: var(--secondary-background);
+  color: var(--text-color);
+  margin-top: 5px;
+  outline: none;
+  border: 2px green solid;
 }
 
 .bio-input {
