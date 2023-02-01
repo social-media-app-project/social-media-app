@@ -17,6 +17,14 @@ export async function addFriend(id) {
   );
   return response;
 }
+export async function checkUsername(name) {
+  const options = postOptions(JSON.stringify({ username: name }));
+  const response = await fetch(
+    `${process.env.REACT_APP_TEST_URL}users/username`,
+    options
+  );
+  return response;
+}
 
 export async function updateUsername(name) {
   const options = putOptions(JSON.stringify({ username: name }));
