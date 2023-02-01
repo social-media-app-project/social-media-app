@@ -23,3 +23,16 @@ exports.deleteFriend = [
   sendResponseOnError,
   q.deleteFriend,
 ];
+
+exports.checkAvailibility = [
+  ...v.validateUsername,
+  ...v.originalUsername,
+  sendResponseOnError,
+  (req, res, next) => {
+    try {
+      res.status(200).send({ success: { msg: "username available" } });
+    } catch (error) {
+      next({ statusCode: 500, error: ["Internal Server Error"] });
+    }
+  },
+];
