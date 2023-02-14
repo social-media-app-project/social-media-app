@@ -1,33 +1,22 @@
-import React, {
-  Suspense,
-  lazy,
-  useState,
-  createContext,
-  useEffect,
-} from "react";
-
+import React, { Suspense, lazy } from "react";
+import { Link } from "react-router-dom";
 import MainPage from "./components/MainPage/MainPage";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomeFeed from "./components/HomeFeed/HomeFeed";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 const Settings = lazy(() => import("./components/Settings/Settings"));
 const Profile = lazy(() => import("./components/Profile/Profile"));
 const LoginPage = lazy(() => import("./components/LoginPage/LoginPage"));
 const Friends = lazy(() => import("./components/Friends/Friends"));
 const SignUpPage = lazy(() => import("./components/SignUpPage/SignUpPage"));
-// import Settings from "./components/Settings/Settings";
-// import Friends from "./components/Friends/Friends";
-// import LoginPage from "./components/LoginPage/LoginPage";
-// import Profile from "./components/Profile/Profile";
 
-export const AuthContext = createContext(null);
+const queryClient = new QueryClient();
 function App() {
-  const [isAuthenticated, setAuthenticated] = useState(true);
-  useEffect(() => {}, [isAuthenticated]);
-
   return (
-    <Router>
-      <AuthContext.Provider value={{ isAuthenticated, setAuthenticated }}>
+    <QueryClientProvider client={queryClient}>
+      <Router>
         <Routes>
           <Route
             path="/login"
@@ -88,9 +77,18 @@ function App() {
               }
             />
           </Route>
+          <Route
+            path="*"
+            element={
+              <div>
+                NO PAGE FOUND<Link to="/"> GO HOME</Link>
+              </div>
+            }
+          />
         </Routes>
-      </AuthContext.Provider>
-    </Router>
+      </Router>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   );
 }
 
