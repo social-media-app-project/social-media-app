@@ -41,6 +41,25 @@
   padding: 10px;
 }
 
+.not-friends {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 160px;
+  height: 160px;
+  border: 3px white solid;
+  padding: 7px;
+  border-radius: 50%;
+}
+.not-friends-svg {
+  stroke: white;
+  stroke-width: 15;
+  width: 70px;
+  height: 70px;
+}
+
 @media (max-width: 400px) {
   .create-post {
     bottom: 60px;

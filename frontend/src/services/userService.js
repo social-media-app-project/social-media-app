@@ -9,27 +9,52 @@ export async function searchUsers(name) {
   return response;
 }
 
-export async function addFriend(id) {
+export async function sendFriendRequest(id) {
   const options = postOptions();
   const response = await fetch(
-    `${process.env.REACT_APP_TEST_URL}users/friend/${id}`,
+    `${process.env.REACT_APP_TEST_URL}users/friend/${id}/request`,
+    options
+  );
+  return response;
+}
+export async function acceptFriendRequest(id) {
+  const options = postOptions();
+  const response = await fetch(
+    `${process.env.REACT_APP_TEST_URL}users/friend/${id}/accept`,
+    options
+  );
+  return response;
+}
+
+export async function deleteFriend(id) {
+  const options = deleteOptions;
+  const response = await fetch(
+    `${process.env.REACT_APP_TEST_URL}users/delete/${id}`,
+    options
+  );
+  return response;
+}
+export async function deleteFriendRequest(id) {
+  const options = deleteOptions;
+  const response = await fetch(
+    `${process.env.REACT_APP_TEST_URL}users/delete/${id}/request`,
     options
   );
   return response;
 }
 export async function checkUsername(name) {
-  const options = postOptions(JSON.stringify({ username: name }));
+  const options = postOptions();
   const response = await fetch(
-    `${process.env.REACT_APP_TEST_URL}users/username`,
+    `${process.env.REACT_APP_TEST_URL}users/${name}`,
     options
   );
   return response;
 }
 
 export async function updateUsername(name) {
-  const options = putOptions(JSON.stringify({ username: name }));
+  const options = putOptions();
   const response = await fetch(
-    `${process.env.REACT_APP_TEST_URL}users/update/username`,
+    `${process.env.REACT_APP_TEST_URL}users/update/username/${name}`,
     options
   );
   return response;
@@ -44,10 +69,10 @@ export async function updateBio(bio) {
   return response;
 }
 
-export async function deleteFriend(id) {
-  const options = deleteOptions;
+export async function getUser() {
+  const options = getOptions;
   const response = await fetch(
-    `${process.env.REACT_APP_TEST_URL}users/delete${id}`,
+    `${process.env.REACT_APP_TEST_URL}users/user`,
     options
   );
   return response;

@@ -76,8 +76,13 @@
   cursor: text;
   margin-left: 5px;
 }
+.search-bar {
+  display: flex;
+}
 
 .input-container {
+  display: flex;
+  flex-direction: column;
   flex-basis: 350px;
   flex-shrink: 1;
 }

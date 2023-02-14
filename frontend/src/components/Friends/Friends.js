@@ -1,60 +1,118 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useRef } from "react";
 import styles from "./Friends.module.css";
-import { user } from "../../test-data/users";
 import FriendRequest from "./FriendRequest/Friendrequest";
 import Friend from "./Friend/Friend";
 import TextButton from "../common/form/TextButton/TextButton";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../App";
+import SearchResults from "./SearchResults/SearchResults";
+import { v4 } from "uuid";
+import { searchUsers, getUser } from "../../services/userService";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const Friends = () => {
-  const auth = useContext(AuthContext);
-  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [frOpen, setFrOpen] = useState(false);
   const [requestText, setRequestText] = useState("");
-
+  const [showRes, setShowRes] = useState(false);
+  const [searchRes, setSearchRes] = useState([]);
+  const searchRef = useRef();
   const seeFriendRequests = () => {
     setFrOpen(!frOpen);
+    if (frOpen) {
+      queryClient.invalidateQueries("user");
+    }
   };
 
-  useEffect(() => {
-    if (auth.isAuthenticated !== true) {
-      navigate("/login");
+  const fetchUsers = async (e) => {
+    e.preventDefault();
+    try {
+      const value = searchRef.current.value;
+      if (value === "") {
+        throw Error("nothing in search bar");
+      }
+      const response = await searchUsers(value);
+      const data = await response.json();
+      if (response.ok) {
+        setSearchRes(data);
+      }
+      console.log(data);
+    } catch (error) {
+      console.error(error);
     }
-  }, [auth.isAuthenticated]);
+  };
+
+  const userQuery = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      const response = await getUser();
+      return response.json();
+    },
+    onSuccess: (data) => {},
+  });
+  if (userQuery.isLoading) {
+    return <h1>Loading....</h1>;
+  }
+  if (userQuery.isError) {
+    return <pre>{JSON.stringify(userQuery.error.errors)}</pre>;
+  }
 
   return (
     <div className={styles["friends-container"]}>
       <h1 className={styles["friends-header"]}>Friends</h1>
 
-      <div className={styles["send-request-container"]}>
-        <div className={styles["input-container"]}>
-          <input
-            type="text"
-            className={styles["send-request-input"]}
-            id="req-username"
-            name="Request Username Input"
-            value={requestText}
-            onChange={(e) => setRequestText(e.target.value)}
+      <div>
+        <form
+          className={styles["send-request-container"]}
+          onSubmit={(e) => {
+            fetchUsers(e);
+          }}
+        >
+          <div className={styles["input-container"]}>
+            <input
+              ref={searchRef}
+              onFocus={() => {
+                setShowRes(true);
+              }}
+              onBlur={() => {
+                setShowRes(false);
+              }}
+              type="text"
+              className={styles["send-request-input"]}
+              id="req-username"
+              name="Request Username Input"
+              value={requestText}
+              onChange={(e) => setRequestText(e.target.value)}
+            />
+          </div>
+          <TextButton
+            text="Search"
+            type="submit"
+            classNames={[styles["send-button"]]}
+            onClick={() => setShowRes(true)}
           />
-        </div>
-        <TextButton
-          text="Request"
-          type="submit"
-          classNames={[styles["send-button"]]}
+        </form>
+        <SearchResults
+          results={searchRes}
+          inFocus={showRes}
+          user={userQuery.data._id || null}
         />
       </div>
 
-      <div onClick={seeFriendRequests} className={styles["f-bar"]}>
+      <div
+        onClick={(e) => {
+          e.preventDefault();
+          seeFriendRequests();
+        }}
+        className={styles["f-bar"]}
+      >
         Friend Requests
-        <span>{user.length}</span>
+        <span>{userQuery.data.incoming_requests.length}</span>
       </div>
       <div className={styles["fr-container"]}>
         {frOpen &&
-          user.map((person, index) => {
+          userQuery.data.incoming_requests.map((person) => {
             return (
               <FriendRequest
-                key={index}
+                key={v4()}
                 pic={person.profilePicUrl}
                 name={person.displayName}
                 username={person.username}
@@ -65,14 +123,14 @@ const Friends = () => {
       <div className={styles["your-friends"]}>
         <h1>
           Your Friends
-          <span>{user.length}</span>
+          <span>{userQuery.data.friends.length}</span>
         </h1>
       </div>
       <div className={styles["fr-container"]}>
-        {user.map((person, index) => {
+        {userQuery.data.friends.map((person) => {
           return (
             <Friend
-              key={index}
+              key={v4()}
               pic={person.profilePicUrl}
               name={person.displayName}
               username={person.username}

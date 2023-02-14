@@ -2,25 +2,19 @@ import React, { useState, Suspense, lazy, useEffect } from "react";
 import GeneralPostContainer from "../GeneralPostContainer/GeneralPostContainer";
 import styles from "./Post.module.css";
 import { HiOutlineThumbUp /*HiThumbUp*/ } from "react-icons/hi";
-// import CommentsSection from "./CommentsSection/CommentsSection";
 import LikesView from "./LikesView/LikesView";
 import { handleCreateLike } from "../../services/postService";
-// import picOne from "../../test-data/test-images/landscape1.jpg";
-// import picTwo from "../../test-data/test-images/landscape2.jpg";
-// import picThree from "../../test-data/test-images/vertical.jpg";
 const LazyCommentsSection = lazy(() =>
   import("./CommentsSection/CommentsSection")
 );
 
-const Post = (props) => {
+const Post = ({ post, username }) => {
   const [commentsExpanded, setCommentsExpanded] = useState(false);
   const [likesExpanded, setLikesExpanded] = useState(false);
 
   const isOwner = true;
   // const { post, handlePostImageClick } = props;
-  // const images = [picOne, picTwo, picThree];
-  const { /*profilePicUrl, user,*/ date, numLikes, numComments, message, _id } =
-    props.post;
+  const { /*profilePicUrl, user,*/ date, likes, comments, message, _id } = post;
 
   const toggleComments = () => {
     if (likesExpanded) {
@@ -51,7 +45,12 @@ const Post = (props) => {
 
   return (
     <div className={styles["post-container"]}>
-      <GeneralPostContainer isOwner={isOwner} timestamp={date}>
+      <GeneralPostContainer
+        _id={_id}
+        isOwner={isOwner}
+        timestamp={date}
+        username={username}
+      >
         <div className={styles["post-text"]}>
           <span>{message}</span>
         </div>
@@ -69,7 +68,7 @@ const Post = (props) => {
             name="like"
             onClick={toggleLikes}
           >
-            {numLikes} likes
+            {likes.length} likes
           </button>
           <button
             className={styles["post-info-button"]}
@@ -82,7 +81,7 @@ const Post = (props) => {
             name="comment"
             onClick={toggleComments}
           >
-            {numComments} comments
+            {comments.length} comments
           </button>
         </div>
         {commentsExpanded ? (

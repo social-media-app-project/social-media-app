@@ -1,16 +1,20 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
-import ChangeProfilePicModal from "../ChangeProfilePicModal/ChangeProfilePicModal";
-import LargeTextInput from "../common/form/LargeTextInput/LargeTextInput";
+// import ChangeProfilePicModal from "../ChangeProfilePicModal/ChangeProfilePicModal";
+// import LargeTextInput from "../common/form/LargeTextInput/LargeTextInput";
+// import ChangeProfilePic from "./ChangeProfilePic/ChangeProfilePic";
+// import profilePicTest from "../../test-data/test-images/vertical.jpg";
+import React, { useState, useRef } from "react";
 import TextButton from "../common/form/TextButton/TextButton";
-import ChangeProfilePic from "./ChangeProfilePic/ChangeProfilePic";
-import profilePicTest from "../../test-data/test-images/vertical.jpg";
 import styles from "./Settings.module.css";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../App";
-import { checkUsername, updateUsername } from "../../services/userService";
+import {
+  checkUsername,
+  getUser,
+  updateBio,
+  updateUsername,
+} from "../../services/userService";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const Settings = (props) => {
-  const auth = useContext(AuthContext);
   const navigate = useNavigate();
   // const [isModalOpen, setModalOpen] = useState(false);
   // const [profilePicture, setProfilePicture] = useState(profilePicTest);
@@ -22,30 +26,39 @@ const Settings = (props) => {
   // const [bioText, setBioText] = useState("some bio");
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const username = useRef();
+  const usernameRef = useRef();
+  const bioRef = useRef();
+
+  const settingsQuery = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      const response = await getUser();
+      return response.json();
+    },
+  });
+  if (settingsQuery.isLoading) {
+    return <h1>loading...</h1>;
+  }
+
+  // const mutateBioQuery = useMutationQuery()
 
   let queryTimeout;
   const queryUsername = async () => {
     clearTimeout(queryTimeout);
     queryTimeout = setTimeout(async () => {
-      const response = await checkUsername(username.current.value);
-
-      if (!response.ok) {
-        setIsError(true);
-        setErrorMessage("Username is not valid");
-      } else {
-        setIsError(false);
-        setErrorMessage("Username is valid");
-      }
+      try {
+        const val = usernameRef.current.value;
+        const response = await checkUsername(val);
+        if (!response.ok) {
+          setIsError(true);
+          setErrorMessage("Username is not valid");
+        } else {
+          setIsError(false);
+          setErrorMessage("Username is valid");
+        }
+      } catch (error) {}
     }, 300);
   };
-
-  useEffect(() => {
-    username.current.value = "bawa";
-    if (auth.isAuthenticated !== true) {
-      navigate("/login");
-    }
-  }, [auth.isAuthenticated]);
 
   return (
     <div className={styles["settings-container"]}>
@@ -54,41 +67,10 @@ const Settings = (props) => {
       </div>
       <div className={styles["form-container"]}>
         <form className={styles["settings-form"]}>
-          {/* <div className={styles["edit-pic-container"]}>
-            <ChangeProfilePic
-              handleClick={handleChangePicClick}
-              src={profilePicture}
-            />
-          </div>
-          <div className={styles["edit-name-container"]}>
-            <label className={styles["text-input-label"]}>Name</label>
-            <input
-              ref={username}
-              type="text"
-              className={styles["text-input"]}
-              id={"name"}
-              name={"name"}
-              // value={nameText}
-              style={{ width: props.width }}
-              // onChange={(e) => setNameText(e.target.value)}
-              onKeyUp={queryUsername}
-            ></input>
-          </div>
-          <div className={styles["edit-bio-container"]}>
-            <label className={styles["text-input-label"]}>Bio</label>
-            <LargeTextInput
-              classNames={[styles["bio-input"]]}
-              value={bioText}
-              onChange={(e) => setBioText(e.target.value)}
-            />
-          </div>
-          <div className={styles["save-button-container"]}>
-          </div>
-        </form>
-        <form> */}
-          <label className={styles["text-input-label"]}>username</label>
+          <label className={styles["text-input-label"]}>Update Username</label>
           <input
-            ref={username}
+            placeholder={settingsQuery.data.username}
+            ref={usernameRef}
             type="text"
             className={
               !isError ? styles["text-input-valid"] : styles["text-input"]
@@ -98,7 +80,7 @@ const Settings = (props) => {
             style={{ width: props.width }}
             onKeyUp={queryUsername}
             required
-          ></input>
+          />
           <div
             className={
               !isError ? styles["error-message-valid"] : styles["error-message"]
@@ -108,15 +90,40 @@ const Settings = (props) => {
           </div>
           {!isError && (
             <TextButton
-              text="Save"
+              text="Update Username"
               type="submit"
               classNames={[styles["save-button"]]}
               onClick={async (e) => {
                 e.preventDefault();
-                await updateUsername(username.current.value);
+                await updateUsername(usernameRef.current.value);
+                bioRef.current.value = "";
               }}
             />
           )}
+          <div style={{ paddingTop: "12px" }}>
+            <label className={styles["text-input-label"]}>Update Bio</label>
+            <input
+              placeholder={settingsQuery.data.bio}
+              ref={bioRef}
+              type="text"
+              className={styles["text-input-normal"]}
+              id={"name"}
+              name={"name"}
+              style={{ width: props.width }}
+              required
+            ></input>
+
+            <TextButton
+              text="Update Bio"
+              type="submit"
+              classNames={[styles["save-button"]]}
+              onClick={async (e) => {
+                e.preventDefault();
+                await updateBio(bioRef.current.value);
+                bioRef.current.value = "";
+              }}
+            />
+          </div>
         </form>
       </div>
       <div className={styles["logout-button-container"]}>
