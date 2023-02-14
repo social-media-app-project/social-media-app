@@ -1,15 +1,37 @@
 const { sendResponseOnError } = require("../middleware/validators/util");
 const q = require("../middleware/query-executors/UserQuery");
 const v = require("../middleware/validators/userValidator");
+exports.getUser = [q.getUser];
 exports.getFriends = [...v.validateUsername, sendResponseOnError, q.getUsers];
-exports.postAddFriend = [
+exports.postSendFriendRequest = [
   ...v.validateFriendIdParams,
   ...v.validateFriend,
   ...v.checkAlreadySentRequest,
   ...v.checkIfFriends,
   sendResponseOnError,
-  q.postAddFriend,
+  q.postSendFriendRequest,
 ];
+exports.postAcceptFriendRequest = [
+  ...v.validateFriendIdParams,
+  ...v.validateFriend,
+  ...v.checkIfFriends,
+  sendResponseOnError,
+  q.postacceptFriendRequest,
+];
+exports.deleteFriendRequest = [
+  ...v.validateFriendIdParams,
+  ...v.validateFriend,
+  sendResponseOnError,
+  q.deleteFriendRequest,
+];
+exports.deleteFriend = [
+  ...v.validateFriendIdParams,
+  ...v.validateFriend,
+  ...v.checkIfInFriendsList,
+  sendResponseOnError,
+  q.deleteFriend,
+];
+
 exports.updateUsername = [
   ...v.validateUsername,
   ...v.originalUsername,
@@ -17,22 +39,10 @@ exports.updateUsername = [
   q.putUpdateUsername,
 ];
 exports.updateBio = [...v.validateBio, sendResponseOnError, q.putUpdateBio];
-exports.deleteFriend = [
-  ...v.validateFriendIdParams,
-  ...v.checkIfInFriendsList,
-  sendResponseOnError,
-  q.deleteFriend,
-];
 
 exports.checkAvailibility = [
   ...v.validateUsername,
   ...v.originalUsername,
   sendResponseOnError,
-  (req, res, next) => {
-    try {
-      res.status(200).send({ success: { msg: "username available" } });
-    } catch (error) {
-      next({ statusCode: 500, error: ["Internal Server Error"] });
-    }
-  },
+  q.originalName,
 ];
