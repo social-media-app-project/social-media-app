@@ -62,7 +62,7 @@ exports.checkAlreadySentRequest = [
 ];
 
 exports.validateUsername = [
-  body("username")
+  param("username")
     .trim()
     .escape()
     .isLength({ min: 1 })
@@ -71,9 +71,8 @@ exports.validateUsername = [
     .withMessage("username is too long"),
 ];
 exports.originalUsername = [
-  body("username").custom(async (value) => {
+  param("username").custom(async (value) => {
     try {
-      console.log(value);
       const name = await User.findOne({ username: value });
       if (name) {
         return Promise.reject("Username not available");
