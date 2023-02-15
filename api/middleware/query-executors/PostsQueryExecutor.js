@@ -20,22 +20,18 @@ exports.executeOthersFeedQuery = async (req, res, next) => {
     ]);
     if (!Posts || !PostUser) {
       next({ statusCode: 404, errors: ["Could not find posts or user"] });
-    }
-
-    if (user.friends.includes(userId)) {
+    } else if (user.friends.includes(userId)) {
       status.isFriend = true;
       return res.status(200).send({ Posts, User: PostUser, status });
-    }
-    if (user.outgoing_requests.includes(userId)) {
+    } else if (user.outgoing_requests.includes(userId)) {
       status.requestSent = true;
       return res.status(200).send({ Posts: null, User: PostUser, status });
-    }
-    if (user.incoming_requests.includes(userId)) {
+    } else if (user.incoming_requests.includes(userId)) {
       status.requestIncoming = true;
       return res.status(200).send({ Posts: null, User: PostUser, status });
+    } else {
+      return res.status(200).send({ Posts: null, User: PostUser, status });
     }
-
-    return res.status(200).send({ Posts: null, User: PostUser, status });
   } catch (error) {
     console.log(error);
     next({ statusCode: 500, errors: ["Internal server error"] });
