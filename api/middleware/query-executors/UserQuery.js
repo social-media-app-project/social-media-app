@@ -132,7 +132,7 @@ exports.putUpdateBio = async (req, res, next) => {
   }
 };
 
-exports.originalName = async () => {
+exports.originalName = async (req, res, next) => {
   try {
     res.status(200).send({ success: { msg: "username available" } });
   } catch (error) {
