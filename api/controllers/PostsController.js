@@ -5,6 +5,11 @@ const { sendResponseOnError } = require("../middleware/validators/util");
 exports.getFeed = [pq.executeFeedQuery];
 exports.getPosts = [pq.getUserFeedQuery];
 
+exports.getOtherPosts = [
+  ...pv.validateLikeParams,
+  sendResponseOnError,
+  pq.executeOthersFeedQuery,
+];
 exports.getPost = [...pv.validatePostParams, sendResponseOnError, pq.getPost];
 exports.getComments = [
   ...pv.validatePostParams,

@@ -6,20 +6,46 @@ const Comment = require("../../models/Comment");
 // exports.executeFeedQuery = async (req, res, next) => {};
 exports.executeOthersFeedQuery = async (req, res, next) => {
   try {
-    const { _id } = req.user;
+    const user = req.user;
     const { userId } = req.params;
-    const checkFriend = User.find();
-  } catch (error) {}
+    const status = {
+      isFriend: false,
+      requestSent: false,
+      requestIncoming: false,
+    };
+
+    let [Posts, PostUser] = await Promise.all([
+      Post.find({ author: userId }).sort({ date: 1 }),
+      User.findById(userId).select("username bio"),
+    ]);
+    if (!Posts || !PostUser) {
+      next({ statusCode: 404, errors: ["Could not find posts or user"] });
+    } else if (user.friends.includes(userId)) {
+      status.isFriend = true;
+      return res.status(200).send({ Posts, User: PostUser, status });
+    } else if (user.outgoing_requests.includes(userId)) {
+      status.requestSent = true;
+      return res.status(200).send({ Posts: null, User: PostUser, status });
+    } else if (user.incoming_requests.includes(userId)) {
+      status.requestIncoming = true;
+      return res.status(200).send({ Posts: null, User: PostUser, status });
+    } else {
+      return res.status(200).send({ Posts: null, User: PostUser, status });
+    }
+  } catch (error) {
+    console.log(error);
+    next({ statusCode: 500, errors: ["Internal server error"] });
+  }
 };
 
 exports.getUserFeedQuery = async (req, res, next) => {
   try {
     const { _id } = req.user;
-    const posts = await Post.find({ author: _id }).sort({ date: -1 });
-    if (!posts) {
+    const Posts = await Post.find({ author: _id }).sort({ date: 1 });
+    if (!Posts) {
       next({ statusCode: 404, errors: ["Could not find posts"] });
     } else {
-      res.send({ posts });
+      res.send({ Posts, User: req.user });
     }
   } catch (error) {
     next({ statusCode: 500, errors: ["Internal server error"] });
@@ -146,7 +172,6 @@ exports.executeCreatePostQuery = async (req, res, next) => {
   try {
     const { message } = req.body;
     const { _id } = req.user;
-
     const post = new Post({
       author: _id,
       message,
@@ -157,7 +182,7 @@ exports.executeCreatePostQuery = async (req, res, next) => {
     if (savedPost !== post) {
       throw new Error();
     } else {
-      res.status(200).send({
+      return res.status(200).send({
         msg: "Thanks for posting",
         post: savedPost,
       });

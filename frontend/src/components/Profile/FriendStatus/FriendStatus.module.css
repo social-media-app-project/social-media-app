@@ -4,3 +4,26 @@
   align-items: center;
   gap: 5px;
 }
+
+.fr-buttons {
+  display: flex;
+  gap: 10px;
+}
+.accept-fr {
+  font-size: 0.9rem;
+  height: 25px;
+  padding: 0px 3px;
+  border-radius: 0.25rem;
+  background-color: green;
+  display: flex;
+  align-items: center;
+}
+.delete-fr {
+  font-size: 0.9rem;
+  height: 25px;
+  padding: 0px 3px;
+  background-color: red;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+}

@@ -3,7 +3,7 @@ import styles from "./AddFriendButton.module.css";
 
 const AddFriendButton = () => {
   return (
-    <button className={styles["add-friend-button"]}>
+    <button type="submit" className={styles["add-friend-button"]}>
       <span>Add Friend</span>
     </button>
   );

@@ -6,6 +6,8 @@ import CreatePostButton from "./CreatePostButton/CreatePostButton";
 import { handleCreatePost } from "../../services/postService";
 // import PostImageSlideshow from "../PostImageSlideshow/PostImageSlideshow";
 // import AttachmentsBar from "./AttachmentsBar/AttachmentsBar";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 
 const CreatePost = (props) => {
   // const [images, setImages] = useState([]);
@@ -27,25 +29,36 @@ const CreatePost = (props) => {
   //   ]);
   // };
   const textArea = useRef();
+  const queryClient = useQueryClient();
 
-  const fetchCreatePost = async (e) => {
+  const createPost = (e) => {
     e.preventDefault();
-    try {
-      const response = await handleCreatePost({ message: textArea.current });
-      if (response.ok) {
-        let data = await response.json();
-        console.log(data);
-      }
-    } catch (error) {
-    } finally {
-      const val = e.target.querySelector("#textBox");
-      val.textContent = "";
-    }
+    newPostMutation.mutate({ message: textArea.current, event: e });
+    const val = e.target.querySelector("#textBox");
+    val.textContent = "";
   };
+
+  const newPostMutation = useMutation({
+    mutationFn: ({ message }) => {
+      handleCreatePost({ message: message }).then((res) => {
+        return res.json();
+      });
+    },
+    onSettled: (data, error, { event }) => {
+      textArea.current = "";
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("posts");
+    },
+  });
 
   return (
     <div className={styles["create-post-container"]}>
-      <form onSubmit={(event) => fetchCreatePost(event)}>
+      <form
+        onSubmit={(e) => {
+          createPost(e);
+        }}
+      >
         <GeneralPostContainer props={props}>
           <LargeTextInput
             placeholder={"What would you like to say?"}

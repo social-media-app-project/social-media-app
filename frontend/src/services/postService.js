@@ -12,7 +12,7 @@ export async function handleUserPosts() {
 export async function getOtherUsersPosts(id) {
   const options = getOptions;
   const response = await fetch(
-    `${process.env.REACT_APP_TEST_URL}posts/user/${id}`,
+    `${process.env.REACT_APP_TEST_URL}posts/${id}`,
     options
   );
   return response;

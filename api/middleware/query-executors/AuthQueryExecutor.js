@@ -55,7 +55,12 @@ exports.loginUser = async (req, res, next) => {
         const token = jwt.sign({ userid: user._id }, secret, opts);
         res
           .status(200)
-          .send({ success: true, token: `Bearer ${token}`, expiresDate });
+          .send({
+            success: true,
+            token: `Bearer ${token}`,
+            expiresDate,
+            user: user,
+          });
       } else {
         next({
           statusCode: 404,
