@@ -76,7 +76,7 @@ exports.deleteFriendRequest = async (req, res, next) => {
     await user.save();
     await friend.save();
     res
-      .statusCode(200)
+      .status(200)
       .send({ sucess: [{ msg: "You deleted the friend request" }] });
   } catch (error) {
     next({
@@ -93,7 +93,7 @@ exports.deleteFriend = async (req, res, next) => {
     req.user.friends.remove(friend._id);
     await friend.save();
     await req.user.save();
-    res.statusCode(200).send({
+    res.status(200).send({
       sucess: [{ msg: `You are no longer friends with ${friend.username}` }],
     });
   } catch (error) {
