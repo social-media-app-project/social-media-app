@@ -35,7 +35,7 @@ exports.executeOthersFeedQuery = async (req, res, next) => {
       return res.status(200).send({ Posts: null, User: PostUser, status });
     }
 
-    res.status(200).send({ Posts: null, User: PostUser, status });
+    return res.status(200).send({ Posts: null, User: PostUser, status });
   } catch (error) {
     console.log(error);
     next({ statusCode: 500, errors: ["Internal server error"] });
@@ -186,7 +186,7 @@ exports.executeCreatePostQuery = async (req, res, next) => {
     if (savedPost !== post) {
       throw new Error();
     } else {
-      res.status(200).send({
+      return res.status(200).send({
         msg: "Thanks for posting",
         post: savedPost,
       });
