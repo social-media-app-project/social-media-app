@@ -69,6 +69,15 @@ export async function updateBio(bio) {
   return response;
 }
 
+export async function updateProfilePic(url) {
+  const options = putOptions(JSON.stringify({ picUrl: url }));
+  const response = await fetch(
+    `${process.env.REACT_APP_TEST_URL}users/update/profilePic`,
+    options
+  );
+  return response;
+}
+
 export async function getUser() {
   const options = getOptions;
   const response = await fetch(
