@@ -139,3 +139,13 @@ exports.originalName = async (req, res, next) => {
     next({ statusCode: 500, error: ["Internal Server Error"] });
   }
 };
+
+exports.putUpdateProfilePic = async (req, res, next) => {
+  try {
+    req.user.profilePicUrl = req.body.picUrl;
+    await req.user.save();
+    res.status(200).send({ success: [{ msg: "Profile Pic updated" }] });
+  } catch (error) {
+    next({ statusCode: 500, error: ["Internal Server Error"] });
+  }
+};
