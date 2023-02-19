@@ -11,6 +11,7 @@ router.post("/friend/:friendId/accept", UserController.postAcceptFriendRequest);
 
 router.put("/update/username/:username", UserController.updateUsername);
 router.put("/update/bio", UserController.updateBio);
+router.put("/update/profilePic", UserController.updateProfilePic);
 
 router.delete("/delete/:friendId", UserController.deleteFriend);
 router.delete("/delete/:friendId/request", UserController.deleteFriendRequest);
