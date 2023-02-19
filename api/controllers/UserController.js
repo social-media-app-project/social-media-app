@@ -38,6 +38,12 @@ exports.updateUsername = [
   sendResponseOnError,
   q.putUpdateUsername,
 ];
+
+exports.updateProfilePic = [
+  ...v.validatePicUrl,
+  sendResponseOnError,
+  q.putUpdateProfilePic,
+];
 exports.updateBio = [...v.validateBio, sendResponseOnError, q.putUpdateBio];
 
 exports.checkAvailibility = [
