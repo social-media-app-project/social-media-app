@@ -107,3 +107,7 @@ exports.checkIfInFriendsList = [
     } catch (error) {}
   }),
 ];
+
+exports.validatePicUrl = [
+  body("picUrl").isURL().trim().withMessage("not valid url"),
+];
