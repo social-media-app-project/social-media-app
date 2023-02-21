@@ -16,7 +16,7 @@ exports.executeOthersFeedQuery = async (req, res, next) => {
 
     let [Posts, PostUser] = await Promise.all([
       Post.find({ author: userId }).sort({ date: 1 }),
-      User.findById(userId).select("username bio"),
+      User.findById(userId).select("username bio profilePicUrl"),
     ]);
     if (!Posts || !PostUser) {
       next({ statusCode: 404, errors: ["Could not find posts or user"] });
