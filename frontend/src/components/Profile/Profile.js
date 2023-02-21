@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Profile.module.css";
 import ProfileHeader from "./ProfileHeader/ProfileHeader";
 import Post from "../Post/Post";
@@ -12,9 +12,9 @@ import {
   handleUserPosts,
   getOtherUsersPosts,
 } from "../../services/postService";
-import { isError } from "react-query";
 
 const Profile = () => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { userId } = useParams();
   // const [isModalOpen, setModalOpen] = useState(false);
@@ -28,22 +28,19 @@ const Profile = () => {
 
   const userProfileQuery = useQuery({
     queryKey: ["posts", userId],
+    enabled: !userId,
     queryFn: async () => {
       const res = await handleUserPosts();
       return res.json();
     },
-    enabled: userId === undefined ? true : false,
   });
   const otherProfileQuery = useQuery({
     queryKey: ["posts", userId],
+    enabled: !!userId,
     queryFn: async () => {
       const res = await getOtherUsersPosts(userId);
       console.log(res);
       return res.json();
-    },
-    enabled: userId !== undefined ? true : false,
-    onSuccess: (data) => {
-      console.log(data);
     },
     onError: (err) => {
       console.log(err);
@@ -55,23 +52,32 @@ const Profile = () => {
   if (otherProfileQuery.isError) {
     return <pre>{JSON.stringify(otherProfileQuery.error.errors)}</pre>;
   }
-  if (otherProfileQuery.isSuccess && otherProfileQuery.data.Posts !== null) {
+  // Profile Pages for Other Users
+  if (
+    !!userId &&
+    otherProfileQuery.isSuccess &&
+    otherProfileQuery.data.Posts !== null
+  ) {
     return (
       <div className={styles["profile-container"]}>
         {otherProfileQuery.data.User && (
           <ProfileHeader
-            // img={user.profilePicUrl}
+            img={otherProfileQuery.data.User.profilePicUrl}
             name={otherProfileQuery.data.User.username}
             bio={otherProfileQuery.data.User.bio}
             status={otherProfileQuery.data.status}
           />
         )}
-        {!userId && <CreatePost />}
+        {/*if you are on somoene elses page you can't create a post on it*/}
+        {!userId && (
+          <CreatePost imgUrl={otherProfileQuery.data.User.profilePicUrl} />
+        )}
         {otherProfileQuery.data.Posts.length > 0 ? (
           otherProfileQuery.data.Posts.map((post) => (
             <Post
               key={v4()}
               post={post}
+              imgUrl={otherProfileQuery.data.User.profilePicUrl}
               username={otherProfileQuery.data.User.username}
               // handlePostImageClick={handleImageClick}
             />
@@ -93,12 +99,13 @@ const Profile = () => {
         )} */}
       </div>
     );
-  } else if (otherProfileQuery.data.Posts === null) {
+    // If you are not friends with the User whos profile you are looking at
+  } else if (!!userId && otherProfileQuery.data.Posts === null) {
     return (
       <div className={styles["profile-container"]}>
         {otherProfileQuery.data.User && (
           <ProfileHeader
-            // img={user.profilePicUrl}
+            img={otherProfileQuery.data.User.profilePicUrl}
             status={otherProfileQuery.data.status}
             name={otherProfileQuery.data.User.username}
             bio={otherProfileQuery.data.User.bio}
@@ -136,22 +143,26 @@ const Profile = () => {
   if (userProfileQuery.isError) {
     return <pre>{JSON.stringify(userProfileQuery.error.errors)}</pre>;
   }
-  if (userProfileQuery.isSuccess) {
+  if (!userId && userProfileQuery.isSuccess) {
     return (
+      // When looking at your own Porfile Page
       <div className={styles["profile-container"]}>
         {userProfileQuery.data.User && (
           <ProfileHeader
-            // img={user.profilePicUrl}
+            img={userProfileQuery.data.User.profilePicUrl}
             name={userProfileQuery.data.User.username}
             bio={userProfileQuery.data.User.bio}
           />
         )}
-        {!userId && <CreatePost />}
+        {!userId && (
+          <CreatePost imgUrl={userProfileQuery.data.User.profilePicUrl} />
+        )}
         {userProfileQuery.data.Posts.length > 0 ? (
           userProfileQuery.data.Posts.map((post) => (
             <Post
               key={v4()}
               post={post}
+              imgUrl={userProfileQuery.data.User.profilePicUrl}
               username={userProfileQuery.data.User.username}
               // handlePostImageClick={handleImageClick}
             />
