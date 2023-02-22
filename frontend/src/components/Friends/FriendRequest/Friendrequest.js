@@ -5,7 +5,7 @@ import {
   acceptFriendRequest,
   deleteFriendRequest,
 } from "../../../services/userService";
-const FriendRequest = ({ props }) => {
+const FriendRequest = (props) => {
   const queryClient = useQueryClient();
   const acceptFrMutate = useMutation({
     mutationFn: async ({ id }) => {
@@ -15,6 +15,8 @@ const FriendRequest = ({ props }) => {
     onSuccess: () => {
       setTimeout(() => {
         queryClient.invalidateQueries({ queryKey: ["posts", props._id] });
+        queryClient.invalidateQueries({ queryKey: ["friendspage"] });
+        queryClient.invalidateQueries({ queryKey: ["friendrequests"] });
       }, 500);
     },
   });
@@ -26,13 +28,15 @@ const FriendRequest = ({ props }) => {
     onSuccess: () => {
       setTimeout(() => {
         queryClient.invalidateQueries({ queryKey: ["posts", props._id] });
+        queryClient.invalidateQueries({ queryKey: ["friendspage"] });
+        queryClient.invalidateQueries({ queryKey: ["friendrequests"] });
       }, 500);
     },
   });
   return (
     <div className={styles["fr"]}>
       <div className={styles["name-pic"]}>
-        {/* <img src={props.pic} alt="pic" /> */}
+        <img src={props.pic} alt="pic" />
         <div className={styles["names"]}>
           {/* <div>{props.name}</div> */}
           <div className={styles["username"]}>{props.username}</div>

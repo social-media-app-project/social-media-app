@@ -7,13 +7,7 @@ const ProfileHeader = (props) => {
   // TODO: something to determine whether user is owner of profile (prop or function)
   const { userId } = useParams();
   const isUser = false;
-  const {
-    status,
-    name = " ",
-    username = " ",
-    bio = "NO USER",
-    img = "https://cdn.nba.com/headshots/nba/latest/1040x760/1626224.png",
-  } = props;
+  const { status, name = " ", username = " ", bio = "NO USER", img } = props;
 
   const msg = {
     /**TODO: create a settings button which takes user to settings tab */

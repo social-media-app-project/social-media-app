@@ -25,10 +25,19 @@ const SearchResults = ({ results, inFocus, user }) => {
         results.map((res, index) => {
           return (
             <Link
+              className={styles["searchres"]}
               style={resStyles(index)}
               key={v4()}
               to={res._id !== user ? `/${res._id}` : "/profile"}
             >
+              <img
+                className={styles["avatar-img"]}
+                src={
+                  res.profilePicUrl ||
+                  "https://www.svgrepo.com/show/309688/image-alt-text.svg"
+                }
+                alt="avatar"
+              />
               {res.username}
             </Link>
           );

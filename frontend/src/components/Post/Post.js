@@ -8,7 +8,7 @@ const LazyCommentsSection = lazy(() =>
   import("./CommentsSection/CommentsSection")
 );
 
-const Post = ({ post, username }) => {
+const Post = ({ post, username, imgUrl }) => {
   const [commentsExpanded, setCommentsExpanded] = useState(false);
   const [likesExpanded, setLikesExpanded] = useState(false);
 
@@ -50,6 +50,7 @@ const Post = ({ post, username }) => {
         isOwner={isOwner}
         timestamp={date}
         username={username}
+        imgUrl={imgUrl}
       >
         <div className={styles["post-text"]}>
           <span>{message}</span>

@@ -9,6 +9,23 @@ export async function searchUsers(name) {
   return response;
 }
 
+export async function getFriendsPage() {
+  const options = getOptions;
+  const response = await fetch(
+    `${process.env.REACT_APP_TEST_URL}users/friends/page`,
+    options
+  );
+  return response;
+}
+export async function getFriendRequests() {
+  const options = getOptions;
+  const response = await fetch(
+    `${process.env.REACT_APP_TEST_URL}users/friendrequests`,
+    options
+  );
+  return response;
+}
+
 export async function sendFriendRequest(id) {
   const options = postOptions();
   const response = await fetch(
@@ -64,6 +81,15 @@ export async function updateBio(bio) {
   const options = putOptions(JSON.stringify({ bio: bio }));
   const response = await fetch(
     `${process.env.REACT_APP_TEST_URL}users/update/bio`,
+    options
+  );
+  return response;
+}
+
+export async function updateProfilePic(url) {
+  const options = putOptions(JSON.stringify({ picUrl: url }));
+  const response = await fetch(
+    `${process.env.REACT_APP_TEST_URL}users/update/profilePic`,
     options
   );
   return response;

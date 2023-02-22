@@ -6,17 +6,18 @@ import ProfilePictureButton from "../ProfilePictureButton/ProfilePictureButton";
 import styles from "./GeneralPostContainer.module.css";
 import { useParams } from "react-router-dom";
 const GeneralPostContainer = (props) => {
-  const { timestamp, isOwner, _id } = props;
+  const { timestamp, isOwner, _id, username, imgUrl } = props;
   const { userId } = useParams();
-
   return (
     <div className={styles["post-container"]}>
       <div>
-        <ProfilePictureButton user={props.user}></ProfilePictureButton>
+        <ProfilePictureButton
+          imgUrl={imgUrl || props.props.imgUrl}
+        ></ProfilePictureButton>
       </div>
       <div className={styles["content-container"]}>
         <div className={styles["post-header-info"]}>
-          <ProfileNameButton name={props.username}></ProfileNameButton>
+          <ProfileNameButton name={username}></ProfileNameButton>
           {timestamp ? (
             <div>
               <PostDateLabel timestamp={timestamp} />

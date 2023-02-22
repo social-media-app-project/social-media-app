@@ -11,6 +11,9 @@ exports.postSendFriendRequest = [
   sendResponseOnError,
   q.postSendFriendRequest,
 ];
+
+exports.getFriendsPage = [q.getFriendsPage];
+exports.getUserFriendRequests = [q.getFriendRequests];
 exports.postAcceptFriendRequest = [
   ...v.validateFriendIdParams,
   ...v.validateFriend,
@@ -37,6 +40,12 @@ exports.updateUsername = [
   ...v.originalUsername,
   sendResponseOnError,
   q.putUpdateUsername,
+];
+
+exports.updateProfilePic = [
+  ...v.validatePicUrl,
+  sendResponseOnError,
+  q.putUpdateProfilePic,
 ];
 exports.updateBio = [...v.validateBio, sendResponseOnError, q.putUpdateBio];
 

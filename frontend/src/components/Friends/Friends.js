@@ -5,7 +5,11 @@ import Friend from "./Friend/Friend";
 import TextButton from "../common/form/TextButton/TextButton";
 import SearchResults from "./SearchResults/SearchResults";
 import { v4 } from "uuid";
-import { searchUsers, getUser } from "../../services/userService";
+import {
+  searchUsers,
+  getFriendsPage,
+  getFriendRequests,
+} from "../../services/userService";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const Friends = () => {
@@ -17,8 +21,8 @@ const Friends = () => {
   const searchRef = useRef();
   const seeFriendRequests = () => {
     setFrOpen(!frOpen);
-    if (frOpen) {
-      queryClient.invalidateQueries("user");
+    if (!frOpen) {
+      queryClient.invalidateQueries("friendrequests");
     }
   };
 
@@ -39,14 +43,23 @@ const Friends = () => {
       console.error(error);
     }
   };
-
-  const userQuery = useQuery({
-    queryKey: ["user"],
+  const fetchFr = useQuery({
+    queryKey: ["friendrequests"],
     queryFn: async () => {
-      const response = await getUser();
+      const response = await getFriendRequests();
       return response.json();
     },
-    onSuccess: (data) => {},
+  });
+
+  const userQuery = useQuery({
+    queryKey: ["friendspage"],
+    queryFn: async () => {
+      const response = await getFriendsPage();
+      return response.json();
+    },
+    onSuccess: (data) => {
+      console.log(data);
+    },
   });
   if (userQuery.isLoading) {
     return <h1>Loading....</h1>;
@@ -93,7 +106,7 @@ const Friends = () => {
         <SearchResults
           results={searchRes}
           inFocus={showRes}
-          user={userQuery.data._id || null}
+          user={userQuery.data.page._id || null}
         />
       </div>
 
@@ -105,17 +118,21 @@ const Friends = () => {
         className={styles["f-bar"]}
       >
         Friend Requests
-        <span>{userQuery.data.incoming_requests.length}</span>
+        <span>{userQuery.data.page.incoming_requests.length}</span>
       </div>
       <div className={styles["fr-container"]}>
+        {frOpen && fetchFr.isLoading && <div>Loading....</div>}
+        {frOpen && fetchFr.isError && <div>Error</div>}
         {frOpen &&
-          userQuery.data.incoming_requests.map((person) => {
+          fetchFr.isSuccess &&
+          fetchFr.data.requests.incoming_requests.map((person) => {
             return (
               <FriendRequest
                 key={v4()}
-                pic={person.profilePicUrl}
-                name={person.displayName}
-                username={person.username}
+                _id={person._id}
+                pic={person?.profilePicUrl}
+                // name={person.displayName}
+                username={person?.username}
               />
             );
           })}
@@ -123,14 +140,15 @@ const Friends = () => {
       <div className={styles["your-friends"]}>
         <h1>
           Your Friends
-          <span>{userQuery.data.friends.length}</span>
+          <span>{userQuery.data.page.friends.length}</span>
         </h1>
       </div>
       <div className={styles["fr-container"]}>
-        {userQuery.data.friends.map((person) => {
+        {userQuery.data.page.friends.map((person) => {
           return (
             <Friend
               key={v4()}
+              _id={person._id}
               pic={person.profilePicUrl}
               name={person.displayName}
               username={person.username}

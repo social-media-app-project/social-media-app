@@ -19,6 +19,7 @@ exports.saveNewUser = async (req, res, next) => {
       email: req.body.email,
       friends: [],
       bio: req.body.bio,
+      profilePicUrl: "https://api.dicebear.com/5.x/big-ears/svg?seed=Felix",
     });
 
     const savedUser = await user.save();
@@ -53,14 +54,12 @@ exports.loginUser = async (req, res, next) => {
         const secret = process.env.SECRET;
         // eslint-disable-next-line no-underscore-dangle
         const token = jwt.sign({ userid: user._id }, secret, opts);
-        res
-          .status(200)
-          .send({
-            success: true,
-            token: `Bearer ${token}`,
-            expiresDate,
-            user: user,
-          });
+        res.status(200).send({
+          success: true,
+          token: `Bearer ${token}`,
+          expiresDate,
+          user: user,
+        });
       } else {
         next({
           statusCode: 404,

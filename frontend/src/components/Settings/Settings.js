@@ -13,21 +13,42 @@ import {
   updateUsername,
 } from "../../services/userService";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import ChangeProfilePic from "./ChangeProfilePic/ChangeProfilePic";
 
 const Settings = (props) => {
   const navigate = useNavigate();
-  // const [isModalOpen, setModalOpen] = useState(false);
-  // const [profilePicture, setProfilePicture] = useState(profilePicTest);
-  // const handleChangePicClick = () => {
-  //   setModalOpen(true);
-  // };
+  const queryClient = useQueryClient();
 
-  // const [nameText, setNameText] = useState("some name");
-  // const [bioText, setBioText] = useState("some bio");
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const usernameRef = useRef();
   const bioRef = useRef();
+
+  const usernameMutate = useMutation({
+    mutationFn: async () => {
+      const res = await updateUsername(usernameRef.current.value);
+      return res.json();
+    },
+    onSuccess: () => {
+      usernameRef.current.value = "";
+      setTimeout(() => {
+        queryClient.invalidateQueries("user");
+      }, 500);
+    },
+  });
+
+  const bioMutate = useMutation({
+    mutationFn: async () => {
+      const response = await updateBio(bioRef.current.value);
+      return response.json();
+    },
+    onSuccess: () => {
+      bioRef.current.value = "";
+      setTimeout(() => {
+        queryClient.invalidateQueries("user");
+      }, 500);
+    },
+  });
 
   const settingsQuery = useQuery({
     queryKey: ["user"],
@@ -39,8 +60,6 @@ const Settings = (props) => {
   if (settingsQuery.isLoading) {
     return <h1>loading...</h1>;
   }
-
-  // const mutateBioQuery = useMutationQuery()
 
   let queryTimeout;
   const queryUsername = async () => {
@@ -67,6 +86,7 @@ const Settings = (props) => {
       </div>
       <div className={styles["form-container"]}>
         <form className={styles["settings-form"]}>
+          <ChangeProfilePic ppUrl={settingsQuery.data.profilePicUrl} />
           <label className={styles["text-input-label"]}>Update Username</label>
           <input
             placeholder={settingsQuery.data.username}
@@ -95,8 +115,7 @@ const Settings = (props) => {
               classNames={[styles["save-button"]]}
               onClick={async (e) => {
                 e.preventDefault();
-                await updateUsername(usernameRef.current.value);
-                bioRef.current.value = "";
+                usernameMutate.mutate();
               }}
             />
           )}
@@ -119,8 +138,7 @@ const Settings = (props) => {
               classNames={[styles["save-button"]]}
               onClick={async (e) => {
                 e.preventDefault();
-                await updateBio(bioRef.current.value);
-                bioRef.current.value = "";
+                bioMutate.mutate();
               }}
             />
           </div>
@@ -129,14 +147,6 @@ const Settings = (props) => {
       <div className={styles["logout-button-container"]}>
         <TextButton text="Logout" classNames={[styles["logout-button"]]} />
       </div>
-      {/* {isModalOpen && (
-        <ChangeProfilePicModal
-          onOverlayClick={() => setModalOpen(false)}
-          onClose={() => setModalOpen(false)}
-          onChange={(pic) => setProfilePicture(pic)}
-          pic={profilePicture}
-        />
-      )} */}
     </div>
   );
 };

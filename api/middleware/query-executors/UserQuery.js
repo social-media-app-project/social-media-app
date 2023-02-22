@@ -17,7 +17,7 @@ exports.getUsers = async (req, res, next) => {
     const potentialFriends = await User.find({
       username: { $regex: regex },
     })
-      .select("_id outgoing_requests incoming_requests username")
+      .select("_id username profilePicUrl")
       .limit(10);
     if (!potentialFriends) {
       next({ statusCode: 404, errors: ["No Users Found"] });
@@ -65,6 +65,35 @@ exports.postacceptFriendRequest = async (req, res, next) => {
       errors: ["Internal server error"],
     });
   }
+};
+
+exports.getFriendRequests = async (req, res, next) => {
+  try {
+    const requests = await User.findById(req.user._id)
+      .select("incoming_reuqests")
+      .populate("incoming_requests", "_id profilePicUrl username")
+      .exec();
+    if (!requests) {
+      next({ statusCode: 404, errors: ["no incoming requests found"] });
+    } else {
+      res.status(200).send({ requests });
+    }
+  } catch (error) {
+    next({ statusCode: 500, errors: ["Internal server error"] });
+  }
+};
+exports.getFriendsPage = async (req, res, next) => {
+  try {
+    const page = await User.findById(req.user._id)
+      .select("friends incoming_requests")
+      .populate("friends", "_id profilePicUrl username")
+      .exec();
+    if (!page) {
+      next({ statusCode: 404, errors: ["not found"] });
+    } else {
+      res.status(200).send({ page });
+    }
+  } catch (error) {}
 };
 
 exports.deleteFriendRequest = async (req, res, next) => {
@@ -132,9 +161,19 @@ exports.putUpdateBio = async (req, res, next) => {
   }
 };
 
-exports.originalName = async () => {
+exports.originalName = async (req, res, next) => {
   try {
     res.status(200).send({ success: { msg: "username available" } });
+  } catch (error) {
+    next({ statusCode: 500, error: ["Internal Server Error"] });
+  }
+};
+
+exports.putUpdateProfilePic = async (req, res, next) => {
+  try {
+    req.user.profilePicUrl = req.body.picUrl;
+    await req.user.save();
+    res.status(200).send({ success: [{ msg: "Profile Pic updated" }] });
   } catch (error) {
     next({ statusCode: 500, error: ["Internal Server Error"] });
   }
