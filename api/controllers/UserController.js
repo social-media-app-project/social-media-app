@@ -11,6 +11,9 @@ exports.postSendFriendRequest = [
   sendResponseOnError,
   q.postSendFriendRequest,
 ];
+
+exports.getFriendsPage = [q.getFriendsPage];
+exports.getUserFriendRequests = [q.getFriendRequests];
 exports.postAcceptFriendRequest = [
   ...v.validateFriendIdParams,
   ...v.validateFriend,
