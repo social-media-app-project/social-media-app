@@ -17,7 +17,7 @@ exports.getUsers = async (req, res, next) => {
     const potentialFriends = await User.find({
       username: { $regex: regex },
     })
-      .select("_id outgoing_requests incoming_requests username profilePicUrl")
+      .select("_id username profilePicUrl")
       .limit(10);
     if (!potentialFriends) {
       next({ statusCode: 404, errors: ["No Users Found"] });
