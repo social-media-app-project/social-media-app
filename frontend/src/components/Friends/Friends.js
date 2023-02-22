@@ -106,7 +106,7 @@ const Friends = () => {
         <SearchResults
           results={searchRes}
           inFocus={showRes}
-          user={userQuery.data._id || null}
+          user={userQuery.data.page._id || null}
         />
       </div>
 
