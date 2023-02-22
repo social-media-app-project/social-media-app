@@ -67,6 +67,35 @@ exports.postacceptFriendRequest = async (req, res, next) => {
   }
 };
 
+exports.getFriendRequests = async (req, res, next) => {
+  try {
+    const requests = await User.findById(req.user._id)
+      .select("incoming_reuqests")
+      .populate("incoming_requests", "_id profilePicUrl username")
+      .exec();
+    if (!requests) {
+      next({ statusCode: 404, errors: ["no incoming requests found"] });
+    } else {
+      res.status(200).send({ requests });
+    }
+  } catch (error) {
+    next({ statusCode: 500, errors: ["Internal server error"] });
+  }
+};
+exports.getFriendsPage = async (req, res, next) => {
+  try {
+    const page = await User.findById(req.user._id)
+      .select("friends incoming_requests")
+      .populate("friends", "_id profilePicUrl username")
+      .exec();
+    if (!page) {
+      next({ statusCode: 404, errors: ["not found"] });
+    } else {
+      res.status(200).send({ page });
+    }
+  } catch (error) {}
+};
+
 exports.deleteFriendRequest = async (req, res, next) => {
   try {
     const friend = req.friend;

@@ -4,6 +4,8 @@ const router = express.Router();
 
 router.get("/user", UserController.getUser);
 router.get("/friend/:username", UserController.getFriends);
+router.get("/friendrequests", UserController.getUserFriendRequests);
+router.get("/friends/page", UserController.getFriendsPage);
 
 router.post("/:username", UserController.checkAvailibility);
 router.post("/friend/:friendId/request", UserController.postSendFriendRequest);
