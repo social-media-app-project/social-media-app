@@ -1,7 +1,20 @@
 import React from "react";
 import styles from "./Friend.module.css";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteFriend } from "../../../services/userService";
 
 const Friend = (props) => {
+  const userQuery = useQueryClient();
+  const mutateDelete = useMutation({
+    mutationFn: async () => {
+      const response = await deleteFriend(props._id);
+      return response.json();
+    },
+    onSuccess: () => {
+      userQuery.invalidateQueries(["posts", props._id]);
+      userQuery.invalidateQueries(["friendspage"]);
+    },
+  });
   return (
     <div className={styles["fr"]}>
       <div className={styles["name-pic"]}>
@@ -11,9 +24,16 @@ const Friend = (props) => {
           <div className={styles["username"]}>{props.username}</div>
         </div>
       </div>
-      <div className={styles["fr-buttons"]}>
-        <button>Delete</button>
-      </div>
+      <form className={styles["fr-buttons"]}>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            mutateDelete.mutate();
+          }}
+        >
+          Delete
+        </button>
+      </form>
     </div>
   );
 };

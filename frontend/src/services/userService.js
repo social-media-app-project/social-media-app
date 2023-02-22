@@ -9,6 +9,23 @@ export async function searchUsers(name) {
   return response;
 }
 
+export async function getFriendsPage() {
+  const options = getOptions;
+  const response = await fetch(
+    `${process.env.REACT_APP_TEST_URL}users/friends/page`,
+    options
+  );
+  return response;
+}
+export async function getFriendRequests() {
+  const options = getOptions;
+  const response = await fetch(
+    `${process.env.REACT_APP_TEST_URL}users/friendrequests`,
+    options
+  );
+  return response;
+}
+
 export async function sendFriendRequest(id) {
   const options = postOptions();
   const response = await fetch(
