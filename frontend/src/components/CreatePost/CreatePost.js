@@ -10,6 +10,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
 const CreatePost = (props) => {
+  const { userId } = useParams();
   // const [images, setImages] = useState([]);
 
   // const handleImageUpload = (e) => {
@@ -48,7 +49,9 @@ const CreatePost = (props) => {
       textArea.current = "";
     },
     onSuccess: () => {
-      queryClient.invalidateQueries("posts");
+      setTimeout(() => {
+        queryClient.invalidateQueries({ queryKey: ["posts", userId] });
+      }, 250);
     },
   });
 
