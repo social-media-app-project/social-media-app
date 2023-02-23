@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Friend.module.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteFriend } from "../../../services/userService";
+import { Link } from "react-router-dom";
 
 const Friend = (props) => {
   const userQuery = useQueryClient();
@@ -17,13 +18,13 @@ const Friend = (props) => {
   });
   return (
     <div className={styles["fr"]}>
-      <div className={styles["name-pic"]}>
+      <Link to={`/${props._id}`} className={styles["name-pic"]}>
         <img src={props.pic} alt="pic" />
         <div className={styles["names"]}>
           <div>{props.name}</div>
           <div className={styles["username"]}>{props.username}</div>
         </div>
-      </div>
+      </Link>
       <form className={styles["fr-buttons"]}>
         <button
           onClick={(e) => {

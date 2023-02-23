@@ -11,6 +11,11 @@
   display: flex;
   gap: 14px;
   align-items: center;
+  text-decoration: none;
+  color: white;
+}
+.name-pic:hover {
+  text-decoration: underline;
 }
 .name-pic > img {
   border-radius: 1.5rem;
