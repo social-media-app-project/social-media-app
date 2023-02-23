@@ -5,24 +5,29 @@ import styles from "./CreateComment.module.css";
 import { FaComment } from "react-icons/fa";
 import LargeTextInput from "../../../common/form/LargeTextInput/LargeTextInput";
 import { handleCreateComment } from "../../../../services/postService";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 const CreateComment = ({ postID }) => {
   const textArea = useRef();
+  const queryClient = useQueryClient();
+
+  const mutateComent = useMutation({
+    mutationFn: async (message) => {
+      const response = await handleCreateComment({ message: message }, postID);
+      return response.json();
+    },
+    onSuccess: () => {
+      setTimeout(() => {
+        queryClient.invalidateQueries({ queryKey: ["comments", postID] });
+      }, 250);
+    },
+  });
 
   async function handlePostComment(e) {
     e.preventDefault();
-    try {
-      const response = await handleCreateComment(
-        { message: textArea.current },
-        postID
-      );
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      const val = e.target.querySelector("#textBox");
-      val.textContent = "";
-    }
+    mutateComent.mutate(textArea.current);
+    const val = e.target.querySelector("#textBox");
+    val.textContent = "";
+    textArea.current = "";
   }
 
   return (
