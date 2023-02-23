@@ -9,6 +9,7 @@ const ProfilePictureButton = (props) => {
         src={props?.imgUrl}
         alt="avatar"
         className={styles["profile-pic-link"]}
+        style={{ height: props.height || null }}
       />
     </Link>
   );
