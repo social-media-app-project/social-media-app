@@ -77,6 +77,7 @@ exports.executeGetCommentsQuery = async (req, res, next) => {
             _id: 1,
             username: 1,
             date: 1,
+            profilePicUrl: 1,
           },
         },
       })
