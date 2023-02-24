@@ -4,17 +4,23 @@ import styles from "./Post.module.css";
 import { HiOutlineThumbUp /*HiThumbUp*/ } from "react-icons/hi";
 import LikesView from "./LikesView/LikesView";
 import { handleCreateLike } from "../../services/postService";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 const LazyCommentsSection = lazy(() =>
   import("./CommentsSection/CommentsSection")
 );
 
 const Post = ({ post, username, imgUrl }) => {
+  const { /*profilePicUrl, user,*/ date, likes, comments, message, _id } = post;
+  // const { post, handlePostImageClick } = props;
+  const isOwner = true;
+  const queryClient = useQueryClient();
+  const { userId } = useParams();
+
   const [commentsExpanded, setCommentsExpanded] = useState(false);
   const [likesExpanded, setLikesExpanded] = useState(false);
-
-  const isOwner = true;
-  // const { post, handlePostImageClick } = props;
-  const { /*profilePicUrl, user,*/ date, likes, comments, message, _id } = post;
+  const [likesLen, setLikesLen] = useState(likes.length || 0);
+  const [CommentsLen, setCommentsLen] = useState(comments.length || 0);
 
   const toggleComments = () => {
     if (likesExpanded) {
@@ -29,19 +35,17 @@ const Post = ({ post, username, imgUrl }) => {
     }
     setLikesExpanded(!likesExpanded);
   };
-
-  async function postLike(e) {
-    e.preventDefault();
-    try {
+  const mutateLike = useMutation({
+    mutationFn: async () => {
       const response = await handleCreateLike(_id);
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+      return response.json();
+    },
+    onSuccess: (data) => {
+      setTimeout(() => {
+        queryClient.invalidateQueries({ queryKey: ["posts", userId] });
+      }, 250);
+    },
+  });
 
   return (
     <div className={styles["post-container"]}>
@@ -69,11 +73,14 @@ const Post = ({ post, username, imgUrl }) => {
             name="like"
             onClick={toggleLikes}
           >
-            {likes.length} likes
+            {likesLen} likes
           </button>
           <button
             className={styles["post-info-button"]}
-            onClick={(e) => postLike(e)}
+            onClick={(e) => {
+              e.preventDefault();
+              mutateLike.mutate();
+            }}
           >
             <HiOutlineThumbUp className={styles["post-info-icon"]} /> Like
           </button>
@@ -82,15 +89,17 @@ const Post = ({ post, username, imgUrl }) => {
             name="comment"
             onClick={toggleComments}
           >
-            {comments.length} comments
+            {CommentsLen} comments
           </button>
         </div>
         {commentsExpanded ? (
           <Suspense fallback={<div>loading......</div>}>
-            <LazyCommentsSection postID={_id} />
+            <LazyCommentsSection postID={_id} setCommentsLen={setCommentsLen} />
           </Suspense>
         ) : null}
-        {likesExpanded ? <LikesView postID={_id} /> : null}
+        {likesExpanded ? (
+          <LikesView postID={_id} setLikesLen={setLikesLen} />
+        ) : null}
       </div>
     </div>
   );

@@ -10,7 +10,10 @@ const Comment = (props) => {
   return (
     <div className={styles["comment-container"]}>
       <div className={styles["profile-pic-container"]}>
-        <ProfilePictureButton height={"32px"} />
+        <ProfilePictureButton
+          imgUrl={comment.author.profilePicUrl}
+          height={"32px"}
+        />
       </div>
       <div className={styles["right-section"]}>
         <div className={styles["comment-header-info"]}>

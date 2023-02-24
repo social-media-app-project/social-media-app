@@ -3,29 +3,39 @@ import styles from "./LikesView.module.css";
 import Like from "./Like/Like";
 import { getPostLikes } from "../../../services/postService";
 import { v4 } from "uuid";
-const LikesView = ({ postID }) => {
-  const [postLikes, setLikes] = useState([]);
-  useEffect(() => {
-    async function fetchPostLikes() {
-      try {
-        const response = await getPostLikes(postID);
-        if (response.ok) {
-          const data = await response.json();
-          setLikes(data.likes);
-          console.log(data);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchPostLikes();
-  }, []);
+import { useMutation, useQuery } from "@tanstack/react-query";
+const LikesView = ({ postID, setLikesLen }) => {
+  const likesQuery = useQuery({
+    queryKey: ["likes", postID],
+    queryFn: async () => {
+      const response = await getPostLikes(postID);
+      return response.json();
+    },
+    onSuccess: (data) => {
+      console.log(data);
+      setLikesLen(data.likes.length);
+    },
+  });
+  if (likesQuery.isError) {
+    return <pre>{JSON.stringify(likesQuery.error.errors)}</pre>;
+  }
+
+  if (likesQuery.isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={styles["likes-view"]}>
-      {postLikes.length > 0 ? (
-        postLikes.map((like) => {
-          return <Like key={v4} username={like.username} />;
+      {likesQuery.data.likes.length > 0 ? (
+        likesQuery.data.likes.map((like) => {
+          return (
+            <Like
+              key={v4()}
+              userId={like._id}
+              username={like.username}
+              picUrl={like.profilePicUrl}
+            />
+          );
         })
       ) : (
         <div>There are no likes</div>

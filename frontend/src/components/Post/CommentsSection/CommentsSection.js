@@ -4,26 +4,28 @@ import CreateComment from "./CreateComment/CreateComment";
 import Comment from "./Comment/Comment";
 import { v4 } from "uuid";
 import { getPostComments } from "../../../services/postService";
+import { useQuery } from "@tanstack/react-query";
 
-const CommentsSection = ({ postID }) => {
+const CommentsSection = ({ postID, setCommentsLen }) => {
   const [commentsArr, setComments] = useState([]);
+  const commentsQuery = useQuery({
+    queryKey: ["comments", postID],
+    queryFn: async () => {
+      const response = await getPostComments(postID);
+      return response.json();
+    },
+    onSuccess: (data) => {
+      setComments(data.comments);
+      setCommentsLen(data.comments.length);
+    },
+  });
 
-  useEffect(() => {
-    const getFetchComments = async () => {
-      try {
-        const response = await getPostComments(postID);
-        const data = await response.json();
-        if (response.ok) {
-          setComments(data.comments);
-        } else {
-          setComments([]);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getFetchComments();
-  }, []);
+  if (commentsQuery.isError) {
+    return <pre>{JSON.stringify(commentsQuery.error.errors)}</pre>;
+  }
+  if (commentsQuery.isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={styles["comments-section"]}>
