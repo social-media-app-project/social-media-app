@@ -11,7 +11,14 @@ const LazyCommentsSection = lazy(() =>
 );
 
 const Post = ({ post, username, imgUrl }) => {
-  const { /*profilePicUrl, user,*/ date, likes, comments, message, _id } = post;
+  const {
+    /*profilePicUrl, user,*/ date,
+    likes,
+    comments,
+    message,
+    _id,
+    author,
+  } = post;
   // const { post, handlePostImageClick } = props;
   const isOwner = true;
   const queryClient = useQueryClient();
@@ -53,8 +60,8 @@ const Post = ({ post, username, imgUrl }) => {
         _id={_id}
         isOwner={isOwner}
         timestamp={date}
-        username={username}
-        imgUrl={imgUrl}
+        username={username || author.username}
+        imgUrl={imgUrl || author.profilePicUrl}
       >
         <div className={styles["post-text"]}>
           <span>{message}</span>
