@@ -3,7 +3,43 @@ const Post = require("../../models/Post");
 const User = require("../../models/User");
 const Comment = require("../../models/Comment");
 
-// exports.executeFeedQuery = async (req, res, next) => {};
+exports.executeFeedQuery = async (req, res, next) => {
+  const perPage = 10;
+  let page = Math.max(0, req.query.page);
+  try {
+    let nextPage = null;
+    const postDocs = await Post.find({
+      author: { $in: [...req.user.friends, req.user._id] },
+    })
+      .sort({ date: 1 })
+      .populate("author", "username _id profilePicUrl")
+      .limit(perPage)
+      .skip(perPage * page)
+      .exec();
+    if (!postDocs) {
+      next({
+        statusCode: 400,
+        errors: ["Count not find posts"],
+      });
+    } else {
+      if (postDocs.length === perPage) {
+        nextPage = page + 1;
+      }
+      res.status(200).send({
+        posts: postDocs,
+        user: {
+          _id: req.user._id,
+          username: req.user.username,
+          profilePicUrl: req.user.profilePicUrl,
+        },
+        nextPage: nextPage,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    next({ statusCode: 500, errors: ["Internal server error"] });
+  }
+};
 exports.executeOthersFeedQuery = async (req, res, next) => {
   try {
     const user = req.user;
@@ -33,7 +69,6 @@ exports.executeOthersFeedQuery = async (req, res, next) => {
       return res.status(200).send({ Posts: null, User: PostUser, status });
     }
   } catch (error) {
-    console.log(error);
     next({ statusCode: 500, errors: ["Internal server error"] });
   }
 };
@@ -41,7 +76,9 @@ exports.executeOthersFeedQuery = async (req, res, next) => {
 exports.getUserFeedQuery = async (req, res, next) => {
   try {
     const { _id } = req.user;
-    const Posts = await Post.find({ author: _id }).sort({ date: 1 });
+    const Posts = await Post.find({ author: _id })
+      .sort({ date: "desc" })
+      .exec();
     if (!Posts) {
       next({ statusCode: 404, errors: ["Could not find posts"] });
     } else {
