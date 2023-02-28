@@ -19,7 +19,7 @@ const Friend = (props) => {
   return (
     <div className={styles["fr"]}>
       <Link to={`/${props._id}`} className={styles["name-pic"]}>
-        <img src={props.pic} alt="pic" />
+        <img src={props.pic} alt="pic" style={{ height: "50px" }} />
         <div className={styles["names"]}>
           <div>{props.name}</div>
           <div className={styles["username"]}>{props.username}</div>
