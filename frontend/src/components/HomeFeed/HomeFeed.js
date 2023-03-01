@@ -58,7 +58,7 @@ const HomeFeed = () => {
             return (
               <React.Fragment key={v4()}>
                 {group.posts.map((post) => {
-                  return <Post key={v4()} post={post} />;
+                  return <Post key={v4()} post={post} user={group.user} />;
                 })}
               </React.Fragment>
             );
