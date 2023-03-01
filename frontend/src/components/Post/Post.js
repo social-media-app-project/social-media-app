@@ -10,19 +10,19 @@ const LazyCommentsSection = lazy(() =>
   import("./CommentsSection/CommentsSection")
 );
 
-const Post = ({ post, username, imgUrl }) => {
-  const {
-    /*profilePicUrl, user,*/ date,
-    likes,
-    comments,
-    message,
-    _id,
-    author,
-  } = post;
+const Post = ({ post, user }) => {
+  const { date, likes, comments, message, _id, author } = post;
   // const { post, handlePostImageClick } = props;
-  const isOwner = true;
-  const queryClient = useQueryClient();
   const { userId } = useParams();
+  const isOwner =
+    user?._id && author?._id && user?._id !== author?._id
+      ? false
+      : user?._id && author?._id && user?._id === author?._id
+      ? true
+      : !userId
+      ? true
+      : false;
+  const queryClient = useQueryClient();
 
   const [commentsExpanded, setCommentsExpanded] = useState(false);
   const [likesExpanded, setLikesExpanded] = useState(false);
@@ -60,8 +60,9 @@ const Post = ({ post, username, imgUrl }) => {
         _id={_id}
         isOwner={isOwner}
         timestamp={date}
-        username={username || author.username}
-        imgUrl={imgUrl || author.profilePicUrl}
+        username={author?.username || user?.username}
+        imgUrl={author?.profilePicUrl || user?.profilePicUrl}
+        author={author}
       >
         <div className={styles["post-text"]}>
           <span>{message}</span>
@@ -101,7 +102,11 @@ const Post = ({ post, username, imgUrl }) => {
         </div>
         {commentsExpanded ? (
           <Suspense fallback={<div>loading......</div>}>
-            <LazyCommentsSection postID={_id} setCommentsLen={setCommentsLen} />
+            <LazyCommentsSection
+              postID={_id}
+              setCommentsLen={setCommentsLen}
+              user={user}
+            />
           </Suspense>
         ) : null}
         {likesExpanded ? (
