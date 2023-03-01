@@ -6,7 +6,7 @@ import { v4 } from "uuid";
 import { getPostComments } from "../../../services/postService";
 import { useQuery } from "@tanstack/react-query";
 
-const CommentsSection = ({ postID, setCommentsLen }) => {
+const CommentsSection = ({ postID, setCommentsLen, user }) => {
   const [commentsArr, setComments] = useState([]);
   const commentsQuery = useQuery({
     queryKey: ["comments", postID],
@@ -29,7 +29,7 @@ const CommentsSection = ({ postID, setCommentsLen }) => {
 
   return (
     <div className={styles["comments-section"]}>
-      <CreateComment postID={postID} />
+      <CreateComment postID={postID} user={user} />
       {commentsArr.length >= 0 ? (
         commentsArr.map((comment) => <Comment key={v4()} comment={comment} />)
       ) : (
