@@ -3,7 +3,50 @@ const Post = require("../../models/Post");
 const User = require("../../models/User");
 const Comment = require("../../models/Comment");
 
-// exports.executeFeedQuery = async (req, res, next) => {};
+/**
+ * Create paginated home feed query
+ * take query params of page to determine which page to repond with.
+ * take query param to determine what that next page should be.
+ * response with posts that include the users friends and the user themself
+ * and the users profilepic username and _id
+ */
+exports.executeFeedQuery = async (req, res, next) => {
+  const perPage = 20;
+  let page = Math.max(0, req.query.page);
+  try {
+    let nextPage = null;
+    const postDocs = await Post.find({
+      author: { $in: [...req.user.friends, req.user._id] },
+    })
+      .sort({ date: 1 })
+      .populate("author", "username _id profilePicUrl")
+      .limit(perPage)
+      .skip(perPage * page)
+      .exec();
+    if (!postDocs) {
+      next({
+        statusCode: 400,
+        errors: ["Count not find posts"],
+      });
+    } else {
+      if (postDocs.length === perPage) {
+        nextPage = page + 1;
+      }
+      res.status(200).send({
+        posts: postDocs,
+        user: {
+          _id: req.user._id,
+          username: req.user.username,
+          profilePicUrl: req.user.profilePicUrl,
+        },
+        nextPage: nextPage,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    next({ statusCode: 500, errors: ["Internal server error"] });
+  }
+};
 exports.executeOthersFeedQuery = async (req, res, next) => {
   try {
     const user = req.user;
@@ -13,24 +56,32 @@ exports.executeOthersFeedQuery = async (req, res, next) => {
       requestSent: false,
       requestIncoming: false,
     };
-
-    let [Posts, PostUser] = await Promise.all([
-      Post.find({ author: userId }).sort({ date: 1 }),
-      User.findById(userId).select("username bio profilePicUrl"),
+    let [Author, Posts] = await Promise.all([
+      User.findById(userId).exec(),
+      Post.find({ author: userId })
+        .sort({ date: 1 })
+        .populate("author", "username _id profilePicUrl")
+        .exec(),
     ]);
-    if (!Posts || !PostUser) {
+    if (!Posts || !User) {
       next({ statusCode: 404, errors: ["Could not find posts or user"] });
     } else if (user.friends.includes(userId)) {
       status.isFriend = true;
-      return res.status(200).send({ Posts, User: PostUser, status });
+      return res.status(200).send({ Posts, User: req.user, status, Author });
     } else if (user.outgoing_requests.includes(userId)) {
       status.requestSent = true;
-      return res.status(200).send({ Posts: null, User: PostUser, status });
+      return res
+        .status(200)
+        .send({ Posts: null, User: req.user, status, Author });
     } else if (user.incoming_requests.includes(userId)) {
       status.requestIncoming = true;
-      return res.status(200).send({ Posts: null, User: PostUser, status });
+      return res
+        .status(200)
+        .send({ Posts: null, User: req.user, status, Author });
     } else {
-      return res.status(200).send({ Posts: null, User: PostUser, status });
+      return res
+        .status(200)
+        .send({ Posts: null, User: req.user, status, Author });
     }
   } catch (error) {
     console.log(error);
@@ -41,7 +92,9 @@ exports.executeOthersFeedQuery = async (req, res, next) => {
 exports.getUserFeedQuery = async (req, res, next) => {
   try {
     const { _id } = req.user;
-    const Posts = await Post.find({ author: _id }).sort({ date: 1 });
+    const Posts = await Post.find({ author: _id })
+      .sort({ date: "desc" })
+      .exec();
     if (!Posts) {
       next({ statusCode: 404, errors: ["Could not find posts"] });
     } else {

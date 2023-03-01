@@ -7,7 +7,12 @@ const ProfileHeader = (props) => {
   // TODO: something to determine whether user is owner of profile (prop or function)
   const { userId } = useParams();
   const isUser = false;
-  const { status, name = " ", username = " ", bio = "NO USER", img } = props;
+  const {
+    name = " ",
+    username = " ",
+    bio = "NO USER",
+    profilePicUrl,
+  } = props.author;
 
   const msg = {
     /**TODO: create a settings button which takes user to settings tab */
@@ -15,7 +20,7 @@ const ProfileHeader = (props) => {
   return (
     <div className={styles["header-container"]}>
       <div className={styles["not-bio"]}>
-        <img src={img} alt="header-img" />
+        <img src={profilePicUrl} alt="header-img" />
         <div className={styles["names"]}>
           <h1 className={styles["name"]}>{name}</h1>
           <p>{username}</p>
@@ -24,7 +29,7 @@ const ProfileHeader = (props) => {
       <div className={styles["bio"]}>{bio}</div>
       {userId && (
         <div className={styles["friend-status-container"]}>
-          <FriendStatus status={status} friendId={userId} />
+          <FriendStatus status={props.status} friendId={userId} />
         </div>
       )}
     </div>

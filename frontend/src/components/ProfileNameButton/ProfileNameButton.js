@@ -3,11 +3,22 @@ import { Link } from "react-router-dom";
 import styles from "./ProfileNameButton.module.css";
 
 const ProfileNameButton = (props) => {
-  return (
-    <Link to="/home" className={styles["name-button"]}>
-      <span>{props.name}</span>
-    </Link>
-  );
+  if (props.isOwner) {
+    return (
+      <Link to={`/profile` || "/"} className={styles["name-button"]}>
+        <span>{props.name}</span>
+      </Link>
+    );
+  } else {
+    return (
+      <Link
+        to={`/${props?.author?._id}` || "/"}
+        className={styles["name-button"]}
+      >
+        <span>{props.name}</span>
+      </Link>
+    );
+  }
 };
 
 export default ProfileNameButton;

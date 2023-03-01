@@ -103,3 +103,16 @@ export async function getUser() {
   );
   return response;
 }
+/**
+ *
+ * @param {int} page
+ * @returns
+ */
+export async function getHomefeed(pageParam) {
+  const options = getOptions;
+  const response = await fetch(
+    `${process.env.REACT_APP_TEST_URL}posts/homefeed/?page=${pageParam}`,
+    options
+  );
+  return response;
+}

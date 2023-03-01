@@ -4,6 +4,7 @@ const PostsController = require("../controllers/PostsController");
 const router = express.Router();
 
 // TODO: router.get('/feed', PostsController.getFeed);
+router.get("/homefeed", PostsController.getFeed);
 router.get("/user", PostsController.getPosts);
 router.get("/:userId", PostsController.getOtherPosts);
 router.get("/:postId", PostsController.getPost);

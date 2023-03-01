@@ -51,6 +51,7 @@ const CreatePost = (props) => {
     onSuccess: () => {
       setTimeout(() => {
         queryClient.invalidateQueries({ queryKey: ["posts", userId] });
+        queryClient.invalidateQueries({ queryKey: ["homefeed"] });
       }, 250);
     },
   });

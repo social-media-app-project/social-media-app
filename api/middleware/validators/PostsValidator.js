@@ -43,7 +43,6 @@ exports.validateCommentBody = [
   body("message")
     .trim()
     .isLength({ min: 1, max: 500 })
-    .escape()
     .withMessage("Message is required"),
 ];
 

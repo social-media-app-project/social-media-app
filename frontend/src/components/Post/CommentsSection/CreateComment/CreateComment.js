@@ -6,7 +6,7 @@ import { FaComment } from "react-icons/fa";
 import LargeTextInput from "../../../common/form/LargeTextInput/LargeTextInput";
 import { handleCreateComment } from "../../../../services/postService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-const CreateComment = ({ postID }) => {
+const CreateComment = ({ postID, user }) => {
   const textArea = useRef();
   const queryClient = useQueryClient();
 
@@ -33,7 +33,13 @@ const CreateComment = ({ postID }) => {
   return (
     <div className={styles["create-comment-container"]}>
       <div className={styles["profile-pic-container"]}>
-        <ProfilePictureButton />
+        <ProfilePictureButton
+          height={"40px"}
+          imgUrl={
+            user?.profilePicUrl ||
+            "https://www.svgrepo.com/show/309688/image-alt-text.svg"
+          }
+        />
       </div>
       <form
         className={styles["form-container"]}

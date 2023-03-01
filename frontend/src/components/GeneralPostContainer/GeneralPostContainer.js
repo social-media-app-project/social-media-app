@@ -6,8 +6,7 @@ import ProfilePictureButton from "../ProfilePictureButton/ProfilePictureButton";
 import styles from "./GeneralPostContainer.module.css";
 import { useParams } from "react-router-dom";
 const GeneralPostContainer = (props) => {
-  const { timestamp, isOwner, _id, username, imgUrl } = props;
-  const { userId } = useParams();
+  const { timestamp, isOwner, _id, username, imgUrl, author } = props;
   return (
     <div className={styles["post-container"]}>
       <div>
@@ -17,13 +16,17 @@ const GeneralPostContainer = (props) => {
       </div>
       <div className={styles["content-container"]}>
         <div className={styles["post-header-info"]}>
-          <ProfileNameButton name={username}></ProfileNameButton>
+          <ProfileNameButton
+            isOwner={isOwner}
+            author={author}
+            name={username}
+          ></ProfileNameButton>
           {timestamp ? (
             <div>
               <PostDateLabel timestamp={timestamp} />
             </div>
           ) : null}
-          {!userId && isOwner ? (
+          {isOwner ? (
             <div className={styles["delete-container"]}>
               <DeletePostButton _id={_id} />
             </div>
