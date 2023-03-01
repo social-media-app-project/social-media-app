@@ -62,23 +62,19 @@ const Profile = () => {
       <div className={styles["profile-container"]}>
         {otherProfileQuery.data.User && (
           <ProfileHeader
-            img={otherProfileQuery.data.User.profilePicUrl}
-            name={otherProfileQuery.data.User.username}
-            bio={otherProfileQuery.data.User.bio}
+            author={otherProfileQuery.data.Author}
             status={otherProfileQuery.data.status}
           />
         )}
         {/*if you are on somoene elses page you can't create a post on it*/}
-        {!userId && (
-          <CreatePost imgUrl={otherProfileQuery.data.User.profilePicUrl} />
-        )}
-        {otherProfileQuery.data.Posts.length > 0 ? (
+
+        {!userId && <CreatePost />}
+        {otherProfileQuery.data.Posts?.length > 0 ? (
           otherProfileQuery.data.Posts.map((post) => (
             <Post
               key={v4()}
               post={post}
-              imgUrl={otherProfileQuery.data.User.profilePicUrl}
-              username={otherProfileQuery.data.User.username}
+              user={otherProfileQuery.data.User}
               // handlePostImageClick={handleImageClick}
             />
           ))
@@ -105,10 +101,8 @@ const Profile = () => {
       <div className={styles["profile-container"]}>
         {otherProfileQuery.data.User && (
           <ProfileHeader
-            img={otherProfileQuery.data.User.profilePicUrl}
+            author={otherProfileQuery.data.Author}
             status={otherProfileQuery.data.status}
-            name={otherProfileQuery.data.User.username}
-            bio={otherProfileQuery.data.User.bio}
           />
         )}
         <div className={styles["not-friends"]}>
@@ -148,11 +142,7 @@ const Profile = () => {
       // When looking at your own Porfile Page
       <div className={styles["profile-container"]}>
         {userProfileQuery.data.User && (
-          <ProfileHeader
-            img={userProfileQuery.data.User.profilePicUrl}
-            name={userProfileQuery.data.User.username}
-            bio={userProfileQuery.data.User.bio}
-          />
+          <ProfileHeader author={userProfileQuery.data.User} />
         )}
         {!userId && (
           <CreatePost imgUrl={userProfileQuery.data.User.profilePicUrl} />
@@ -162,8 +152,7 @@ const Profile = () => {
             <Post
               key={v4()}
               post={post}
-              imgUrl={userProfileQuery.data.User.profilePicUrl}
-              username={userProfileQuery.data.User.username}
+              user={userProfileQuery.data.User}
               // handlePostImageClick={handleImageClick}
             />
           ))
