@@ -45,9 +45,6 @@ const HomeFeed = () => {
   return (
     <>
       <CreatePost imgUrl={data.pages[0].user.profilePicUrl} />
-      {/* {posts.map((post, index) => (
-        <Post key={index} post={post} />
-      ))} */}
       {status === "loading" ? (
         <p>Loading...</p>
       ) : status === "error" ? (
@@ -66,22 +63,26 @@ const HomeFeed = () => {
         </>
       )}
       <div>
-        <InView
-          as="div"
-          onChange={(inView, entry) => {
-            if (inView) {
-              fetchNextPage();
-            }
-          }}
-        >
-          <h2>
-            {isFetchingNextPage
-              ? "Loading more..."
-              : hasNextPage
-              ? "Load More"
-              : "Nothing more to load"}
-          </h2>
-        </InView>
+        {data.pages[0].posts.length > 19 ? (
+          <InView
+            as="div"
+            onChange={(inView, entry) => {
+              if (inView) {
+                fetchNextPage();
+              }
+            }}
+          >
+            <h2>
+              {isFetchingNextPage
+                ? "Loading more..."
+                : hasNextPage
+                ? "Load More"
+                : "Nothing more to load"}
+            </h2>
+          </InView>
+        ) : (
+          <div>no new posts</div>
+        )}
       </div>
       <div>{isFetching && !isFetchingNextPage ? "Fetching..." : null}</div>
     </>

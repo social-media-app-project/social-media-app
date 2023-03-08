@@ -12,17 +12,36 @@ import {
   updateBio,
   updateUsername,
 } from "../../services/userService";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryCache,
+} from "@tanstack/react-query";
 import ChangeProfilePic from "./ChangeProfilePic/ChangeProfilePic";
+import Cookies from "universal-cookie";
 
 const Settings = (props) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const cookies = new Cookies();
 
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const usernameRef = useRef();
   const bioRef = useRef();
+  const signOutMutation = useMutation({
+    mutationFn: async () => {
+      cookies.remove("token");
+      queryClient.resetQueries();
+      queryClient.removeQueries();
+      queryClient.cancelQueries();
+      queryClient.clear();
+    },
+    onSuccess: async () => {
+      navigate("/login");
+    },
+  });
 
   const usernameMutate = useMutation({
     mutationFn: async () => {
@@ -145,7 +164,14 @@ const Settings = (props) => {
         </form>
       </div>
       <div className={styles["logout-button-container"]}>
-        <TextButton text="Logout" classNames={[styles["logout-button"]]} />
+        <TextButton
+          text="Logout"
+          classNames={[styles["logout-button"]]}
+          onClick={() => {
+            signOutMutation.mutate();
+            // signOutUser();
+          }}
+        />
       </div>
     </div>
   );
