@@ -31,7 +31,17 @@ const Profile = () => {
     enabled: !userId,
     queryFn: async () => {
       const res = await handleUserPosts();
-      return res.json();
+      if (!res.ok) {
+        let data = res.json();
+        if (res.status == 401) {
+          throw new Error(data.errors);
+        }
+      } else {
+        return res.json();
+      }
+    },
+    onError: () => {
+      navigate("/login");
     },
   });
   const otherProfileQuery = useQuery({
@@ -41,9 +51,6 @@ const Profile = () => {
       const res = await getOtherUsersPosts(userId);
       console.log(res);
       return res.json();
-    },
-    onError: (err) => {
-      console.log(err);
     },
   });
   if (otherProfileQuery.isLoading) {
