@@ -18,6 +18,7 @@ function LoginForm() {
     const newText = event.target.value;
     setStateToNewText(newText);
   };
+
   /**Send Server Request For Loging In */
   const handleLoginForm = async (e) => {
     e.preventDefault();
@@ -25,11 +26,9 @@ function LoginForm() {
       const res = await handleLogin({ username, password });
       let data = await res.json();
       if (res.ok) {
-        console.log(data);
         cookies.set("token", `${data.token}`, {
           path: "/",
           maxAge: data.expiresIn,
-          secure: true,
         });
       } else {
         setErrors(data.errors);
@@ -37,6 +36,8 @@ function LoginForm() {
     } catch (error) {
       console.log(error);
     } finally {
+      navigate("/profile");
+      window.location.reload();
     }
   };
 
