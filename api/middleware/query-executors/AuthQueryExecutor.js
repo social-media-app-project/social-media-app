@@ -58,7 +58,6 @@ exports.loginUser = async (req, res, next) => {
           success: true,
           token: `Bearer ${token}`,
           expiresDate,
-          user: user,
         });
       } else {
         next({
