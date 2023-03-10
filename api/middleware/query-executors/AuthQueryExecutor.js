@@ -73,3 +73,31 @@ exports.loginUser = async (req, res, next) => {
     });
   }
 };
+
+exports.googleLoginCallBack = async (req, res, next) => {
+  try {
+
+    if (req.user != null) {
+      //  token will expire in 5 days
+      const expiresDate = 1000 * 60 * 60 * 24 * 5 + Date.now();
+      const opts = {};
+      opts.expiresIn = expiresDate;
+      const secret = process.env.SECRET;
+      const token = jwt.sign({ userid: req.user._id }, secret, opts);
+      res.cookie('token', `Bearer ${token}`, { expiresDate })
+      res.redirect(302, 'http://localhost:3000/profile');
+    } else {
+      next({
+        statusCode: 404,
+        errors: ["Username or password is incorrect"],
+      });
+    }
+  } catch (error) {
+    next({
+      statusCode: 500,
+      errors: ["Internal server error: Could not login user"],
+    });
+  }
+}
+
+
