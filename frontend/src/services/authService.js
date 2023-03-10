@@ -1,4 +1,4 @@
-import { postOptions } from "./utility";
+import { getOptions, postOptions } from "./utility";
 
 /**
  * @param {Object} body
@@ -24,6 +24,10 @@ export async function handleSignup(body) {
     options
   );
   return response;
+}
+
+export async function googleSignIn() {
+  window.open(`${process.env.REACT_APP_TEST_URL}auth/login/google`, "_self");
 }
 
 export async function debounceUsername(body) {

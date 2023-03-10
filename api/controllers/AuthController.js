@@ -1,6 +1,7 @@
 const v = require("../middleware/validators/AuthValidator");
 const q = require("../middleware/query-executors/AuthQueryExecutor");
 const { sendResponseOnError } = require("../middleware/validators/util");
+const passport = require('passport')
 
 exports.jwtSignupPost = [
   ...v.validateSignupBody,
@@ -14,3 +15,17 @@ exports.jwtLoginPost = [
   sendResponseOnError,
   q.loginUser,
 ];
+
+exports.googleSignIn = [
+
+  passport.authenticate(['google', 'jwt'], { scope: ['profile', 'email'] }),
+]
+
+exports.googleSignInCallback = [
+  passport.authenticate(['google', 'jwt'], {
+    session: false,
+    failureRedirect: 'http://localhost:3000/login',
+    // successRedirect: "http://localhost:3000/profile"
+  }),
+  q.googleLoginCallBack
+]
