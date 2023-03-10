@@ -6,8 +6,7 @@ const cors = require("cors");
 require("dotenv").config();
 const passport = require("passport");
 const JWTStrategy = require("./strategies/jwt");
-
-passport.use(JWTStrategy);
+const googlestrat = require('./strategies/googleStrategy');
 
 const app = express();
 app.use(cors({ origin: "http://localhost:3000" }));
@@ -16,8 +15,12 @@ app.use(express.json());
 app.use(passport.initialize());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
 app.disable("x-powered-by");
+app.use(express.static(path.join(__dirname, "public")));
+
+
+passport.use(googlestrat);
+passport.use(JWTStrategy);
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -41,7 +44,7 @@ app.use((err, req, res, next) => {
   if (res.headersSent) {
     next(err);
   } else {
-    res.status(err.statusCode).send({ errors: err.errors });
+    res.status(err.statusCode || 500).send({ errors: err.errors });
   }
 });
 
