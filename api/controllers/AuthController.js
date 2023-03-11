@@ -21,11 +21,14 @@ exports.googleSignIn = [
   passport.authenticate(['google', 'jwt'], { scope: ['profile', 'email'] }),
 ]
 
+exports.fbSignin = [
+  passport.authenticate(['facebook', 'jwt']),
+]
+
 exports.googleSignInCallback = [
-  passport.authenticate(['google', 'jwt'], {
+  passport.authenticate(['google', 'facebook', 'jwt'], {
     session: false,
     failureRedirect: 'http://localhost:3000/login',
-    // successRedirect: "http://localhost:3000/profile"
   }),
   q.googleLoginCallBack
 ]
