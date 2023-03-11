@@ -6,8 +6,8 @@ const User = require('../models/User');
 require('dotenv').config();
 
 module.exports = new FacebookStrategy({
-  clientID: "714324209771890",
-  clientSecret: "419ba4f423386a0a1cfa4bf17ef9e163",
+  clientID: process.env.FB_CLIENT_ID,
+  clientSecret: process.env.FB_SECRET,
   callbackURL: "/auth/login/google/callback",
   profileFields: ['id', 'email']
 },
