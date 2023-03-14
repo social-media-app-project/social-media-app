@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  frontend:
+    build: ./frontend
+    container_name: social-frontend-c
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+  api:
+    build: ./api
+    container_name: social-api-c
+    ports:
+      - "3002:3002"
