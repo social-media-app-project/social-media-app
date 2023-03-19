@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
     "serverstart": "DEBUG=api:* npm run dev",
-    "test": "jest"
+    "test": "jest  --testPathPattern=__tests__/"
   },
   "dependencies": {
     "async": "^3.2.3",
