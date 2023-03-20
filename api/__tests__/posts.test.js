@@ -494,15 +494,15 @@ describe('delete a post', () => {
 
   test('success', async () => {
     await request(app)
-      .delete(`/posts/${userOnePostId}`)
+      .delete(`/posts/${userOnePostId}/`)
       .auth(userOneToken, { type: 'bearer' })
       .expect(200);
   });
 
-  // test('check post does not exist', async () => {
-  //   await request(app)
-  //     .get(`/posts/${userOnePostId}`)
-  //     .auth(userOneToken, { type: 'bearer' })
-  //     .expect(404);
-  // });
+  test('check post does not exist', async () => {
+    await request(app)
+      .get(`/posts/${userOnePostId}`)
+      .auth(userOneToken, { type: 'Bearer' })
+      .expect(401);
+  });
 });

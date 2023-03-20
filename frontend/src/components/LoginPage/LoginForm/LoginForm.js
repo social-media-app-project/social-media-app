@@ -30,14 +30,14 @@ function LoginForm() {
           path: "/",
           maxAge: data.expiresIn,
         });
+        navigate("/profile");
+        window.location.reload();
       } else {
         setErrors(data.errors);
       }
     } catch (error) {
       console.log(error);
     } finally {
-      navigate("/profile");
-      window.location.reload();
     }
   };
 
