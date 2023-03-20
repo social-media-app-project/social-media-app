@@ -11,6 +11,10 @@ on:
   
 env: 
   SECRET: thisisatest
+  GOOGLE_CLIENT_ID: ${{secrets.GOOGLE_CLIENT_ID}}
+  GOOGLE_SECRET: ${{secrets.GOOGLE_SECRET}}
+  FB_SECRET: ${{secrets.FB_SECRET}}
+  FB_CLIENT_ID: ${{secrets.FB_CLIENT_ID}}
 
 jobs:
   test-backend:
