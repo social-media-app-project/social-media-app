@@ -12,10 +12,17 @@ COPY . .
 RUN npm run build 
 
 # Stage 2
-FROM nginx:1.19.0
+FROM nginx:alpine
 
 WORKDIR /usr/share/nginx/html
 
 RUN rm -rf ./*
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+
 COPY --from=builder /app/build .
+
+EXPOSE 3000
+
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
