@@ -7,7 +7,7 @@ import { googleSignIn, fbSignIn } from "../../../services/authService";
 
 const SignInWithPanel = () => {
   const fetchGoogleSignin = async () => {
-    const response = await googleSignIn();
+    await googleSignIn();
   };
 
   return (

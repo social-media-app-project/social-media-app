@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./ImageModal.module.css";
+// import styles from "./ImageModal.module.css";
 import Modal from "../Modal/Modal";
 import ModalImageSlideshow from "../ModalImageSlideshow/ModalImageSlideshow";
 

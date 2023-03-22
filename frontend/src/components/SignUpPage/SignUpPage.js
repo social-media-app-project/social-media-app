@@ -8,7 +8,7 @@ const SignUpPage = () => {
   const navigate = useNavigate();
   const cookies = new Cookies();
   useEffect(() => {
-    if (cookies.get("token") !== null) {
+    if (cookies.get("token") != null) {
       navigate("/profile");
     }
   });

@@ -1,4 +1,4 @@
-import React, { useState, Suspense, lazy, useEffect } from "react";
+import React, { useState, Suspense, lazy } from "react";
 import GeneralPostContainer from "../GeneralPostContainer/GeneralPostContainer";
 import styles from "./Post.module.css";
 import { HiOutlineThumbUp /*HiThumbUp*/ } from "react-icons/hi";

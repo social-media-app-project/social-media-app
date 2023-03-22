@@ -12,12 +12,7 @@ import {
   updateBio,
   updateUsername,
 } from "../../services/userService";
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryCache,
-} from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import ChangeProfilePic from "./ChangeProfilePic/ChangeProfilePic";
 import Cookies from "universal-cookie";
 
