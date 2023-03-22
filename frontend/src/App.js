@@ -87,7 +87,7 @@ function App() {
           />
         </Routes>
       </Router>
-      <ReactQueryDevtools />
+      {/* <ReactQueryDevtools /> */}
     </QueryClientProvider>
   );
 }
