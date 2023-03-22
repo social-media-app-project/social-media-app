@@ -4,7 +4,6 @@ import PostDateLabel from "../Post/PostDateLabel/PostDateLabel";
 import ProfileNameButton from "../ProfileNameButton/ProfileNameButton";
 import ProfilePictureButton from "../ProfilePictureButton/ProfilePictureButton";
 import styles from "./GeneralPostContainer.module.css";
-import { useParams } from "react-router-dom";
 const GeneralPostContainer = (props) => {
   const { timestamp, isOwner, _id, username, imgUrl, author } = props;
   return (

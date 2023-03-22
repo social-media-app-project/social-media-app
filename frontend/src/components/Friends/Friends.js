@@ -10,7 +10,7 @@ import {
   getFriendsPage,
   getFriendRequests,
 } from "../../services/userService";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const Friends = () => {
   const queryClient = useQueryClient();

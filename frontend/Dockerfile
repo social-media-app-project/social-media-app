@@ -1,3 +1,4 @@
+# Stage 1
 FROM node:19-alpine
 
 WORKDIR /app
@@ -8,7 +9,13 @@ COPY package-lock.json .
 RUN npm install
 
 COPY . .
+RUN npm build 
 
-EXPOSE 3000
+# Stage 2
+FROM nginx:latest
 
-CMD ["npm","start"]
+WORKDIR /usr/share/nginx/html
+
+RUN rm -rf ./*
+COPY --from=builder /app/build .
+ENTRYPOINT [ "nginx", "-g", "daemon off;" ]

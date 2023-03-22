@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./CommentsSection.module.css";
 import CreateComment from "./CreateComment/CreateComment";
 import Comment from "./Comment/Comment";

@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import CreatePost from "../CreatePost/CreatePost";
 import Post from "../Post/Post";
-import styles from "./HomeFeed.module.css";
-import ImageModal from "../ImageModal/ImageModal";
-import { useNavigate } from "react-router-dom";
-import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
+// import styles from "./HomeFeed.module.css";
+// import ImageModal from "../ImageModal/ImageModal";
+// import { useNavigate } from "react-router-dom";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { getHomefeed } from "../../services/userService";
 import { v4 } from "uuid";
 import { InView } from "react-intersection-observer";
 
 const HomeFeed = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   // const [isModalOpen, setModalOpen] = useState(false);
   // const [modalImages, setModalImages] = useState([]);
   // const [modalIndex, setModalIndex] = useState(0);
