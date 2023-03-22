@@ -23,6 +23,4 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=builder /app/build .
 
-EXPOSE 3000
-
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
