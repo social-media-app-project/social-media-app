@@ -17,5 +17,5 @@ FROM nginx:1.19.0
 WORKDIR /usr/share/nginx/html
 
 RUN rm -rf ./*
-COPY /app/build .
+COPY --from=0 /app/build .
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
