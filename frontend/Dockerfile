@@ -1,5 +1,5 @@
 # Stage 1
-FROM node:19-alpine
+FROM node:19-alpine as builder
 
 WORKDIR /app
 
@@ -17,5 +17,5 @@ FROM nginx:1.19.0
 WORKDIR /usr/share/nginx/html
 
 RUN rm -rf ./*
-COPY --from=0 /app/build .
+COPY --from=builder /app/build .
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
