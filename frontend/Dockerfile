@@ -12,7 +12,7 @@ COPY . .
 RUN npm run build 
 
 # Stage 2
-FROM nginx:latest
+FROM nginx:1.19.0
 
 WORKDIR /usr/share/nginx/html
 
