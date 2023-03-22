@@ -24,12 +24,10 @@ passport.use(fbstrat);
 passport.use(googlestrat);
 passport.use(JWTStrategy);
 
-const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const authArouter = require("./routes/auth");
 const postsRouter = require("./routes/posts");
 
-app.use("/", indexRouter);
 app.use("/auth", authArouter);
 app.use(
   "/users",
