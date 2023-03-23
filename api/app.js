@@ -10,7 +10,7 @@ const googlestrat = require('./strategies/googleStrategy');
 const fbstrat = require("./strategies/facebookStrategy");
 
 const app = express();
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "https://main.d1l2zslx6rge0v.amplifyapp.com" }));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(passport.initialize());
