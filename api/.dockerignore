@@ -1,2 +1,8 @@
 .env.examples
 node_modules
+__tests__
+test_setup
+.vscode
+.eslintrc.js
+.gitignore
+README.md
