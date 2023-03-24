@@ -1,8 +1,8 @@
 .login-container {
   display: flex;
   flex-basis: 500px;
-  background-color: var(--primary-background);
-  box-shadow: 0 0 30px 5px var(--primary-accent);
+  background-color: var(--secondary-background);
+  box-shadow: 2px 2px 10px rgb(40, 40, 40);
   border-radius: 15px;
   padding-top: 2rem;
   padding-bottom: 2rem;

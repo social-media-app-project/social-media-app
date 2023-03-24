@@ -7,26 +7,43 @@
   padding: 7px 15px;
   align-items: center;
 }
+
 .name-pic {
   display: flex;
   gap: 14px;
   align-items: center;
 }
+
 .name-pic > img {
   border-radius: 1.5rem;
 }
+
 .names {
   display: flex;
   flex-direction: column;
 }
+
 .username {
   font-size: 0.8rem;
 }
+
 .fr-buttons {
   font-size: 0.9rem;
   display: flex;
   gap: 10px;
   height: 25px;
+}
+
+.name-pic {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+}
+
+.name-pic:hover {
+  text-decoration: underline;
 }
 
 .fr-buttons :first-child {
@@ -36,9 +53,10 @@
   display: flex;
   align-items: center;
 }
+
 .fr-buttons :last-child {
   padding: 0px 3px;
-  background-color: red;
+  background-color: var(--bad-button-color);
   border-radius: 0.25rem;
   display: flex;
   align-items: center;

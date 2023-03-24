@@ -5,6 +5,7 @@
   align-items: center;
   gap: 10px;
 }
+
 .img-container {
   display: flex;
   justify-content: center;
@@ -12,8 +13,9 @@
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  border: 3px green solid;
+  border: 3px var(--primary-accent) solid;
 }
+
 .pic-form > select {
   border-radius: 1.5rem;
 }
@@ -31,6 +33,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .button-container {
   width: 100%;
   display: flex;
@@ -38,23 +41,28 @@
 }
 
 .button-container > button {
-  background-color: green;
+  background-color: var(--primary-acc);
   padding: 8px 10px;
   border-radius: 1.2rem;
 }
+
 .button-container > button:hover {
-  background-color: rgb(1, 87, 1);
+  background-color: var(--primary-accent);
+  transition: 0.5s;
 }
 
 .button-container > button:first-child {
   background-color: rgb(156, 50, 50);
 }
+
 .button-container > button:first-child:hover {
   background-color: rgb(165, 40, 40);
 }
+
 .button-container > button:nth-child(2) {
   background-color: grey;
 }
+
 .button-container > button:nth-child(2):hover {
   background-color: rgb(66, 66, 66);
 }

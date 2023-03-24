@@ -3,12 +3,14 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  background-color: var(--secondary-background);
 }
 
 .fr-buttons {
   display: flex;
   gap: 10px;
 }
+
 .accept-fr {
   font-size: 0.9rem;
   height: 25px;
@@ -18,11 +20,12 @@
   display: flex;
   align-items: center;
 }
+
 .delete-fr {
   font-size: 0.9rem;
   height: 25px;
   padding: 0px 3px;
-  background-color: red;
+  background-color: var(--bad-button-color);
   border-radius: 0.25rem;
   display: flex;
   align-items: center;

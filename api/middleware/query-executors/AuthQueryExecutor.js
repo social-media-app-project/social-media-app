@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../../models/User");
+require("dotenv").config()
 
 exports.hashPassword = async (password) => {
   const hash = await bcrypt.hash(password, 10);
@@ -85,7 +86,7 @@ exports.googleLoginCallBack = async (req, res, next) => {
       const secret = process.env.SECRET;
       const token = jwt.sign({ userid: req.user._id }, secret, opts);
       res.cookie('token', `Bearer ${token}`, { expiresDate })
-      res.redirect(302, 'http://localhost:3000/profile');
+      res.redirect(302, `${process.env.FE_URL}/profile`);
     } else {
       next({
         statusCode: 404,

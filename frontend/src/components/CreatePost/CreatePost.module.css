@@ -1,6 +1,8 @@
 .create-post-container {
   border-bottom: 1px solid grey;
+  border-top: 1px solid grey;
   width: 100%;
+  background-color: var(--secondary-interaction);
 }
 
 .buttons-container {

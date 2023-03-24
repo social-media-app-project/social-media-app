@@ -1,10 +1,11 @@
 .like-holder {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 7px;
   font-size: clamp(0.8rem, -0.875rem + 4.333vw, 1.12rem);
-
-  margin: 0px 10px;
+  margin: 7px 10px;
+  background-color: var(--secondary-interaction);
 }
 
 .like-img {

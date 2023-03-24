@@ -3,7 +3,7 @@ import GeneralPostContainer from "../GeneralPostContainer/GeneralPostContainer";
 import styles from "./Post.module.css";
 import { HiOutlineThumbUp /*HiThumbUp*/ } from "react-icons/hi";
 import LikesView from "./LikesView/LikesView";
-import { handleCreateLike } from "../../services/postService";
+import { handleCreateLike, getPostLikes } from "../../services/postService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 const LazyCommentsSection = lazy(() =>
@@ -48,8 +48,11 @@ const Post = ({ post, user }) => {
       return response.json();
     },
     onSuccess: (data) => {
-      setTimeout(() => {
+      setTimeout(async () => {
         queryClient.invalidateQueries({ queryKey: ["posts", userId] });
+        const response = await getPostLikes(_id);
+        const data = await response.json();
+        setLikesLen(data.likes.length);
       }, 250);
     },
   });

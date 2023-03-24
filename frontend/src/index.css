@@ -61,7 +61,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--secondary-background);
+  background-color: var(--primary-background);
   color: var(--text-color);
 }
 
@@ -71,16 +71,20 @@ code {
 }
 
 :root {
-  --secondary-background: #1f1f1f;
-  --primary-background: rgb(8, 8, 8);
-  --primary-accent: #a8ff50;
+  --primary-bg-acc: #131313;
+  --primary-background: #000000;
+  --secondary-background: #131313;
+  --primary-accent: #4c30b3;
+  --primary-interaction: #110731;
+  --secondary-interaction: #090616;
+  --primary-acc: #307ab3;
   --dark-accent: #448900;
   --text-color: #f3f3f3;
   --placeholder-text-color: #f3f3f37e;
   --darkened-text-color: #f3f3f3a6;
   --primary-button-color: #0000ff;
   --primary-button-color-inv: #fff;
-  --bad-button-color: rgba(255, 0, 0, 0.808);
+  --bad-button-color: #9c3232;
   --bad-button-color-dark: rgba(255, 0, 0, 0.404);
 }
 

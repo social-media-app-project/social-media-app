@@ -11,6 +11,7 @@
   flex-shrink: 1;
   border-left: 1px solid grey;
   border-right: 1px solid grey;
+  background-color: var(--primary-bg-acc);
 }
 
 @media (max-width: 400px) {

@@ -67,7 +67,7 @@ const HomeFeed = () => {
           <InView
             as="div"
             onChange={(inView, entry) => {
-              if (inView) {
+              if (inView && hasNextPage) {
                 fetchNextPage();
               }
             }}

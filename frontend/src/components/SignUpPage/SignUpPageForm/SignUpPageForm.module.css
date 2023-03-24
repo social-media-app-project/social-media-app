@@ -1,5 +1,4 @@
 .signup-form {
-  background-color: var(--primary-background);
   padding: 7px 10px;
   border-radius: 0.25rem;
   display: flex;
@@ -12,12 +11,12 @@
 
 .signup-button {
   width: 120px;
-  background-color: var(--primary-button-color);
+  background-color: var(--primary-acc);
   color: var(--primary-button-color-inv);
   transition: all 250ms;
 }
 
 .signup-button:hover {
   background-color: var(--primary-button-color-inv);
-  color: var(--primary-button-color);
+  color: var(--primary-acc);
 }

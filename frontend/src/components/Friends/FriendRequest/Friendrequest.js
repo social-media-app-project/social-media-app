@@ -5,6 +5,7 @@ import {
   acceptFriendRequest,
   deleteFriendRequest,
 } from "../../../services/userService";
+import { Link } from "react-router-dom";
 const FriendRequest = (props) => {
   const queryClient = useQueryClient();
   const acceptFrMutate = useMutation({
@@ -39,7 +40,9 @@ const FriendRequest = (props) => {
         <img style={{ height: "50px" }} src={props.pic} alt="pic" />
         <div className={styles["names"]}>
           {/* <div>{props.name}</div> */}
-          <div className={styles["username"]}>{props.username}</div>
+          <Link to={`/${props._id}`} className={styles["name-pic"]}>
+            <div className={styles["username"]}>{props.username}</div>
+          </Link>
         </div>
       </div>
       <form className={styles["fr-buttons"]}>

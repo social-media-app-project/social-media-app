@@ -51,13 +51,15 @@
   cursor: text;
   margin-left: 5px;
 }
+
 .error-message {
   padding: 7px;
-  color: red;
+  color: var(--bad-button-color);
 }
+
 .error-message-valid {
   padding: 7px;
-  color: green;
+  color: var(--primary-acc);
 }
 
 .text-input {
@@ -68,11 +70,12 @@
   border: none;
   width: 100%;
   border-radius: 2px;
-  background-color: var(--secondary-background);
+  background-color: var(--primary-background);
   color: var(--text-color);
   margin-top: 5px;
-  border: 2px red solid;
+  border: 2px var(--primary-acc);
 }
+
 .text-input-normal {
   display: block;
   outline: none;
@@ -81,7 +84,7 @@
   border: none;
   width: 100%;
   border-radius: 2px;
-  background-color: var(--secondary-background);
+  background-color: var(--primary-background);
   color: var(--text-color);
   margin-top: 5px;
   margin-bottom: 5px;
@@ -94,11 +97,11 @@
   border: none;
   width: 100%;
   border-radius: 2px;
-  background-color: var(--secondary-background);
+  background-color: var(--primary-background);
   color: var(--text-color);
   margin-top: 5px;
   outline: none;
-  border: 2px green solid;
+  border: 2px var(--primary-accent) solid;
 }
 
 .bio-input {
@@ -108,12 +111,12 @@
 }
 
 .save-button {
-  background-color: green;
+  background-color: var(--primary-acc);
 }
 
 .save-button:hover {
   background-color: var(--text-color);
-  color: green;
+  color: var(--primary-accent);
 }
 
 .logout-button {
