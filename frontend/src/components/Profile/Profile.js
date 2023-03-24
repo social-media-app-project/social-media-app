@@ -167,9 +167,9 @@ const Profile = () => {
           <div className={styles["first-post"]}> There are no posts</div>
         )}
         {/**TODO: create pop up modal */}
-        <button className={styles["create-post"]}>
+        {/* <button className={styles["create-post"]}>
           <AiOutlinePlus />
-        </button>
+        </button> */}
         {/* {isModalOpen && (
           <ImageModal
             onOverlayClick={() => setModalOpen(false)}
