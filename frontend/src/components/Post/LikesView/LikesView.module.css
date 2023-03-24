@@ -7,4 +7,6 @@
   max-height: 15vh;
   overflow: auto;
   overflow-y: auto;
+  background-color: var(--primary-interaction);
+  min-height: 100px;
 }

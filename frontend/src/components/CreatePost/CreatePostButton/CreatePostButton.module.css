@@ -1,9 +1,9 @@
 .post-button {
-  background-color: var(--primary-button-color);
+  background-color: var(--primary-acc);
   color: var(--primary-button-color-inv);
 }
 
 .post-button:hover {
   background-color: var(--primary-button-color-inv);
-  color: var(--primary-button-color);
+  color: var(--primary-accent);
 }

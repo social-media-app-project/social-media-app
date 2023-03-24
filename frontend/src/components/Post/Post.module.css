@@ -1,4 +1,5 @@
 .post-container {
+  background-color: var(--primary-bg-acc);
   border-bottom: 1px solid grey;
   width: 100%;
 }
@@ -28,10 +29,11 @@
   font-weight: 300;
   padding: 10px;
   text-align: center;
+  background-color: var(--secondary-interaction);
 }
 
 .post-info-button:hover {
-  background-color: var(--secondary-background);
+  background-color: var(--primary-interaction);
   cursor: pointer;
   text-decoration: underline;
 }

@@ -1,11 +1,13 @@
 .create-comment-container {
   display: flex;
-  margin: 7px 9px;
+  padding: 7px 12px;
+  background-color: #090616;
 }
 
 .create-comment-container > .profile-pic-container {
   margin: 5px 5px;
 }
+
 .form-container {
   display: flex;
   width: 100%;
@@ -37,6 +39,7 @@
   flex: 1;
   margin: 7px 3px;
 }
+
 .comment-button {
   margin: 5px 10px;
 }

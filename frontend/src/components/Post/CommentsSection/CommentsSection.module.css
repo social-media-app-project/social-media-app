@@ -1,6 +1,29 @@
 .comments-section {
   margin-bottom: 10px;
+  max-height: 300px;
+  overflow: scroll;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  padding: 7px 20px;
+  background-color: #110731;
 }
+
+div::-webkit-scrollbar {
+  width: 10px;
+}
+
+div::-webkit-scrollbar-track {
+  background: rgb(255, 255, 255);
+}
+
+div::-webkit-scrollbar-thumb {
+  background: rgb(99, 99, 99);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c5c5c5;
+}
+
 .no-comments {
   padding: 7px 20px;
   font-size: 1.3rem;

@@ -3,6 +3,7 @@
   font-size: clamp(0.96rem, -0.875rem + 4.333vw, 1.2rem);
   padding: 6px 12px;
   border-radius: 15px;
+  background-color: var(--primary-accent);
 }
 
 .text-button:hover {
