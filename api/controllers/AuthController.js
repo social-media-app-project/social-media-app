@@ -2,6 +2,7 @@ const v = require("../middleware/validators/AuthValidator");
 const q = require("../middleware/query-executors/AuthQueryExecutor");
 const { sendResponseOnError } = require("../middleware/validators/util");
 const passport = require('passport')
+require("dotenv").config();
 
 exports.jwtSignupPost = [
   ...v.validateSignupBody,
@@ -28,7 +29,7 @@ exports.fbSignin = [
 exports.googleSignInCallback = [
   passport.authenticate(['google', 'facebook', 'jwt'], {
     session: false,
-    failureRedirect: 'http://localhost:3000/login',
+    failureRedirect: `${process.env.FE_URL}/login`,
   }),
   q.googleLoginCallBack
 ]
