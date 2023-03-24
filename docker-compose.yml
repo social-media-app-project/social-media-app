@@ -5,8 +5,6 @@ services:
     container_name: social-frontend-c
     ports:
       - "3000:3000"
-    stdin_open: true
-    tty: true
   api:
     build: ./api
     container_name: social-api-c

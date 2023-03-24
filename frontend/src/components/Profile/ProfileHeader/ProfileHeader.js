@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 const ProfileHeader = (props) => {
   // TODO: something to determine whether user is owner of profile (prop or function)
   const { userId } = useParams();
-  const isUser = false;
   const {
     name = " ",
     username = " ",
@@ -14,9 +13,8 @@ const ProfileHeader = (props) => {
     profilePicUrl,
   } = props.author;
 
-  const msg = {
-    /**TODO: create a settings button which takes user to settings tab */
-  };
+  /**TODO: create a settings button which takes user to settings tab */
+
   return (
     <div className={styles["header-container"]}>
       <div className={styles["not-bio"]}>

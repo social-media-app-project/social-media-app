@@ -1,4 +1,4 @@
-import { getOptions, postOptions } from "./utility";
+import { postOptions } from "./utility";
 
 /**
  * @param {Object} body

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Profile.module.css";
 import ProfileHeader from "./ProfileHeader/ProfileHeader";
 import Post from "../Post/Post";
@@ -7,14 +7,13 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { useNavigate, useParams } from "react-router-dom";
 import { v4 } from "uuid";
 import CreatePost from "../CreatePost/CreatePost";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import {
   handleUserPosts,
   getOtherUsersPosts,
 } from "../../services/postService";
 
 const Profile = () => {
-  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { userId } = useParams();
   // const [isModalOpen, setModalOpen] = useState(false);
@@ -33,7 +32,7 @@ const Profile = () => {
       const res = await handleUserPosts();
       if (!res.ok) {
         let data = res.json();
-        if (res.status == 401) {
+        if (res.status === 401 || res.status === 404) {
           throw new Error(data.errors);
         }
       } else {

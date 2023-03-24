@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./LikesView.module.css";
 import Like from "./Like/Like";
 import { getPostLikes } from "../../../services/postService";
 import { v4 } from "uuid";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 const LikesView = ({ postID, setLikesLen }) => {
   const likesQuery = useQuery({
     queryKey: ["likes", postID],
