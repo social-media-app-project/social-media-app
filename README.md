@@ -2,7 +2,6 @@
 
 [LIVE APP](https://main.d1l2zslx6rge0v.amplifyapp.com/login)
 
-[API](https://social-media-app-api-6qprjg75zq-uc.a.run.app/)
 ![social-media-app-screen-shot](https://user-images.githubusercontent.com/35308786/227627654-e28ac04e-2622-4a93-88f0-d01cc98e8cae.png)
 
 ### Description
