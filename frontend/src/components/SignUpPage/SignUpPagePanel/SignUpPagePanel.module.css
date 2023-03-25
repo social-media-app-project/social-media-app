@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   background-color: var(--secondary-background);
-  box-shadow: 2px 2px 10px rgb(40, 40, 40);
+  box-shadow: 2px 2px 10px var(--primary-accent);
   border-radius: 15px;
   flex-basis: 500px;
 }
