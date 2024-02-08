@@ -19,7 +19,7 @@ function LoginForm() {
     setStateToNewText(newText);
   };
 
-  /**Send Server Request For Loging In */
+  /**Send Server Request For Logging In */
   const handleLoginForm = async (e) => {
     e.preventDefault();
     try {
