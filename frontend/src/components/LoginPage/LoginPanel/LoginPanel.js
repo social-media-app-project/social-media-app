@@ -15,16 +15,8 @@ function LoginPanel() {
         <LoginForm />
         <hr></hr>
         <SignInWithPanel />
-
-        <div className={styles["password-button-container"]}>
-          <TextButton
-            text="Forgot Password?"
-            classNames={[styles["forgot-password-button"]]}
-            type="button"
-          />
-        </div>
         <div className={styles["create-button-container"]}>
-          <Link classNames={styles["create-account-button"]} to="/signup">
+          <Link className={styles["create-account-button"]} to="/signup">
             Create New Account
           </Link>
         </div>

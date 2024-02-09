@@ -5,7 +5,7 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomeFeed from "./components/HomeFeed/HomeFeed";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 const Settings = lazy(() => import("./components/Settings/Settings"));
 const Profile = lazy(() => import("./components/Profile/Profile"));
 const LoginPage = lazy(() => import("./components/LoginPage/LoginPage"));

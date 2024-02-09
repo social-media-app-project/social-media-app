@@ -24,37 +24,14 @@
   gap: 1rem;
 }
 
-.forgot-password-button {
-  background: none;
-  color: var(--primary-accent);
-  font-size: 1rem;
-}
-
-.forgot-password-button:hover {
-  text-decoration: underline;
-  background: none;
-}
-
 .create-account-button {
-  background-color: #009425;
-  color: #fff;
+  color: var(--primary-acc);
   font-weight: 600;
 }
 
 .create-account-button:hover {
-  background-color: #fff;
-  color: #009425;
+  color: var(--primary-button-color-inv);
 }
 hr {
   width: 100%;
-}
-.sign-in-with-google {
-  justify-content: center;
-  flex: 1;
-  display: flex;
-  gap: 7px;
-  background-color: white;
-  color: black;
-  padding: 10px 7px;
-  font-size: 1rem;
 }

@@ -14,5 +14,8 @@
   padding: 10px 7px;
   font-size: 1rem;
 }
-.icon-colour {
+
+.sign-in-with:hover {
+  background-color: var(--primary-acc);
+  color: var(--primary-button-color-inv);
 }
